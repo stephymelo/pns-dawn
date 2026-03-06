@@ -458,6 +458,15 @@
 }
 
 /* ============================================
+   Product Card: No gray background
+   ============================================ */
+
+.card--standard .card__inner,
+.card--card {
+  background-color: transparent;
+}
+
+/* ============================================
    Product Card: Quantity Picker + Add to Cart
    ============================================ */
 
@@ -533,7 +542,7 @@
   border: none;
   border-radius: 0.4rem;
   background-color: rgb(var(--color-button));
-  color: rgb(var(--color-button-label));
+  color: rgb(var(--color-button-text));
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 0.04rem;
