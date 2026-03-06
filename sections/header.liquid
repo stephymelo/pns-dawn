@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'pns-custom.css' | asset_url }}" media="print" onload="this.media='all'">
 <link
   rel="stylesheet"
   href="{{ 'component-cart-notification.css' | asset_url }}"
@@ -136,7 +137,7 @@
       assign localization_forms = true
     endif
   -%}
-  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width pns-header-layout{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
     {%- liquid
       if section.settings.menu != blank
         render 'header-drawer'
@@ -189,6 +190,44 @@
         endif
       endif
     %}
+
+    {%- comment -%} PNS: Inline always-visible search bar {%- endcomment -%}
+    <div class="pns-header-search-inline" style="grid-area: search;">
+      {%- if settings.predictive_search_enabled -%}
+        <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
+      {%- endif -%}
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input
+          class="pns-search-input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.search' | t }}"
+          {%- if settings.predictive_search_enabled -%}
+            role="combobox"
+            aria-expanded="false"
+            aria-owns="predictive-search-results-inline"
+            aria-controls="predictive-search-results-inline"
+            aria-haspopup="listbox"
+            aria-autocomplete="list"
+            autocorrect="off"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+          {%- endif -%}
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="pns-search-btn" aria-label="{{ 'general.search.search' | t }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+      </form>
+      {%- if settings.predictive_search_enabled -%}
+        <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search id="predictive-search-results-inline">
+          {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+        </div>
+        </predictive-search>
+      {%- endif -%}
+    </div>
 
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -304,6 +343,47 @@
     </div>
   </header>
 </{{ header_tag }}>
+
+{%- comment -%} PNS: Navigation bar with hover dropdowns {%- endcomment -%}
+{%- if section.settings.menu != blank -%}
+  <nav class="pns-nav-bar" aria-label="Main navigation">
+    <div class="pns-nav-inner page-width">
+      <ul class="pns-nav-list">
+        {%- for link in section.settings.menu.links -%}
+          <li class="pns-nav-item">
+            <a
+              href="{{ link.url }}"
+              class="pns-nav-link{% if link.title == 'Deals' %} pns-nav-link--deals{% endif %}"
+            >
+              {{- link.title | escape -}}
+              {%- if link.links != blank -%}
+                <span class="pns-caret"></span>
+              {%- endif -%}
+            </a>
+            {%- if link.links != blank -%}
+              <div class="pns-nav-dropdown">
+                {%- for childlink in link.links -%}
+                  {%- if childlink.links != blank -%}
+                    <div class="pns-nav-sub-item">
+                      <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                      <div class="pns-nav-sub-dropdown">
+                        {%- for grandchildlink in childlink.links -%}
+                          <a href="{{ grandchildlink.url }}">{{ grandchildlink.title | escape }}</a>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  {%- else -%}
+                    <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+{%- endif -%}
 
 {%- if settings.cart_type == 'notification' -%}
   {%- render 'cart-notification',
