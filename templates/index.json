@@ -53,7 +53,7 @@
       "settings": {
         "collection": "bestsellers",
         "products_to_show": 25,
-        "title": "Featured products",
+        "title": "Best Sellers",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
