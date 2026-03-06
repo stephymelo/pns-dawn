@@ -1,23 +1,18 @@
 /* ============================================
    PNS Custom Styles - Premier Nail Source
+   Uses Shopify color scheme variables throughout.
    ============================================ */
 
-/* --- Announcement Bar: Pink background with social left, message center, links right --- */
-.announcement-bar-section .utility-bar {
-  background-color: #e88a9a;
-  color: #fff;
-}
-
+/* --- Announcement Bar: Override to use color scheme vars for all child elements --- */
 .announcement-bar-section .utility-bar .announcement-bar__message,
 .announcement-bar-section .utility-bar .announcement-bar__link,
 .announcement-bar-section .utility-bar .list-social__link,
-.announcement-bar-section .utility-bar .localization-wrapper,
 .announcement-bar-section .utility-bar a {
-  color: #fff;
+  color: rgb(var(--color-foreground));
 }
 
 .announcement-bar-section .utility-bar .list-social__link .icon {
-  fill: #fff;
+  fill: rgb(var(--color-foreground));
 }
 
 .announcement-bar-section .utility-bar .announcement-bar__message {
@@ -39,7 +34,7 @@
 
 .pns-utility-links a,
 .pns-utility-links span {
-  color: #fff;
+  color: rgb(var(--color-foreground));
   text-decoration: none;
   font-size: 1.2rem;
   letter-spacing: 0.02rem;
@@ -64,7 +59,7 @@
   width: 1.6rem;
   height: 1.6rem;
   fill: none;
-  stroke: #fff;
+  stroke: rgb(var(--color-foreground));
   stroke-width: 1.5;
 }
 
@@ -102,23 +97,23 @@
 
   .pns-header-search-inline .pns-search-input {
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(var(--color-foreground), 0.3);
     border-radius: 2rem;
     padding: 0.8rem 4rem 0.8rem 1.6rem;
     font-size: 1.4rem;
     outline: none;
-    background: #fff;
-    color: #333;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
     height: 4rem;
     transition: border-color 0.2s ease;
   }
 
   .pns-header-search-inline .pns-search-input::placeholder {
-    color: #999;
+    color: rgba(var(--color-foreground), 0.5);
   }
 
   .pns-header-search-inline .pns-search-input:focus {
-    border-color: #e88a9a;
+    border-color: rgba(var(--color-foreground), 0.6);
   }
 
   .pns-header-search-inline .pns-search-btn {
@@ -138,13 +133,13 @@
   .pns-header-search-inline .pns-search-btn svg {
     width: 2rem;
     height: 2rem;
-    stroke: #666;
+    stroke: rgba(var(--color-foreground), 0.5);
     fill: none;
     stroke-width: 1.5;
   }
 
   .pns-header-search-inline .pns-search-btn:hover svg {
-    stroke: #e88a9a;
+    stroke: rgb(var(--color-foreground));
   }
 
   /* Hide the default search modal icon on desktop when inline search is shown */
@@ -166,13 +161,13 @@
   }
 }
 
-/* --- Navigation bar: Pink background below header --- */
+/* --- Navigation bar: Uses its own color scheme class --- */
 .pns-nav-bar {
-  background-color: #e88a9a;
   width: 100%;
   display: none;
   position: relative;
   z-index: 2;
+  background-color: rgb(var(--color-background));
 }
 
 @media screen and (min-width: 990px) {
@@ -208,7 +203,7 @@
   align-items: center;
   gap: 0.3rem;
   padding: 1rem 1.5rem;
-  color: #fff;
+  color: rgb(var(--color-foreground));
   text-decoration: none;
   font-size: 1.4rem;
   font-weight: 500;
@@ -217,7 +212,7 @@
 }
 
 .pns-nav-bar .pns-nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(var(--color-foreground), 0.1);
 }
 
 .pns-nav-bar .pns-nav-link .pns-caret {
@@ -226,19 +221,19 @@
   height: 0;
   border-left: 0.4rem solid transparent;
   border-right: 0.4rem solid transparent;
-  border-top: 0.4rem solid #fff;
+  border-top: 0.4rem solid rgb(var(--color-foreground));
   margin-left: 0.2rem;
   transition: transform 0.2s ease;
 }
 
-/* Special styling for "Deals" link */
+/* Special styling for "Deals" link - uses button color from scheme for accent */
 .pns-nav-bar .pns-nav-link--deals {
-  color: #c0392b;
+  color: rgb(var(--color-button));
   font-weight: 700;
 }
 
 .pns-nav-bar .pns-nav-link--deals .pns-caret {
-  border-top-color: #c0392b;
+  border-top-color: rgb(var(--color-button));
 }
 
 /* --- Dropdown menu (hover) --- */
@@ -247,10 +242,10 @@
   top: 100%;
   left: 0;
   min-width: 22rem;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: rgb(var(--color-background));
+  border: 1px solid rgba(var(--color-foreground), 0.08);
   border-radius: 0 0 0.4rem 0.4rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(var(--color-foreground), 0.1);
   padding: 0.8rem 0;
   opacity: 0;
   visibility: hidden;
@@ -274,7 +269,7 @@
 .pns-nav-dropdown a {
   display: block;
   padding: 0.7rem 2rem;
-  color: #333;
+  color: rgba(var(--color-foreground), 0.85);
   text-decoration: none;
   font-size: 1.3rem;
   font-weight: 400;
@@ -282,8 +277,8 @@
 }
 
 .pns-nav-dropdown a:hover {
-  background-color: #fdf0f2;
-  color: #e88a9a;
+  background-color: rgba(var(--color-foreground), 0.05);
+  color: rgb(var(--color-foreground));
 }
 
 /* Sub-dropdown (third level) */
@@ -304,7 +299,7 @@
   height: 0;
   border-top: 0.35rem solid transparent;
   border-bottom: 0.35rem solid transparent;
-  border-left: 0.35rem solid #999;
+  border-left: 0.35rem solid rgba(var(--color-foreground), 0.4);
   margin-left: 1rem;
 }
 
@@ -313,10 +308,10 @@
   top: 0;
   left: 100%;
   min-width: 20rem;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: rgb(var(--color-background));
+  border: 1px solid rgba(var(--color-foreground), 0.08);
   border-radius: 0 0.4rem 0.4rem 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(var(--color-foreground), 0.1);
   padding: 0.8rem 0;
   opacity: 0;
   visibility: hidden;

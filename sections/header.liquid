@@ -346,7 +346,7 @@
 
 {%- comment -%} PNS: Navigation bar with hover dropdowns {%- endcomment -%}
 {%- if section.settings.menu != blank -%}
-  <nav class="pns-nav-bar" aria-label="Main navigation">
+  <nav class="pns-nav-bar color-{{ section.settings.nav_color_scheme }} gradient" aria-label="Main navigation">
     <div class="pns-nav-inner page-width">
       <ul class="pns-nav-list">
         {%- for link in section.settings.menu.links -%}
@@ -361,12 +361,12 @@
               {%- endif -%}
             </a>
             {%- if link.links != blank -%}
-              <div class="pns-nav-dropdown">
+              <div class="pns-nav-dropdown color-{{ section.settings.menu_color_scheme }}">
                 {%- for childlink in link.links -%}
                   {%- if childlink.links != blank -%}
                     <div class="pns-nav-sub-item">
                       <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
-                      <div class="pns-nav-sub-dropdown">
+                      <div class="pns-nav-sub-dropdown color-{{ section.settings.menu_color_scheme }}">
                         {%- for grandchildlink in childlink.links -%}
                           <a href="{{ grandchildlink.url }}">{{ grandchildlink.title | escape }}</a>
                         {%- endfor -%}
@@ -664,6 +664,12 @@
       "id": "menu_color_scheme",
       "label": "t:sections.header.settings.menu_color_scheme.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "nav_color_scheme",
+      "label": "Navigation bar color scheme",
+      "default": "scheme-4"
     },
     {
       "type": "header",
