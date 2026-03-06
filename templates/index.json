@@ -9,6 +9,80 @@
  */
 {
   "sections": {
+    "pns_promo_brands_hNrPUU": {
+      "type": "pns-promo-brands",
+      "blocks": {
+        "slide_3KeTCA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/CND_Vinylux_2_9cda2381-51fe-46db-99b8-0eca0f5ec101.webp",
+            "link": ""
+          }
+        },
+        "slide_LtiGBR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/OPI_Nail_Lacquer_83859916-2c21-4246-ac15-a11c2001fd9d.webp",
+            "link": ""
+          }
+        },
+        "slide_enw4Tt": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Spring_2026_Collections_Banner.webp",
+            "link": ""
+          }
+        },
+        "brand_MG9YJi": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "CND",
+            "brand_link": ""
+          }
+        },
+        "brand_6EiKN6": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "OPI",
+            "brand_link": ""
+          }
+        },
+        "brand_BXMcMm": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Americanails",
+            "brand_link": ""
+          }
+        },
+        "brand_ViLY33": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Gelish",
+            "brand_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_3KeTCA",
+        "slide_LtiGBR",
+        "slide_enw4Tt",
+        "brand_MG9YJi",
+        "brand_6EiKN6",
+        "brand_BXMcMm",
+        "brand_ViLY33"
+      ],
+      "name": "Promo + Brands",
+      "settings": {
+        "color_scheme": "",
+        "brands_title": "Top Brands",
+        "brands_color_scheme": "",
+        "cta_label": "NAILBUYS",
+        "cta_link": "",
+        "cta_color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -49,35 +123,6 @@
         "show_text_below": false
       }
     },
-    "featured_collection_7C4CcL": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "new-arrivals",
-        "products_to_show": 25,
-        "title": "New Arrivals",
-        "heading_size": "h1",
-        "heading_alignment": "center",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": true,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
-    },
     "image_banner_rG4nLi": {
       "type": "image-banner",
       "blocks": {
@@ -110,6 +155,107 @@
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
         "show_text_below": true
+      }
+    },
+    "featured_collection_7C4CcL": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "new-arrivals",
+        "products_to_show": 25,
+        "title": "New Arrivals",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "pns_promo_brands": {
+      "type": "pns-promo-brands",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
+        },
+        "brand_1": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "CND",
+            "brand_link": ""
+          }
+        },
+        "brand_2": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "OPI",
+            "brand_link": ""
+          }
+        },
+        "brand_3": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Gelish",
+            "brand_link": ""
+          }
+        },
+        "brand_4": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Americanails",
+            "brand_link": ""
+          }
+        },
+        "brand_5": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Cuccio",
+            "brand_link": ""
+          }
+        },
+        "brand_6": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Voesh",
+            "brand_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "brand_1",
+        "brand_2",
+        "brand_3",
+        "brand_4",
+        "brand_5",
+        "brand_6"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "brands_title": "Top Brands",
+        "brands_color_scheme": "scheme-3",
+        "cta_label": "NAILBUYS",
+        "cta_link": "",
+        "cta_color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "image_banner_JyhVwE": {
@@ -174,72 +320,10 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
-    },
-    "pns_promo_brands": {
-      "type": "pns-promo-brands",
-      "blocks": {
-        "slide_1": {
-          "type": "slide"
-        },
-        "brand_1": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "CND"
-          }
-        },
-        "brand_2": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "OPI"
-          }
-        },
-        "brand_3": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Gelish"
-          }
-        },
-        "brand_4": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Americanails"
-          }
-        },
-        "brand_5": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Cuccio"
-          }
-        },
-        "brand_6": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Voesh"
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "brand_1",
-        "brand_2",
-        "brand_3",
-        "brand_4",
-        "brand_5",
-        "brand_6"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "brands_title": "Top Brands",
-        "brands_color_scheme": "scheme-3",
-        "cta_label": "NAILBUYS",
-        "cta_link": "",
-        "cta_color_scheme": "scheme-3",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
     }
   },
   "order": [
+    "pns_promo_brands_hNrPUU",
     "image_banner",
     "image_banner_rG4nLi",
     "featured_collection_7C4CcL",
