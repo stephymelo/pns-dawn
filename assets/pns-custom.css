@@ -463,8 +463,9 @@
 
 .pns-qty-add-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8rem;
   width: 100%;
   margin-top: 0.8rem;
 }
@@ -472,18 +473,18 @@
 .pns-qty-picker {
   display: flex;
   align-items: center;
-  justify-content: center;
   border: 1px solid rgba(var(--color-foreground), 0.2);
   border-radius: 0.4rem;
   overflow: hidden;
-  height: 3.6rem;
+  height: 4rem;
+  flex-shrink: 0;
 }
 
 .pns-qty-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.6rem;
+  width: 3.2rem;
   height: 100%;
   background: none;
   border: none;
@@ -500,7 +501,7 @@
 }
 
 .pns-qty-input {
-  width: 3.6rem;
+  width: 3rem;
   text-align: center;
   border: none;
   border-left: 1px solid rgba(var(--color-foreground), 0.2);
@@ -526,8 +527,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  width: 100%;
-  height: 3.8rem;
+  flex: 1;
+  min-width: 0;
+  height: 4rem;
   border: none;
   border-radius: 0.4rem;
   background-color: rgb(var(--color-button));
@@ -538,7 +540,7 @@
   cursor: pointer;
   transition: opacity 0.2s ease;
   padding: 0 1rem;
-  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .pns-add-to-cart-btn:hover {
@@ -553,4 +555,17 @@
 .pns-add-to-cart-btn .loading__spinner {
   width: 1.6rem;
   height: 1.6rem;
+}
+
+/* Add to cart icon (cart SVG) */
+.pns-add-to-cart-btn .pns-cart-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+}
+
+/* Full-width variant for multi-variant "Choose options" button */
+.pns-add-to-cart-btn--full {
+  width: 100%;
+  margin-top: 0.8rem;
 }
