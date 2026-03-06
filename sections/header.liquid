@@ -11,6 +11,7 @@
 
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
 {%- if section.settings.menu_type_desktop == 'mega' -%}
@@ -194,38 +195,57 @@
     {%- comment -%} PNS: Inline always-visible search bar {%- endcomment -%}
     <div class="pns-header-search-inline" style="grid-area: search;">
       {%- if settings.predictive_search_enabled -%}
-        <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
-      {%- endif -%}
-      <form action="{{ routes.search_url }}" method="get" role="search">
-        <input
-          class="pns-search-input"
-          type="search"
-          name="q"
-          value="{{ search.terms | escape }}"
-          placeholder="{{ 'general.search.search' | t }}"
-          {%- if settings.predictive_search_enabled -%}
-            role="combobox"
-            aria-expanded="false"
-            aria-owns="predictive-search-results-inline"
-            aria-controls="predictive-search-results-inline"
-            aria-haspopup="listbox"
-            aria-autocomplete="list"
-            autocorrect="off"
-            autocomplete="off"
-            autocapitalize="off"
-            spellcheck="false"
-          {%- endif -%}
-        >
-        <input type="hidden" name="options[prefix]" value="last">
-        <button type="submit" class="pns-search-btn" aria-label="{{ 'general.search.search' | t }}">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        </button>
-      </form>
-      {%- if settings.predictive_search_enabled -%}
-        <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search id="predictive-search-results-inline">
-          {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
-        </div>
+        <predictive-search class="pns-predictive-search-wrapper" data-loading-text="{{ 'accessibility.loading' | t }}">
+          <form action="{{ routes.search_url }}" method="get" role="search" class="pns-search-form">
+            <input
+              class="pns-search-input"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.search' | t }}"
+              role="combobox"
+              aria-expanded="false"
+              aria-owns="predictive-search-results-inline"
+              aria-controls="predictive-search-results-inline"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            >
+            <input type="hidden" name="options[prefix]" value="last">
+            <button type="reset" class="reset__button hidden pns-search-reset" aria-label="{{ 'general.search.reset' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button type="submit" class="pns-search-btn" aria-label="{{ 'general.search.search' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
+          </form>
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+            {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+          </div>
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
         </predictive-search>
+      {%- else -%}
+        <search-form>
+          <form action="{{ routes.search_url }}" method="get" role="search" class="pns-search-form">
+            <input
+              class="pns-search-input"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.search' | t }}"
+            >
+            <input type="hidden" name="options[prefix]" value="last">
+            <button type="reset" class="reset__button hidden pns-search-reset" aria-label="{{ 'general.search.reset' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button type="submit" class="pns-search-btn" aria-label="{{ 'general.search.search' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
+          </form>
+        </search-form>
       {%- endif -%}
     </div>
 

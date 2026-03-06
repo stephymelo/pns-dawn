@@ -89,7 +89,15 @@
     margin: 0 2rem;
   }
 
-  .pns-header-search-inline form {
+  /* The predictive-search or search-form custom element */
+  .pns-header-search-inline > predictive-search,
+  .pns-header-search-inline > search-form {
+    width: 100%;
+    position: relative;
+    display: block;
+  }
+
+  .pns-header-search-inline .pns-search-form {
     display: flex;
     width: 100%;
     position: relative;
@@ -99,7 +107,7 @@
     width: 100%;
     border: 1px solid rgba(var(--color-foreground), 0.3);
     border-radius: 2rem;
-    padding: 0.8rem 4rem 0.8rem 1.6rem;
+    padding: 0.8rem 7rem 0.8rem 1.6rem;
     font-size: 1.4rem;
     outline: none;
     background: rgb(var(--color-background));
@@ -114,6 +122,25 @@
 
   .pns-header-search-inline .pns-search-input:focus {
     border-color: rgba(var(--color-foreground), 0.6);
+  }
+
+  .pns-header-search-inline .pns-search-reset {
+    position: absolute;
+    right: 3.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(var(--color-foreground), 0.5);
+  }
+
+  .pns-header-search-inline .pns-search-reset:hover {
+    color: rgb(var(--color-foreground));
   }
 
   .pns-header-search-inline .pns-search-btn {
@@ -140,6 +167,17 @@
 
   .pns-header-search-inline .pns-search-btn:hover svg {
     stroke: rgb(var(--color-foreground));
+  }
+
+  /* Predictive search results dropdown positioning */
+  .pns-header-search-inline .predictive-search {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    width: 100%;
+    border-radius: 0.8rem;
+    max-height: 60vh;
+    overflow-y: auto;
   }
 
   /* Hide the default search modal icon on desktop when inline search is shown */
@@ -326,4 +364,194 @@
   visibility: visible;
   transform: translateX(0);
   pointer-events: auto;
+}
+
+/* ============================================
+   Featured Collection: Carousel with side buttons
+   ============================================ */
+
+/* Position slider-component as relative container for absolute buttons */
+.pns-featured-slider slider-component {
+  position: relative;
+}
+
+/* Move slider buttons to sides of the carousel */
+.pns-featured-slider .slider-buttons {
+  position: static;
+}
+
+.pns-featured-slider .slider-button {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.pns-featured-slider .slider-button--prev {
+  left: 0.5rem;
+}
+
+.pns-featured-slider .slider-button--next {
+  right: 0.5rem;
+}
+
+.pns-featured-slider .slider-button:not([disabled]):hover {
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-label));
+}
+
+.pns-featured-slider .slider-button .icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.pns-featured-slider .slider-button--next .icon {
+  transform: rotate(-90deg);
+}
+
+.pns-featured-slider .slider-button--prev .icon {
+  transform: rotate(90deg);
+}
+
+.pns-featured-slider .slider-button--next:not([disabled]):hover .icon {
+  transform: rotate(-90deg);
+}
+
+.pns-featured-slider .slider-button--prev:not([disabled]):hover .icon {
+  transform: rotate(90deg);
+}
+
+.pns-featured-slider .slider-button[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Hide the counter text between buttons */
+.pns-featured-slider .slider-counter {
+  display: none;
+}
+
+/* Ensure 4-col desktop grid for the slider */
+@media screen and (min-width: 990px) {
+  .pns-featured-slider .slider--desktop.grid--4-col-desktop .grid__item {
+    width: calc((100% - var(--desktop-margin-left-first-item)) / 4 - var(--grid-desktop-horizontal-spacing) * 3);
+  }
+
+  .pns-featured-slider .slider-button--prev {
+    left: 1rem;
+  }
+
+  .pns-featured-slider .slider-button--next {
+    right: 1rem;
+  }
+}
+
+/* ============================================
+   Product Card: Quantity Picker + Add to Cart
+   ============================================ */
+
+.pns-qty-add-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+.pns-qty-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  height: 3.6rem;
+}
+
+.pns-qty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 0;
+  transition: background-color 0.15s ease;
+}
+
+.pns-qty-btn:hover {
+  background-color: rgba(var(--color-foreground), 0.06);
+}
+
+.pns-qty-input {
+  width: 3.6rem;
+  text-align: center;
+  border: none;
+  border-left: 1px solid rgba(var(--color-foreground), 0.2);
+  border-right: 1px solid rgba(var(--color-foreground), 0.2);
+  background: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgb(var(--color-foreground));
+  height: 100%;
+  padding: 0;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.pns-qty-input::-webkit-inner-spin-button,
+.pns-qty-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pns-add-to-cart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  height: 3.8rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-label));
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.04rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  padding: 0 1rem;
+  text-transform: uppercase;
+}
+
+.pns-add-to-cart-btn:hover {
+  opacity: 0.85;
+}
+
+.pns-add-to-cart-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pns-add-to-cart-btn .loading__spinner {
+  width: 1.6rem;
+  height: 1.6rem;
 }
