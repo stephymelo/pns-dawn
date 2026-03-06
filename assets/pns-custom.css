@@ -189,8 +189,12 @@
 @media screen and (min-width: 990px) {
   .header--middle-left.pns-header-layout {
     grid-template-areas: 'heading search icons';
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: minmax(auto, max-content) 1fr auto;
     column-gap: 2rem;
+  }
+
+  .header--middle-left.pns-header-layout .header__heading {
+    flex-shrink: 0;
   }
 
   .header--middle-left.pns-header-layout .header__inline-menu {
@@ -369,8 +373,8 @@
    Featured Collection: Carousel with side buttons
    ============================================ */
 
-/* Position slider-component as relative container for absolute buttons */
-.pns-featured-slider slider-component {
+/* Position the section wrapper as the relative container so buttons sit at the edges */
+.pns-featured-slider {
   position: relative;
 }
 
@@ -399,11 +403,11 @@
 }
 
 .pns-featured-slider .slider-button--prev {
-  left: 0.5rem;
+  left: 1rem;
 }
 
 .pns-featured-slider .slider-button--next {
-  right: 0.5rem;
+  right: 1rem;
 }
 
 .pns-featured-slider .slider-button:hover {
@@ -448,11 +452,11 @@
   }
 
   .pns-featured-slider .slider-button--prev {
-    left: 1rem;
+    left: 0;
   }
 
   .pns-featured-slider .slider-button--next {
-    right: 1rem;
+    right: 0;
   }
 }
 

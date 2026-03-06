@@ -1,0 +1,207 @@
+{{ 'pns-promo-brands.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<div class="pns-promo-brands color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pns-promo-brands__grid">
+      {%- comment -%} Left: Image Slider {%- endcomment -%}
+      <div class="pns-promo-brands__slider">
+        <div class="pns-promo-slider" data-pns-promo-slider>
+          <div class="pns-promo-slider__track" data-pns-slider-track>
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'slide' -%}
+                <div class="pns-promo-slider__slide" {{ block.shopify_attributes }}>
+                  {%- if block.settings.link != blank -%}
+                    <a href="{{ block.settings.link }}">
+                  {%- endif -%}
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 900
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '375, 550, 750, 900',
+                        sizes: '(min-width: 990px) 50vw, 100vw',
+                        class: 'pns-promo-slider__image'
+                    }}
+                  {%- else -%}
+                    {{ 'hero-apparel-1' | placeholder_svg_tag: 'pns-promo-slider__placeholder' }}
+                  {%- endif -%}
+                  {%- if block.settings.link != blank -%}
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- assign slide_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'slide' -%}
+              {%- assign slide_count = slide_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if slide_count > 1 -%}
+            <button class="pns-promo-slider__btn pns-promo-slider__btn--prev" data-pns-slider-prev aria-label="{{ 'accessibility.previous_slide' | t }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="pns-promo-slider__btn pns-promo-slider__btn--next" data-pns-slider-next aria-label="{{ 'accessibility.next_slide' | t }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+            </button>
+
+            <div class="pns-promo-slider__dots" data-pns-slider-dots>
+              {%- for i in (1..slide_count) -%}
+                <button class="pns-promo-slider__dot{% if forloop.first %} pns-promo-slider__dot--active{% endif %}" data-pns-dot="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"></button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Right: Top Brands {%- endcomment -%}
+      <div class="pns-promo-brands__brands">
+        <div class="pns-promo-brands__header color-{{ section.settings.brands_color_scheme }}">
+          <h3 class="pns-promo-brands__title">{{ section.settings.brands_title }}</h3>
+        </div>
+        <ul class="pns-promo-brands__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'brand' -%}
+              <li class="pns-promo-brands__brand-item" {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.brand_link }}" class="pns-promo-brands__brand-link">
+                  {{ block.settings.brand_name }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        {%- if section.settings.cta_label != blank -%}
+          <div class="pns-promo-brands__cta">
+            <a href="{{ section.settings.cta_link }}" class="pns-promo-brands__cta-btn color-{{ section.settings.cta_color_scheme }}">
+              {{ section.settings.cta_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'pns-promo-slider.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Promo + Brands",
+  "tag": "section",
+  "class": "pns-promo-brands-section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "brands_title",
+      "label": "Brands heading",
+      "default": "Top Brands"
+    },
+    {
+      "type": "color_scheme",
+      "id": "brands_color_scheme",
+      "label": "Brands header color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "NAILBUYS"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "cta_color_scheme",
+      "label": "CTA button color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand name",
+          "default": "Brand"
+        },
+        {
+          "type": "url",
+          "id": "brand_link",
+          "label": "Brand link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo + Brands",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "brand", "settings": { "brand_name": "CND" } },
+        { "type": "brand", "settings": { "brand_name": "OPI" } },
+        { "type": "brand", "settings": { "brand_name": "Gelish" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
