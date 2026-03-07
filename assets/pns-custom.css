@@ -470,6 +470,29 @@
 }
 
 /* ============================================
+   Product Card: Smaller images + more spacing
+   ============================================ */
+
+/* Increase gap between cards */
+.collection .grid,
+.pns-featured-slider .grid,
+.slider--desktop {
+  --grid-desktop-horizontal-spacing: 2.4rem;
+  --grid-desktop-vertical-spacing: 3.2rem;
+  --grid-mobile-horizontal-spacing: 1.6rem;
+  --grid-mobile-vertical-spacing: 2.4rem;
+}
+
+/* Reduce image size by adding padding inside the card image wrapper */
+.card__media {
+  padding: 1.2rem;
+}
+
+.card__media .media img {
+  object-fit: contain;
+}
+
+/* ============================================
    Product Card: Quantity Picker + Add to Cart
    ============================================ */
 
