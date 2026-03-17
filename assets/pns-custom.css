@@ -98,7 +98,7 @@
 
   .pns-header-search-inline .pns-search-form {
     display: flex;
-    width: 50%;
+    width: 100%;
     position: relative;
     margin: 0 0 0 auto;
   }
