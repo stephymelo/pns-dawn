@@ -84,7 +84,7 @@
   .pns-header-search-inline {
     display: flex;
     align-items: center;
-    width: 50%;
+    flex: 1;
     margin: 0 0 0 auto;
   }
 
@@ -98,8 +98,9 @@
 
   .pns-header-search-inline .pns-search-form {
     display: flex;
-    width: 100%;
+    width: 50%;
     position: relative;
+    margin: 0 0 0 auto;
   }
 
   .pns-header-search-inline .pns-search-input {
