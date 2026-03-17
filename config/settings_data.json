@@ -186,6 +186,50 @@
         "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
         "disabled": false,
         "settings": {}
+      },
+      "7584948915495707528": {
+        "type": "shopify://apps/joy-loyalty-program/blocks/app-embed/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+        "disabled": false,
+        "settings": {}
+      },
+      "18208872656243357035": {
+        "type": "shopify://apps/joy-loyalty-program/blocks/joy-points-calculator-embed/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+        "disabled": false,
+        "settings": {
+          "points_calculator_alignment": "left"
+        }
+      },
+      "589228961406621311": {
+        "type": "shopify://apps/joy-loyalty-program/blocks/joy-redeem-inline-embed/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+        "disabled": false,
+        "settings": {
+          "hide-for-guest": false,
+          "hide-not-enough-point": false,
+          "detail-view-layout": false,
+          "hide-redeem-all-points": false,
+          "background-color-redeem-button": "#ffffff",
+          "text-color-redeem-button": "#000000",
+          "border-color-redeem-button": "#d1d5db",
+          "border-color-redeem-button-hover": "#000000",
+          "background-color-button": "#ffffff",
+          "text-color-button": "#000000",
+          "border-color-button": "#000000",
+          "text-color": "#000000",
+          "text-redeem-all-point": "#0066cc",
+          "hasEnableCancel": true,
+          "enableRevokeDiscountApplyFailed": true,
+          "hasReloadPage": true
+        }
+      },
+      "3703718642129649661": {
+        "type": "shopify://apps/casper-cart-sync/blocks/cross-device-cart/3e8e9213-3920-4806-a1c5-772d07bb1e4e",
+        "disabled": false,
+        "settings": {
+          "reload": true,
+          "not_replace_with_empty": false,
+          "clear_after_logout": false,
+          "variant_id_to_ignore": ""
+        }
       }
     },
     "color_schemes": {
