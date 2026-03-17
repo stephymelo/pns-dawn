@@ -85,7 +85,7 @@
     display: flex;
     align-items: center;
     flex: 1;
-    margin: 0 0 0 auto;
+    margin: 0;
   }
 
   /* The predictive-search or search-form custom element */
@@ -189,7 +189,7 @@
 @media screen and (min-width: 990px) {
   .header--middle-left.pns-header-layout {
     grid-template-areas: 'heading search icons';
-    grid-template-columns: minmax(auto, max-content) 2fr auto;
+    grid-template-columns: minmax(auto, max-content) 1fr auto;
     column-gap: 2rem;
   }
 
