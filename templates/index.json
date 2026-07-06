@@ -1,88 +1,5 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "pns_promo_brands_hNrPUU": {
-      "type": "pns-promo-brands",
-      "blocks": {
-        "slide_3KeTCA": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/CND_Vinylux_2_9cda2381-51fe-46db-99b8-0eca0f5ec101.webp",
-            "link": ""
-          }
-        },
-        "slide_LtiGBR": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/OPI_Nail_Lacquer_83859916-2c21-4246-ac15-a11c2001fd9d.webp",
-            "link": ""
-          }
-        },
-        "slide_enw4Tt": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Spring_2026_Collections_Banner.webp",
-            "link": ""
-          }
-        },
-        "brand_MG9YJi": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "CND",
-            "brand_link": ""
-          }
-        },
-        "brand_6EiKN6": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "OPI",
-            "brand_link": ""
-          }
-        },
-        "brand_BXMcMm": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Americanails",
-            "brand_link": ""
-          }
-        },
-        "brand_ViLY33": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Gelish",
-            "brand_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_3KeTCA",
-        "slide_LtiGBR",
-        "slide_enw4Tt",
-        "brand_MG9YJi",
-        "brand_6EiKN6",
-        "brand_BXMcMm",
-        "brand_ViLY33"
-      ],
-      "name": "Promo + Brands",
-      "settings": {
-        "color_scheme": "",
-        "brands_title": "Top Brands",
-        "brands_color_scheme": "",
-        "cta_label": "NAILBUYS",
-        "cta_link": "",
-        "cta_color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -109,153 +26,50 @@
         "heading",
         "button"
       ],
-      "disabled": true,
       "settings": {
         "image_overlay_opacity": 40,
         "image_height": "large",
-        "image_behavior": "none",
         "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
         "show_text_box": false,
+        "image_behavior": "none",
+        "desktop_content_alignment": "center",
         "color_scheme": "scheme-3",
+        "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
         "show_text_below": false
-      }
-    },
-    "image_banner_rG4nLi": {
-      "type": "image-banner",
-      "blocks": {
-        "buttons_pQRj4K": {
-          "type": "buttons",
-          "disabled": true,
-          "settings": {
-            "button_label_1": "",
-            "button_link_1": "shopify://collections/nailbuys",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "buttons_pQRj4K"
-      ],
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/N-Nail-Buy.webp",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
-    },
-    "featured_collection_7C4CcL": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "new-arrivals",
-        "products_to_show": 25,
-        "title": "New Arrivals",
-        "heading_size": "h1",
-        "heading_alignment": "center",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": true,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
-    },
-    "image_banner_JyhVwE": {
-      "type": "image-banner",
-      "blocks": {
-        "buttons_KHtqTc": {
-          "type": "buttons",
-          "disabled": true,
-          "settings": {
-            "button_label_1": "",
-            "button_link_1": "shopify://collections/nailbuys",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "buttons_KHtqTc"
-      ],
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/N-Nail-Buy.webp",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "collection": "bestsellers",
-        "products_to_show": 25,
-        "title": "Best Sellers",
-        "heading_size": "h1",
-        "heading_alignment": "center",
+        "title": "Featured products",
+        "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
         "columns_desktop": 4,
-        "enable_desktop_slider": true,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
         "color_scheme": "scheme-1",
-        "image_ratio": "square",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "standard",
+        "quick_add": "none",
         "columns_mobile": "2",
-        "swipe_on_mobile": true,
         "padding_top": 44,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "pns_promo_brands_hNrPUU",
     "image_banner",
-    "image_banner_rG4nLi",
-    "featured_collection_7C4CcL",
-    "image_banner_JyhVwE",
     "featured_collection"
   ]
 }
