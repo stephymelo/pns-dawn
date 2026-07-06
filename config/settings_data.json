@@ -144,13 +144,6 @@
     },
     "content_for_index": [],
     "blocks": {
-      "16548475241908962911": {
-        "type": "shopify://apps/oxi-social-login/blocks/social-login-embed/24ad60bc-8f09-42fa-807e-e5eda0fdae17",
-        "disabled": false,
-        "settings": {
-          "enabled_on_page": "all"
-        }
-      },
       "9776720720251544092": {
         "type": "shopify://apps/helium-customer-fields/blocks/app-embed/bab58598-3e6a-4377-aaaa-97189b15f131",
         "disabled": false,
@@ -223,12 +216,19 @@
       },
       "3703718642129649661": {
         "type": "shopify://apps/casper-cart-sync/blocks/cross-device-cart/3e8e9213-3920-4806-a1c5-772d07bb1e4e",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "reload": true,
           "not_replace_with_empty": false,
           "clear_after_logout": false,
           "variant_id_to_ignore": ""
+        }
+      },
+      "16548475241908962911": {
+        "type": "shopify://apps/oxi-social-login/blocks/social-login-embed/24ad60bc-8f09-42fa-807e-e5eda0fdae17",
+        "disabled": true,
+        "settings": {
+          "enabled_on_page": "all"
         }
       }
     },
