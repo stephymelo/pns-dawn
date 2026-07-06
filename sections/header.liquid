@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'pns-custom.css' | asset_url }}" media="print" onload="this.media='all'">
 <link
   rel="stylesheet"
   href="{{ 'component-cart-notification.css' | asset_url }}"
@@ -10,6 +11,7 @@
 
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
 {%- if section.settings.menu_type_desktop == 'mega' -%}
@@ -136,7 +138,7 @@
       assign localization_forms = true
     endif
   -%}
-  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width pns-header-layout{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
     {%- liquid
       if section.settings.menu != blank
         render 'header-drawer'
@@ -189,6 +191,63 @@
         endif
       endif
     %}
+
+    {%- comment -%} PNS: Inline always-visible search bar {%- endcomment -%}
+    <div class="pns-header-search-inline" style="grid-area: search;">
+      {%- if settings.predictive_search_enabled -%}
+        <predictive-search class="pns-predictive-search-wrapper" data-loading-text="{{ 'accessibility.loading' | t }}">
+          <form action="{{ routes.search_url }}" method="get" role="search" class="pns-search-form">
+            <input
+              class="pns-search-input"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.search' | t }}"
+              role="combobox"
+              aria-expanded="false"
+              aria-owns="predictive-search-results-inline"
+              aria-controls="predictive-search-results-inline"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            >
+            <input type="hidden" name="options[prefix]" value="last">
+            <button type="reset" class="reset__button hidden pns-search-reset" aria-label="{{ 'general.search.reset' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button type="submit" class="pns-search-btn" aria-label="{{ 'general.search.search' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
+          </form>
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+            {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+          </div>
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+        </predictive-search>
+      {%- else -%}
+        <search-form>
+          <form action="{{ routes.search_url }}" method="get" role="search" class="pns-search-form">
+            <input
+              class="pns-search-input"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.search' | t }}"
+            >
+            <input type="hidden" name="options[prefix]" value="last">
+            <button type="reset" class="reset__button hidden pns-search-reset" aria-label="{{ 'general.search.reset' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button type="submit" class="pns-search-btn" aria-label="{{ 'general.search.search' | t }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
+          </form>
+        </search-form>
+      {%- endif -%}
+    </div>
 
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -304,6 +363,47 @@
     </div>
   </header>
 </{{ header_tag }}>
+
+{%- comment -%} PNS: Navigation bar with hover dropdowns {%- endcomment -%}
+{%- if section.settings.menu != blank -%}
+  <nav class="pns-nav-bar color-{{ section.settings.nav_color_scheme }} gradient" aria-label="Main navigation">
+    <div class="pns-nav-inner page-width">
+      <ul class="pns-nav-list">
+        {%- for link in section.settings.menu.links -%}
+          <li class="pns-nav-item">
+            <a
+              href="{{ link.url }}"
+              class="pns-nav-link{% if link.title == 'Deals' %} pns-nav-link--deals{% endif %}"
+            >
+              {{- link.title | escape -}}
+              {%- if link.links != blank -%}
+                <span class="pns-caret"></span>
+              {%- endif -%}
+            </a>
+            {%- if link.links != blank -%}
+              <div class="pns-nav-dropdown color-{{ section.settings.menu_color_scheme }}">
+                {%- for childlink in link.links -%}
+                  {%- if childlink.links != blank -%}
+                    <div class="pns-nav-sub-item">
+                      <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                      <div class="pns-nav-sub-dropdown color-{{ section.settings.menu_color_scheme }}">
+                        {%- for grandchildlink in childlink.links -%}
+                          <a href="{{ grandchildlink.url }}">{{ grandchildlink.title | escape }}</a>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  {%- else -%}
+                    <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+{%- endif -%}
 
 {%- if settings.cart_type == 'notification' -%}
   {%- render 'cart-notification',
@@ -584,6 +684,12 @@
       "id": "menu_color_scheme",
       "label": "t:sections.header.settings.menu_color_scheme.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "nav_color_scheme",
+      "label": "Navigation bar color scheme",
+      "default": "scheme-4"
     },
     {
       "type": "header",
