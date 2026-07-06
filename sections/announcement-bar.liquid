@@ -149,12 +149,6 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-3.92 7.94"/></svg>
           </a>
         {%- endif -%}
-        {%- if section.settings.show_account_links -%}
-          <span class="pns-utility-separator">|</span>
-          <a href="{{ routes.account_register_url | default: '/account/register' }}">{{ section.settings.register_text | default: 'Create an Account' }}</a>
-          <span class="pns-utility-separator">|</span>
-          <a href="{{ routes.account_login_url | default: '/account/login' }}">{{ section.settings.login_text | default: 'Sign In' }}</a>
-        {%- endif -%}
         {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
           <span class="pns-utility-separator">|</span>
           <localization-form class="small-hide medium-hide">
@@ -245,38 +239,21 @@
       "id": "show_utility_links",
       "default": true,
       "label": "Show utility links",
-      "info": "Shows phone, email, account links, and language selector on the right side"
+      "info": "Shows phone, email, and language selector on the right side"
     },
     {
       "type": "text",
       "id": "phone_number",
       "label": "Phone number",
-      "info": "Displayed as a phone icon link in the utility bar"
+      "default": "9085050556",
+      "info": "Shown as a phone icon on the right. Leave blank to hide."
     },
     {
       "type": "text",
       "id": "email_address",
       "label": "Email address",
-      "info": "Displayed as an @ icon link in the utility bar"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_account_links",
-      "default": true,
-      "label": "Show account links",
-      "info": "Shows Create an Account and Sign In links"
-    },
-    {
-      "type": "text",
-      "id": "register_text",
-      "label": "Register link text",
-      "default": "Create an Account"
-    },
-    {
-      "type": "text",
-      "id": "login_text",
-      "label": "Sign in link text",
-      "default": "Sign In"
+      "default": "info@premiernailsource.com",
+      "info": "Shown as an @ icon on the right. Leave blank to hide."
     },
     {
       "type": "text",
