@@ -1,12 +1,13 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'pns-custom.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign social_icons = true
   if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
     assign social_icons = false
   endif
-  if section.settings.enable_country_selector or section.settings.enable_language_selector
+  if section.settings.enable_country_selector or section.settings.enable_language_selector or section.settings.show_utility_links
     assign language_country_selector = true
   endif
   if section.blocks.size > 0
@@ -136,29 +137,50 @@
         </style>
       {%- endif -%}
     {%- endif -%}
-    <div class="localization-wrapper">
-      {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-        <localization-form class="small-hide medium-hide">
-          {%- form 'localization', id: 'AnnouncementCountryForm', class: 'localization-form' -%}
-            <div>
-              <h2 class="visually-hidden" id="AnnouncementCountryLabel">{{ 'localization.country_label' | t }}</h2>
-              {%- render 'country-localization', localPosition: 'AnnouncementCountry' -%}
-            </div>
-          {%- endform -%}
-        </localization-form>
-      {% endif %}
-
-      {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-        <localization-form class="small-hide medium-hide">
-          {%- form 'localization', id: 'AnnouncementLanguageForm', class: 'localization-form' -%}
-            <div>
-              <h2 class="visually-hidden" id="AnnouncementLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-              {%- render 'language-localization', localPosition: 'AnnouncementLanguage' -%}
-            </div>
-          {%- endform -%}
-        </localization-form>
-      {%- endif -%}
-    </div>
+    {%- if section.settings.show_utility_links -%}
+      <div class="pns-utility-links">
+        {%- if section.settings.phone_number != blank -%}
+          <a href="tel:{{ section.settings.phone_number | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}" class="pns-utility-icon" aria-label="{{ section.settings.phone_number }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.email_address != blank -%}
+          <a href="mailto:{{ section.settings.email_address }}" class="pns-utility-icon" aria-label="{{ section.settings.email_address }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-3.92 7.94"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.show_account_links -%}
+          <span class="pns-utility-separator">|</span>
+          <a href="{{ routes.account_register_url | default: '/account/register' }}">{{ section.settings.register_text | default: 'Create an Account' }}</a>
+          <span class="pns-utility-separator">|</span>
+          <a href="{{ routes.account_login_url | default: '/account/login' }}">{{ section.settings.login_text | default: 'Sign In' }}</a>
+        {%- endif -%}
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <span class="pns-utility-separator">|</span>
+          <localization-form class="small-hide medium-hide">
+            {%- form 'localization', id: 'AnnouncementLanguageForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="AnnouncementLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                {%- render 'language-localization', localPosition: 'AnnouncementLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- else -%}
+          <span class="pns-utility-separator">|</span>
+          <span>{{ section.settings.default_language_label | default: 'English' }}</span>
+        {%- endif -%}
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form class="small-hide medium-hide">
+            {%- form 'localization', id: 'AnnouncementCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="AnnouncementCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'AnnouncementCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {% endif %}
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -213,6 +235,55 @@
       "default": false,
       "label": "t:sections.announcement-bar.settings.show_social.label",
       "info": "t:sections.announcement-bar.settings.show_social.info"
+    },
+    {
+      "type": "header",
+      "content": "Utility bar links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_utility_links",
+      "default": true,
+      "label": "Show utility links",
+      "info": "Shows phone, email, account links, and language selector on the right side"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "info": "Displayed as a phone icon link in the utility bar"
+    },
+    {
+      "type": "text",
+      "id": "email_address",
+      "label": "Email address",
+      "info": "Displayed as an @ icon link in the utility bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_links",
+      "default": true,
+      "label": "Show account links",
+      "info": "Shows Create an Account and Sign In links"
+    },
+    {
+      "type": "text",
+      "id": "register_text",
+      "label": "Register link text",
+      "default": "Create an Account"
+    },
+    {
+      "type": "text",
+      "id": "login_text",
+      "label": "Sign in link text",
+      "default": "Sign In"
+    },
+    {
+      "type": "text",
+      "id": "default_language_label",
+      "label": "Default language label",
+      "default": "English",
+      "info": "Shown when language selector is disabled"
     },
     {
       "type": "checkbox",

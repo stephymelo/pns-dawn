@@ -366,7 +366,7 @@
 
 {%- comment -%} PNS: Navigation bar with hover dropdowns {%- endcomment -%}
 {%- if section.settings.menu != blank -%}
-  <nav class="pns-nav-bar color-{{ section.settings.nav_color_scheme }} gradient" aria-label="Main navigation">
+  <nav class="pns-nav-bar color-{{ section.settings.nav_color_scheme }} gradient" aria-label="Main navigation"{% if section.settings.nav_link_color != blank %} style="--pns-nav-link-color: {{ section.settings.nav_link_color }};"{% endif %}>
     <div class="pns-nav-inner page-width">
       <ul class="pns-nav-list">
         {%- for link in section.settings.menu.links -%}
@@ -690,6 +690,13 @@
       "id": "nav_color_scheme",
       "label": "Navigation bar color scheme",
       "default": "scheme-4"
+    },
+    {
+      "type": "color",
+      "id": "nav_link_color",
+      "label": "Navigation menu text color",
+      "default": "#e88a9a",
+      "info": "Overrides the menu link color. Clear to use the navigation bar color scheme text color."
     },
     {
       "type": "header",
