@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "FREE SHIPPING - CONTIGUOUS USA $99.00+",
+            "text": "Welcome to our store",
             "link": ""
           }
         }
@@ -31,13 +31,6 @@
         "color_scheme": "scheme-3",
         "show_line_separator": true,
         "show_social": true,
-        "show_utility_links": true,
-        "phone_number": "9085050556",
-        "email_address": "info@premiere.com",
-        "show_account_links": false,
-        "register_text": "Create an Account",
-        "login_text": "Sign In",
-        "default_language_label": "English",
         "enable_country_selector": false,
         "enable_language_selector": true
       }
@@ -48,16 +41,15 @@
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "main-menu",
-        "menu_type_desktop": "mega",
+        "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
-        "nav_color_scheme": "scheme-1",
-        "nav_link_color": "#e88a9a",
-        "enable_country_selector": false,
-        "enable_language_selector": false,
-        "enable_customer_avatar": false,
+        "nav_color_scheme": "",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
         "margin_bottom": 0,
         "padding_top": 20,
         "padding_bottom": 20
