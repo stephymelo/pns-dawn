@@ -67,21 +67,24 @@
           "type": "feature",
           "settings": {
             "heading": "Fast Free Shipping",
-            "text": "On Most Orders Over $99*"
+            "text": "On Most Orders Over $99*",
+            "link": ""
           }
         },
         "feature-2": {
           "type": "feature",
           "settings": {
             "heading": "Customer Service",
-            "text": "Licensed Nail Techs On Phones & Live Chat"
+            "text": "Licensed Nail Techs On Phones & Live Chat",
+            "link": ""
           }
         },
         "feature-3": {
           "type": "feature",
           "settings": {
             "heading": "Easy Returns",
-            "text": "30 Day Return Policy*"
+            "text": "30 Day Return Policy*",
+            "link": ""
           }
         }
       },
@@ -94,7 +97,7 @@
         "color_scheme": "scheme-1",
         "accent_color": "#e88a9a",
         "show_top_border": true,
-        "top_border_width": 4,
+        "top_border_width": 0,
         "padding_top": 20,
         "padding_bottom": 20
       }
