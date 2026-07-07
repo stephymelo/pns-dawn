@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "FREE SHIPPING - CONTIGUOUS USA $99.00+",
+            "text": "Welcome to our store",
             "link": ""
           }
         }
@@ -32,8 +32,8 @@
         "show_line_separator": true,
         "show_social": true,
         "show_utility_links": true,
-        "phone_number": "18007271119",
-        "email_address": "support@premiernailsource.com",
+        "phone_number": "",
+        "email_address": "",
         "default_language_label": "English",
         "enable_country_selector": false,
         "enable_language_selector": true
@@ -50,8 +50,8 @@
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
-        "nav_color_scheme": "scheme-5",
-        "nav_link_color": "#171717",
+        "nav_color_scheme": "",
+        "nav_link_color": "#e88a9a",
         "enable_country_selector": false,
         "enable_language_selector": false,
         "enable_customer_avatar": true,
@@ -66,6 +66,7 @@
         "feature-1": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/shipping-icon-4.png",
             "heading": "Fast Free Shipping",
             "text": "On Most Orders Over $99*",
             "link": ""
@@ -74,6 +75,7 @@
         "feature-2": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/cs-icon.png",
             "heading": "Customer Service",
             "text": "Licensed Nail Techs On Phones & Live Chat",
             "link": ""
@@ -82,6 +84,7 @@
         "feature-3": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/return-icon.png",
             "heading": "Easy Returns",
             "text": "30 Day Return Policy*",
             "link": ""
