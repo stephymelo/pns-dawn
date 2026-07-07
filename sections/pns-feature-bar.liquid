@@ -4,6 +4,7 @@
   class="pns-feature-bar color-{{ section.settings.color_scheme }} gradient"
   style="
     --pns-feature-accent: {{ section.settings.accent_color }};
+    --pns-feature-icon-color: {{ section.settings.icon_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     {% if section.settings.show_top_border %}border-top: {{ section.settings.top_border_width }}px solid {{ section.settings.accent_color }};{% endif %}
@@ -23,16 +24,25 @@
         {{ block.shopify_attributes }}
       >
         {%- if block.settings.icon != blank -%}
-          <span class="pns-feature-icon">
-            {{
-              block.settings.icon
-              | image_url: width: 160
-              | image_tag:
-                loading: 'lazy',
-                widths: '80, 120, 160',
-                alt: block.settings.heading | escape
-            }}
-          </span>
+          {%- if section.settings.recolor_icons -%}
+            <span
+              class="pns-feature-icon pns-feature-icon--recolor"
+              role="img"
+              aria-label="{{ block.settings.heading | escape }}"
+              style="--pns-feature-icon-src: url('{{ block.settings.icon | image_url: width: 160 }}');"
+            ></span>
+          {%- else -%}
+            <span class="pns-feature-icon">
+              {{
+                block.settings.icon
+                | image_url: width: 160
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '80, 120, 160',
+                  alt: block.settings.heading | escape
+              }}
+            </span>
+          {%- endif -%}
         {%- endif -%}
         <span class="pns-feature-text-wrap">
           {%- if block.settings.heading != blank -%}
@@ -66,7 +76,20 @@
       "type": "color",
       "id": "accent_color",
       "label": "Heading & accent color",
-      "default": "#e88a9a"
+      "default": "#f4b6bc"
+    },
+    {
+      "type": "checkbox",
+      "id": "recolor_icons",
+      "label": "Recolor icons",
+      "info": "Tint uploaded icons to the icon color below. Works best with solid/transparent icons.",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#f4b6bc"
     },
     {
       "type": "checkbox",
