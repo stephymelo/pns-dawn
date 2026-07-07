@@ -279,11 +279,11 @@
       },
       "scheme-5": {
         "settings": {
-          "background": "#FCB3B9",
+          "background": "#fcb3b9",
           "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#FCB3B9",
+          "text": "#F5F5F5",
+          "button": "#D1002D",
+          "button_label": "#fcb3b9",
           "secondary_button_label": "#ffffff",
           "shadow": "#121212"
         }
