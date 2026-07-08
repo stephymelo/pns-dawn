@@ -668,8 +668,8 @@ a.pns-feature-item:hover .pns-feature-heading {
   height: 4rem;
   border: none;
   border-radius: 0.4rem;
-  background-color: rgb(var(--color-button));
-  color: rgb(var(--color-button-text));
+  background-color: var(--pns-button-pink, #e88a9a);
+  color: #ffffff;
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 0.04rem;
@@ -704,4 +704,38 @@ a.pns-feature-item:hover .pns-feature-heading {
 .pns-add-to-cart-btn--full {
   width: 100%;
   margin-top: 0.8rem;
+}
+
+/* Mobile: stack the quantity picker on top of the add-to-cart button */
+@media screen and (max-width: 749px) {
+  .pns-qty-add-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pns-qty-picker {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pns-qty-input {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .pns-add-to-cart-btn {
+    width: 100%;
+  }
+}
+
+/* --- Product card: gray outline (matches the live site) --- */
+.product-card-wrapper {
+  border: 1px solid #e0e0e0;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+}
+
+/* Hide Shopify's native badges (Sale / Sold out) — badges come from an app */
+.product-card-wrapper .card__badge {
+  display: none !important;
 }
