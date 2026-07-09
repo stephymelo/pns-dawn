@@ -165,6 +165,23 @@
         "padding_bottom": 36
       }
     },
+    "image_banner_8EyTLh": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/amn-banner-home.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
     "pns_featured_collection_HpPXtX": {
       "type": "pns-featured-collection",
       "name": "PNS Featured Collection",
@@ -201,6 +218,7 @@
     "featured_collection",
     "multicolumn_q9bdcE",
     "pns_featured_collection_d3gTqj",
+    "image_banner_8EyTLh",
     "pns_featured_collection_HpPXtX"
   ]
 }
