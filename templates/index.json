@@ -81,7 +81,7 @@
       "name": "PNS Featured Collection",
       "settings": {
         "collection": "new-arrivals",
-        "products_to_show": 4,
+        "products_to_show": 12,
         "title": "New Arrivals",
         "heading_size": "h1",
         "heading_alignment": "center",
@@ -100,8 +100,8 @@
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "standard",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 36
       }
