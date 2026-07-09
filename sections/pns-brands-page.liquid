@@ -1,0 +1,202 @@
+<style>
+  /* === Base styles === */
+  .brands-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .brands-section::after {
+    content:"";
+    clear:both;
+    display:block;
+  }
+
+  .brands-title {
+    width:100%;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+  }
+
+  .brands-section img {
+    border:none;
+    max-width:100%;
+    height:auto;
+    display:block;
+    margin:0 auto;
+  }
+
+  /* === Brands grid === */
+  .brands-grid {
+    margin:14px 0 30px 0;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+    box-sizing:border-box;
+  }
+
+  .brand-item {
+    display:inline-block;
+    vertical-align:top;
+    box-sizing:border-box;
+    text-align:center;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .brand-item:hover {
+    transform: translateY(-8px);
+  }
+
+  .brand-link {
+    text-decoration:none;
+    color:inherit;
+    display:block;
+  }
+
+  .brand-catalogue-wrapper {
+    width:100%;
+    display:inline-block;
+    padding:10px 15px;
+    border:1px solid #e0e0e0;
+    box-sizing:border-box;
+    background:#fff; /* always white */
+    border-radius:8px;
+    transition: all 0.3s ease;
+  }
+
+  .brand-item:hover .brand-catalogue-wrapper {
+    border-color:#ccc;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .brand-catalogue-image {
+    width:60%;
+    aspect-ratio:1/1;
+    object-fit:contain;
+    filter:grayscale(100%);
+    opacity:0.7;
+    transition:all 0.3s ease;
+  }
+
+  .brand-item:hover .brand-catalogue-image {
+    filter:grayscale(0%);
+    opacity:1;
+  }
+
+  .brand-featured-title {
+    margin-top:12px;
+    font-weight:600;
+    font-size:14px;
+    color:#333;
+    transition:color 0.3s ease;
+  }
+
+  .brand-item:hover .brand-featured-title {
+    color:#000;
+  }
+
+  /* === Responsive breakpoints === */
+  @media(max-width:1100px){
+    .brands-grid{ grid-template-columns:repeat(4, 1fr); }
+  }
+
+  @media(max-width:900px){
+    .brands-grid{ grid-template-columns:repeat(3, 1fr); }
+  }
+
+  @media(max-width:700px){
+    .brands-grid{ grid-template-columns:repeat(2, 1fr); }
+
+.brand-catalogue-image {
+    filter:none !important;
+    opacity:1 !important;
+  }
+  }
+
+  @media(max-width:500px){
+    .brands-grid{ grid-template-columns:repeat(1, 1fr); }
+  }
+</style>
+
+<div class="brands-section">
+  <div class="brands-title">
+    {% if section.settings.heading != blank %}
+      <h1>{{ section.settings.heading | escape }}</h1>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <p>{{ section.settings.description | escape }}</p>
+    {% endif %}
+  </div>
+
+  <div class="brands-wrapper">
+    <div class="brands-grid">
+      {% assign skip_list = "95+,do not show" | split: "," %}
+      {% for vendor in shop.vendors %}
+        {% assign vendor_down = vendor | downcase %}
+        {% assign skip = false %}
+        {% for bad in skip_list %}
+          {% assign bad_down = bad | downcase %}
+          {% if vendor_down contains bad_down %}
+            {% assign skip = true %}
+          {% endif %}
+        {% endfor %}
+
+        {% unless skip %}
+          {% assign handle = vendor | handleize %}
+          {% assign collection = collections[handle] %}
+
+          <div class="brand-item" title="{{ vendor }}">
+            <a href="/collections/{{ vendor | handleize }}" class="brand-link">
+              <div class="brand-catalogue-wrapper">
+                {% if collection and collection.image %}
+                  <img
+                    src="{{ collection.image | img_url: '400x' }}"
+                    alt="{{ vendor }}"
+                    class="brand-catalogue-image"
+                  >
+                {% else %}
+                  <img
+                    src="https://via.placeholder.com/400x400?text={{ vendor | url_encode }}"
+                    alt="{{ vendor }}"
+                    class="brand-catalogue-image"
+                  >
+                {% endif %}
+              </div>
+              <div class="brand-featured-title">{{ vendor }}</div>
+            </a>
+          </div>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "PNS Brands Page",
+  "tag": "section",
+  "class": "pns-brands-page-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Brand"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover your favorite brands and explore their collections."
+    }
+  ],
+  "presets": [
+    {
+      "name": "PNS Brands Page"
+    }
+  ]
+}
+{% endschema %}
