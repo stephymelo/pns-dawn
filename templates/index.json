@@ -211,6 +211,80 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "image_banner_JG3AQe": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/N-Nail-Buy.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "multicolumn_VBchct": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_w4HapA": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/salon-retail.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "shopify://collections/weekly-hot-deals"
+          }
+        },
+        "column_QkhUkc": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/buy-bulk.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "shopify://collections/weekly-hot-deals"
+          }
+        },
+        "column_ewbzFT": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Salon-Safety_9a504cf5-9176-4c0e-bb17-a6b61414985e.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "shopify://collections/weekly-hot-deals"
+          }
+        }
+      },
+      "block_order": [
+        "column_w4HapA",
+        "column_QkhUkc",
+        "column_ewbzFT"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -219,6 +293,8 @@
     "multicolumn_q9bdcE",
     "pns_featured_collection_d3gTqj",
     "image_banner_8EyTLh",
-    "pns_featured_collection_HpPXtX"
+    "pns_featured_collection_HpPXtX",
+    "image_banner_JG3AQe",
+    "multicolumn_VBchct"
   ]
 }
