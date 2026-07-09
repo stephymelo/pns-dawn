@@ -498,13 +498,13 @@ a.pns-feature-item:hover .pns-feature-heading {
   height: 4.4rem;
   border-radius: 50%;
   background-color: #ffffff;
-  color: #2b2b2b;
-  border: 1px solid rgba(0, 0, 0, 0.18);
+  color: #111111;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: box-shadow 0.2s ease, opacity 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
@@ -517,9 +517,10 @@ a.pns-feature-item:hover .pns-feature-heading {
 }
 
 .pns-featured-slider .slider-button:hover {
-  background-color: #ffffff !important;
-  color: #2b2b2b !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  background-color: #e88a9a !important;
+  color: #ffffff !important;
+  border-color: #e88a9a !important;
+  box-shadow: 0 4px 14px rgba(232, 138, 154, 0.4);
 }
 
 .pns-featured-slider .slider-button .icon {
@@ -547,10 +548,28 @@ a.pns-feature-item:hover .pns-feature-heading {
   display: none;
 }
 
-/* Mobile: no arrows — swipe, with the next card peeking to signal scroll */
+/* Mobile: no arrows — swipe with a peek */
 @media screen and (max-width: 989px) {
   .pns-featured-slider .slider-buttons {
     display: none;
+  }
+}
+
+/* Tablet: ~2.5 cards */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .pns-featured-slider .slider.slider--tablet .slider__slide {
+    width: 42% !important;
+    min-width: 42% !important;
+    max-width: 42% !important;
+  }
+}
+
+/* Phones: show 1 full card + half of the next (≈1.5 cards) */
+@media screen and (max-width: 749px) {
+  .pns-featured-slider .slider.slider--tablet .slider__slide {
+    width: 66% !important;
+    min-width: 66% !important;
+    max-width: 66% !important;
   }
 }
 
