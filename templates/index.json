@@ -77,6 +77,61 @@
         "padding_bottom": 36
       }
     },
+    "multicolumn_q9bdcE": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_PYNarh": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Hot-Deals.webp",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "shopify://collections/weekly-hot-deals"
+          }
+        },
+        "column_YqLciX": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_rt4Bdy": {
+          "type": "column",
+          "settings": {
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_PYNarh",
+        "column_YqLciX",
+        "column_rt4Bdy"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "pns_featured_collection_d3gTqj": {
       "type": "pns-featured-collection",
       "name": "PNS Featured Collection",
@@ -141,6 +196,7 @@
   "order": [
     "image_banner",
     "featured_collection",
+    "multicolumn_q9bdcE",
     "pns_featured_collection_d3gTqj",
     "pns_featured_collection_HpPXtX"
   ]
