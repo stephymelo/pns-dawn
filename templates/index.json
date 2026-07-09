@@ -9,6 +9,55 @@
  */
 {
   "sections": {
+    "pns_feature_bar_home": {
+      "type": "pns-feature-bar",
+      "blocks": {
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/shipping-icon-4.png",
+            "heading": "Fast Free Shipping",
+            "text": "On Most Orders Over $99*",
+            "link": ""
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/cs-icon.png",
+            "heading": "Customer Service",
+            "text": "Licensed Nail Techs On Phones & Live Chat",
+            "link": ""
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/return-icon.png",
+            "heading": "Easy Returns",
+            "text": "30 Day Return Policy*",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature-1",
+        "feature-2",
+        "feature-3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "background_color": "#F7F7F7",
+        "accent_color": "#f4b6bc",
+        "recolor_icons": true,
+        "icon_color": "#f4b6bc",
+        "show_bottom_border": true,
+        "bottom_border_color": "#E4E4E4",
+        "bottom_border_width": 2,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
     "pns_home_banner_DedYP7": {
       "type": "pns-home-banner",
       "blocks": {
@@ -490,6 +539,7 @@
     }
   },
   "order": [
+    "pns_feature_bar_home",
     "pns_home_banner_DedYP7",
     "image_banner",
     "featured_collection",
