@@ -474,51 +474,57 @@ a.pns-feature-item:hover .pns-feature-heading {
    Featured Collection: Carousel with side buttons
    ============================================ */
 
-/* Position the section wrapper as the relative container so buttons sit at the edges */
+/* Anchor arrows to the card row (not the section title) */
 .pns-featured-slider {
   position: relative;
 }
 
-/* Move slider buttons to sides of the carousel */
+.pns-featured-slider slider-component {
+  position: relative;
+  display: block;
+}
+
 .pns-featured-slider .slider-buttons {
   position: static;
 }
 
+/* ULTA-style: slim white circular outline arrows on the sides */
 .pns-featured-slider .slider-button {
   position: absolute;
   top: 35%;
   transform: translateY(-50%);
-  z-index: 2;
-  width: 4.8rem;
-  height: 4.8rem;
+  z-index: 3;
+  width: 4.4rem;
+  height: 4.4rem;
   border-radius: 50%;
-  background-color: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
-  border: none;
+  background-color: #ffffff;
+  color: #2b2b2b;
+  border: 1px solid rgba(0, 0, 0, 0.18);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.25s ease, transform 0.25s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .pns-featured-slider .slider-button--prev {
-  left: 1rem;
+  left: -1.6rem;
 }
 
 .pns-featured-slider .slider-button--next {
-  right: 1rem;
+  right: -1.6rem;
 }
 
 .pns-featured-slider .slider-button:hover {
-  background-color: rgb(var(--color-button)) !important;
-  color: rgb(var(--color-button-label)) !important;
+  background-color: #ffffff !important;
+  color: #2b2b2b !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
 }
 
 .pns-featured-slider .slider-button .icon {
-  height: 1rem;
-  width: 1rem;
+  height: 1.2rem;
+  width: 1.2rem;
   color: inherit !important;
 }
 
@@ -530,15 +536,10 @@ a.pns-feature-item:hover .pns-feature-heading {
   transform: rotate(90deg) !important;
 }
 
-/* Keep buttons fully visible even when disabled (not greyed out) */
+/* Hide the arrow once you reach the start/end */
 .pns-featured-slider .slider-button[disabled] {
-  opacity: 1;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.pns-featured-slider .slider-button[disabled] .icon {
-  color: rgb(var(--color-background)) !important;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Hide the counter text between buttons */
@@ -546,18 +547,10 @@ a.pns-feature-item:hover .pns-feature-heading {
   display: none;
 }
 
-/* Ensure 4-col desktop grid for the slider */
-@media screen and (min-width: 990px) {
-  .pns-featured-slider .slider--desktop.grid--4-col-desktop .grid__item {
-    width: calc((100% - var(--desktop-margin-left-first-item)) / 4 - var(--grid-desktop-horizontal-spacing) * 3);
-  }
-
-  .pns-featured-slider .slider-button--prev {
-    left: 0;
-  }
-
-  .pns-featured-slider .slider-button--next {
-    right: 0;
+/* Mobile: no arrows — swipe, with the next card peeking to signal scroll */
+@media screen and (max-width: 989px) {
+  .pns-featured-slider .slider-buttons {
+    display: none;
   }
 }
 
