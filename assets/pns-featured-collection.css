@@ -1,0 +1,132 @@
+/* ============================================
+   Featured Collection: Carousel with side buttons
+   ============================================ */
+
+/* Anchor arrows to the card row (not the section title) */
+.pns-featured-slider {
+  position: relative;
+}
+
+.pns-featured-slider slider-component {
+  position: relative;
+  display: block;
+}
+
+.pns-featured-slider .slider-buttons {
+  position: static;
+}
+
+/* Black circular arrows with a white chevron, centered on the card */
+.pns-featured-slider .slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  background-color: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.pns-featured-slider .slider-button--prev {
+  left: -1.6rem;
+}
+
+.pns-featured-slider .slider-button--next {
+  right: -1.6rem;
+}
+
+.pns-featured-slider .slider-button:hover {
+  background-color: #e88a9a !important;
+  color: #ffffff !important;
+  border-color: #e88a9a !important;
+  box-shadow: 0 4px 14px rgba(232, 138, 154, 0.4);
+}
+
+.pns-featured-slider .slider-button .icon {
+  height: 1.2rem;
+  width: 1.2rem;
+  color: inherit !important;
+}
+
+.pns-featured-slider .slider-button--next .icon {
+  transform: rotate(-90deg) !important;
+}
+
+.pns-featured-slider .slider-button--prev .icon {
+  transform: rotate(90deg) !important;
+}
+
+/* Hide the arrow once you reach the start/end */
+.pns-featured-slider .slider-button[disabled] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hide the counter text between buttons */
+.pns-featured-slider .slider-counter {
+  display: none;
+}
+
+/* Desktop: constrain to the theme page width (Dawn's slider is full-bleed by
+   default) and show exactly 4 equal cards; scroll for the rest */
+@media screen and (min-width: 990px) {
+  .pns-featured-slider slider-component {
+    max-width: var(--page-width) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box;
+    --desktop-margin-left-first-item: 0rem;
+  }
+
+  .pns-featured-slider .slider--desktop .slider__slide:first-child {
+    margin-left: 0 !important;
+    scroll-margin-left: 0 !important;
+  }
+
+  .pns-featured-slider .slider--desktop::after {
+    display: none !important;
+  }
+
+  .pns-featured-slider .slider--desktop .slider__slide {
+    width: calc((100% - 3 * var(--grid-desktop-horizontal-spacing, 2.4rem)) / 4) !important;
+    min-width: calc((100% - 3 * var(--grid-desktop-horizontal-spacing, 2.4rem)) / 4) !important;
+    max-width: calc((100% - 3 * var(--grid-desktop-horizontal-spacing, 2.4rem)) / 4) !important;
+  }
+}
+
+/* Mobile: no arrows — swipe with a peek */
+@media screen and (max-width: 989px) {
+  .pns-featured-slider .slider-buttons {
+    display: none;
+  }
+}
+
+/* Tablet: ~2.5 cards */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .pns-featured-slider .slider.slider--tablet .slider__slide {
+    width: 42% !important;
+    min-width: 42% !important;
+    max-width: 42% !important;
+  }
+}
+
+/* Phones: show 1 full card + half of the next (≈1.5 cards) */
+@media screen and (max-width: 749px) {
+  .pns-featured-slider .slider.slider--tablet .slider__slide {
+    width: 66% !important;
+    min-width: 66% !important;
+    max-width: 66% !important;
+  }
+}
+

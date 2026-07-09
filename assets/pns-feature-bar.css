@@ -1,0 +1,141 @@
+/* ============================================
+   Feature / trust-badge bar (below the nav menu)
+   ============================================ */
+.pns-feature-bar {
+  background-color: var(--pns-feature-bg, rgb(var(--color-background)));
+}
+
+.pns-feature-bar__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.pns-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  flex: 1 1 0;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pns-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
+}
+
+.pns-feature-icon img,
+.pns-feature-icon svg {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+}
+
+/* Recolor uploaded icons to the exact icon color via CSS mask */
+.pns-feature-icon--recolor {
+  background-color: var(--pns-feature-icon-color, #f4b6bc);
+  -webkit-mask: var(--pns-feature-icon-src) no-repeat center / contain;
+  mask: var(--pns-feature-icon-src) no-repeat center / contain;
+}
+
+.pns-feature-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.pns-feature-heading {
+  color: var(--pns-feature-accent, #f4b6bc);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.pns-feature-text {
+  color: #777777;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  margin-top: 0.2rem;
+}
+
+a.pns-feature-item:hover .pns-feature-heading {
+  text-decoration: underline;
+}
+
+/* Duplicate marquee items only show on mobile */
+.pns-feature-item--dup {
+  display: none;
+}
+
+@keyframes pns-feature-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .pns-feature-bar__grid {
+    justify-content: center;
+    gap: 1.6rem 3.2rem;
+  }
+
+  .pns-feature-item {
+    flex: 0 1 auto;
+  }
+}
+
+/* Mobile: horizontal auto-scrolling loop (marquee) */
+@media screen and (max-width: 749px) {
+  .pns-feature-bar__marquee {
+    overflow: hidden;
+  }
+
+  .pns-feature-bar__grid {
+    flex-wrap: nowrap;
+    width: max-content;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+    animation: pns-feature-marquee 22s linear infinite;
+  }
+
+  .pns-feature-item,
+  .pns-feature-item--dup {
+    display: flex;
+    flex: 0 0 auto;
+    width: 62vw;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pns-feature-bar__grid {
+    animation: none !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .pns-utility-links {
+    display: flex;
+  }
+
+  /* Ensure 3-col grid works for utility links */
+  .utility-bar__grid:has(.pns-utility-links) {
+    grid-template-columns: 3fr 4fr 3fr;
+    grid-template-areas: 'social-icons announcements language-currency';
+  }
+}
+

@@ -1,0 +1,252 @@
+/* ============================================
+   Home Banner (rotating promo + Top Brands)
+   ============================================ */
+.pns-home-banner__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .pns-home-banner__grid {
+    grid-template-columns: 1fr 24rem;
+    gap: 1.6rem;
+    align-items: stretch;
+  }
+}
+
+/* Banner stage: prev arrow | image | next arrow (arrows outside the image) */
+.pns-home-banner__stage {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* --- Rotating banner --- */
+.pns-home-banner__slider {
+  display: block;
+  position: relative;
+  width: 100%;
+  /* Never stretch the banner past its ratio to match the taller brands box */
+  align-self: start;
+}
+
+.pns-home-banner__viewport {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-width: 0;
+  /* Match the banner artwork ratio (3200 x 1280 = 2.5:1) */
+  aspect-ratio: 3200 / 1280;
+  border-radius: 0.4rem;
+}
+
+.pns-home-banner__track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.pns-home-banner__slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  height: 100%;
+}
+
+.pns-home-banner__slide-link {
+  display: block;
+  height: 100%;
+}
+
+/* Banner artwork is 2.5:1, same as the viewport, so cover shows it fully */
+.pns-home-banner__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Arrows — outside the image, same look as the product carousel */
+.pns-home-banner__slider .slider-button {
+  flex: 0 0 auto;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  background-color: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.pns-home-banner__slider .slider-button:hover {
+  background-color: #e88a9a;
+  color: #ffffff;
+  border-color: #e88a9a;
+}
+
+.pns-home-banner__slider .slider-button .icon {
+  width: 1rem;
+  height: 1rem;
+  color: inherit;
+}
+
+.pns-home-banner__slider .slider-button--prev .icon {
+  transform: rotate(90deg);
+}
+
+.pns-home-banner__slider .slider-button--next .icon {
+  transform: rotate(-90deg);
+}
+
+/* Mobile: banner full width, arrows overlaid on the edges (not flanking) */
+@media screen and (max-width: 989px) {
+  .pns-home-banner__stage {
+    position: relative;
+    display: block;
+    gap: 0;
+  }
+
+  .pns-home-banner__slider .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+
+  .pns-home-banner__slider .slider-button--prev {
+    left: 0.6rem;
+  }
+
+  .pns-home-banner__slider .slider-button--next {
+    right: 0.6rem;
+  }
+}
+
+/* Dots — below the banner (outside the image) */
+.pns-home-banner__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.pns-home-banner__dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid rgba(var(--color-foreground), 0.35);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pns-home-banner__dot.is-active {
+  background: rgb(var(--color-foreground));
+  border-color: rgb(var(--color-foreground));
+}
+
+/* --- Top Brands panel --- */
+.pns-home-banner__brands {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.pns-home-banner__brands-header {
+  padding: 1.4rem 2rem;
+  text-align: left;
+  background-color: rgb(var(--color-background));
+}
+
+.pns-home-banner__brands-title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  color: rgb(var(--color-foreground));
+}
+
+.pns-home-banner__brands-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pns-home-banner__brand-item {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.pns-home-banner__brand-item:last-child {
+  border-bottom: none;
+}
+
+.pns-home-banner__brand-link {
+  display: block;
+  padding: 1.2rem 2rem;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.pns-home-banner__brand-link:hover {
+  background-color: rgba(var(--color-foreground), 0.04);
+  color: rgb(var(--color-button));
+}
+
+/* Desktop only: rows flex-fill to match the banner height (mobile uses natural rows) */
+@media screen and (min-width: 990px) {
+  .pns-home-banner__brands-list {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .pns-home-banner__brand-item {
+    flex: 1 1 0;
+    display: flex;
+    min-height: 0;
+  }
+
+  .pns-home-banner__brand-link {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 2rem;
+  }
+}
+
+.pns-home-banner__cta {
+  padding: 1rem 1.6rem;
+}
+
+.pns-home-banner__cta-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  border-radius: 0.4rem;
+  background-color: var(--pns-cta-bg, #c0392b);
+  color: var(--pns-cta-text, #ffffff);
+  transition: opacity 0.2s ease;
+}
+
+.pns-home-banner__cta-btn:hover {
+  opacity: 0.88;
+}

@@ -1,0 +1,186 @@
+/* ============================================
+   Product Card: No gray background
+   ============================================ */
+
+.card--standard .card__inner,
+.card--card {
+  background-color: transparent;
+}
+
+/* ============================================
+   Product Card: Smaller images + more spacing
+   ============================================ */
+
+/* Increase gap between cards */
+.collection .grid,
+.pns-featured-slider .grid,
+.slider--desktop {
+  --grid-desktop-horizontal-spacing: 2.4rem;
+  --grid-desktop-vertical-spacing: 3.2rem;
+  --grid-mobile-horizontal-spacing: 1.6rem;
+  --grid-mobile-vertical-spacing: 2.4rem;
+}
+
+/* Reduce image size by adding padding inside the card image wrapper */
+.card__media {
+  padding: 1.2rem;
+}
+
+.card__media .media img {
+  object-fit: contain;
+}
+
+/* ============================================
+   Product Card: Quantity Picker + Add to Cart
+   ============================================ */
+
+.pns-qty-add-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+.pns-qty-picker {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  height: 4rem;
+  flex-shrink: 0;
+}
+
+.pns-qty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 0;
+  transition: background-color 0.15s ease;
+}
+
+.pns-qty-btn:hover {
+  background-color: rgba(var(--color-foreground), 0.06);
+}
+
+.pns-qty-input {
+  width: 3rem;
+  text-align: center;
+  border: none;
+  border-left: 1px solid rgba(var(--color-foreground), 0.2);
+  border-right: 1px solid rgba(var(--color-foreground), 0.2);
+  background: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgb(var(--color-foreground));
+  height: 100%;
+  padding: 0;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.pns-qty-input::-webkit-inner-spin-button,
+.pns-qty-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pns-add-to-cart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 0;
+  height: 4rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: var(--pns-button-pink, #e88a9a);
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.04rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  padding: 0 1rem;
+  white-space: nowrap;
+}
+
+.pns-add-to-cart-btn:hover {
+  opacity: 0.85;
+}
+
+.pns-add-to-cart-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pns-add-to-cart-btn .loading__spinner {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* Add to cart icon (cart SVG) */
+.pns-add-to-cart-btn .pns-cart-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+}
+
+/* Full-width variant for multi-variant "Choose options" button */
+.pns-add-to-cart-btn--full {
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+/* Mobile: stack the quantity picker on top of the add-to-cart button */
+@media screen and (max-width: 749px) {
+  .pns-qty-add-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .pns-qty-picker {
+    width: 100%;
+    height: 4.4rem;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .pns-qty-input {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  /* Full-width, finger-friendly tap target that stays inside the card */
+  .pns-add-to-cart-btn {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 4.8rem;
+    box-sizing: border-box;
+  }
+}
+
+/* --- Product card: gray outline (matches the live site) --- */
+.product-card-wrapper {
+  border: 1px solid #e0e0e0;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+}
+
+/* Hide Shopify's native badges (Sale / Sold out) — badges come from an app */
+.product-card-wrapper .card__badge {
+  display: none !important;
+}
+

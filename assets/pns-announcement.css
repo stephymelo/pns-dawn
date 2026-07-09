@@ -1,0 +1,73 @@
+/* ============================================
+   PNS Custom Styles - Premier Nail Source
+   Uses Shopify color scheme variables throughout.
+   ============================================ */
+
+/* --- Announcement Bar: Override to use color scheme vars for all child elements --- */
+.announcement-bar-section .utility-bar .announcement-bar__message,
+.announcement-bar-section .utility-bar .announcement-bar__link,
+.announcement-bar-section .utility-bar .list-social__link,
+.announcement-bar-section .utility-bar a {
+  color: rgb(var(--color-foreground));
+}
+
+.announcement-bar-section .utility-bar .list-social__link {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0.4rem;
+}
+
+.announcement-bar-section .utility-bar .list-social__link .icon {
+  fill: rgb(var(--color-foreground));
+  color: rgb(var(--color-foreground));
+}
+
+.announcement-bar-section .utility-bar .announcement-bar__message {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}
+
+/* --- Announcement bar utility links on the right --- */
+.pns-utility-links {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  grid-area: language-currency;
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.pns-utility-links a,
+.pns-utility-links span {
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  font-size: 1.2rem;
+  letter-spacing: 0.02rem;
+}
+
+.pns-utility-links a:hover {
+  text-decoration: underline;
+}
+
+.pns-utility-links .pns-utility-separator {
+  margin: 0 0.4rem;
+  opacity: 0.7;
+}
+
+.pns-utility-links .pns-utility-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.3rem;
+}
+
+.pns-utility-links .pns-utility-icon svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: none;
+  stroke: rgb(var(--color-foreground));
+  stroke-width: 1.5;
+}
+
