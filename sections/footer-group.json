@@ -45,6 +45,7 @@
         "top_background": "#111111",
         "top_text": "#ffffff",
         "show_bg_logo": true,
+        "bg_logo": "shopify://shop_images/pns-flowerlogo.png",
         "show_middle": true,
         "middle_background": "#a9ddd1",
         "middle_text": "#1a1a1a",
@@ -52,7 +53,7 @@
         "phone": "800-727-1119",
         "bottom_background": "#f6ccc5",
         "bottom_text": "#1a1a1a",
-        "brand_color": "#1A1A1A",
+        "brand_color": "#1a1a1a",
         "copyright_name": "Premier Nail Source",
         "bottom_menu": "footer"
       }
