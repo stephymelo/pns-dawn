@@ -1,0 +1,291 @@
+{{ 'pns-custom.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+
+<footer
+  class="pns-footer"
+  style="
+    --pns-footer-top-bg: {{ section.settings.top_background }};
+    --pns-footer-top-text: {{ section.settings.top_text }};
+    --pns-footer-mid-bg: {{ section.settings.middle_background }};
+    --pns-footer-mid-text: {{ section.settings.middle_text }};
+    --pns-footer-bot-bg: {{ section.settings.bottom_background }};
+    --pns-footer-bot-text: {{ section.settings.bottom_text }};
+    --pns-footer-brand: {{ section.settings.brand_color }};
+  "
+>
+  <div class="pns-footer__top">
+    <div class="page-width pns-footer__top-grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <div class="pns-footer__col" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="pns-footer__heading">{{ block.settings.heading | escape }}</h2>
+              {%- endif -%}
+              {%- if block.settings.menu != blank -%}
+                <ul class="pns-footer__links" role="list">
+                  {%- for link in block.settings.menu.links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="pns-footer__link">{{ link.title | escape }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- when 'newsletter' -%}
+            <div class="pns-footer__col pns-footer__newsletter" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="pns-footer__heading">{{ block.settings.heading | escape }}</h2>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="pns-footer__newsletter-text">{{ block.settings.description | escape }}</p>
+              {%- endif -%}
+              {%- form 'customer', id: 'PnsFooterNewsletter', class: 'pns-footer__form newsletter-form' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="pns-footer__form-row">
+                  <input
+                    type="email"
+                    name="contact[email]"
+                    class="pns-footer__email"
+                    value="{{ form.email }}"
+                    aria-label="{{ 'newsletter.label' | t }}"
+                    placeholder="{{ 'newsletter.label' | t }}"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    required
+                  >
+                  <button type="submit" class="pns-footer__subscribe" name="commit">
+                    {{ 'newsletter.button_label' | t }}
+                  </button>
+                </div>
+                {%- if form.errors -%}
+                  <small class="pns-footer__form-msg pns-footer__form-msg--error">
+                    {{- form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email -}}
+                  </small>
+                {%- elsif form.posted_successfully? -%}
+                  <p class="pns-footer__form-msg pns-footer__form-msg--success">{{ 'newsletter.success' | t }}</p>
+                {%- endif -%}
+              {%- endform -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.show_bg_logo and section.settings.bg_logo != blank -%}
+      <div class="pns-footer__bg-logo" aria-hidden="true">
+        {{
+          section.settings.bg_logo
+          | image_url: width: 900
+          | image_tag: loading: 'lazy', widths: '300, 600, 900', alt: ''
+        }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_middle -%}
+    <div class="pns-footer__middle">
+      <div class="page-width pns-footer__middle-grid">
+        <div class="pns-footer__contact">
+          {%- if section.settings.address != blank -%}
+            <span class="pns-footer__contact-item">
+              <svg class="pns-footer__contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              {{ section.settings.address | escape }}
+            </span>
+          {%- endif -%}
+          {%- if section.settings.phone != blank -%}
+            <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}" class="pns-footer__contact-item">
+              <svg class="pns-footer__contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              {{ section.settings.phone | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+        <div class="pns-footer__socials">
+          {%- render 'social-icons' -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="pns-footer__bottom">
+    <div class="page-width pns-footer__bottom-grid">
+      <span class="pns-footer__copy">
+        &copy; {{ 'now' | date: '%Y' }}
+        <span class="pns-footer__brand">{{ section.settings.copyright_name | default: shop.name | escape }}</span>.
+      </span>
+      {%- if section.settings.bottom_menu != blank -%}
+        <ul class="pns-footer__policies" role="list">
+          {%- for link in section.settings.bottom_menu.links -%}
+            <li>
+              <a href="{{ link.url }}" class="pns-footer__policy-link">{{ link.title | escape }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "PNS Footer",
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Menu"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "This menu won't show dropdown items."
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Stay In Touch"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Join the our newsletter and be first to hear about news, offers and nailcare advice"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top area"
+    },
+    {
+      "type": "color",
+      "id": "top_background",
+      "label": "Top background",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "top_text",
+      "label": "Top text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bg_logo",
+      "label": "Show background logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_logo",
+      "label": "Background logo",
+      "info": "Decorative logo shown on the right of the top area (e.g. the lotus mark)."
+    },
+    {
+      "type": "header",
+      "content": "Contact bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_middle",
+      "label": "Show contact bar",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "middle_background",
+      "label": "Contact bar background",
+      "default": "#a9ddd1"
+    },
+    {
+      "type": "color",
+      "id": "middle_text",
+      "label": "Contact bar text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "5454 W. Crenshaw St, Tampa, FL 33634"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "800-727-1119"
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "color",
+      "id": "bottom_background",
+      "label": "Bottom bar background",
+      "default": "#f6ccc5"
+    },
+    {
+      "type": "color",
+      "id": "bottom_text",
+      "label": "Bottom bar text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "brand_color",
+      "label": "Brand name color",
+      "default": "#5b3a9e"
+    },
+    {
+      "type": "text",
+      "id": "copyright_name",
+      "label": "Copyright name",
+      "default": "Premier Nail Source"
+    },
+    {
+      "type": "link_list",
+      "id": "bottom_menu",
+      "label": "Bottom menu",
+      "info": "Shown on the right of the bottom bar."
+    }
+  ],
+  "presets": [
+    {
+      "name": "PNS Footer",
+      "blocks": [
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Customer Service"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Top Deals"
+          }
+        },
+        {
+          "type": "newsletter"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

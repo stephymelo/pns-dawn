@@ -12,40 +12,49 @@
   "type": "footer",
   "sections": {
     "footer": {
-      "type": "footer",
+      "type": "pns-footer",
       "blocks": {
-        "link_list_wTwVMi": {
-          "type": "link_list",
+        "menu_cs": {
+          "type": "menu",
           "settings": {
-            "heading": "Quick links",
+            "heading": "Customer Service",
             "menu": "footer"
           }
         },
-        "link_list_8Byppi": {
-          "type": "link_list",
+        "menu_deals": {
+          "type": "menu",
           "settings": {
             "heading": "Top Deals",
             "menu": "footer-products"
           }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Stay In Touch",
+            "description": "Join the our newsletter and be first to hear about news, offers and nailcare advice"
+          }
         }
       },
       "block_order": [
-        "link_list_wTwVMi",
-        "link_list_8Byppi"
+        "menu_cs",
+        "menu_deals",
+        "newsletter"
       ],
       "settings": {
-        "color_scheme": "scheme-4",
-        "newsletter_enable": true,
-        "newsletter_heading": "Stay In Touch",
-        "enable_follow_on_shop": false,
-        "show_social": true,
-        "enable_country_selector": false,
-        "enable_language_selector": true,
-        "payment_enable": false,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "top_background": "#111111",
+        "top_text": "#ffffff",
+        "show_bg_logo": true,
+        "show_middle": true,
+        "middle_background": "#a9ddd1",
+        "middle_text": "#1a1a1a",
+        "address": "5454 W. Crenshaw St, Tampa, FL 33634",
+        "phone": "800-727-1119",
+        "bottom_background": "#f6ccc5",
+        "bottom_text": "#1a1a1a",
+        "brand_color": "#5b3a9e",
+        "copyright_name": "Premier Nail Source",
+        "bottom_menu": "footer"
       }
     }
   },
