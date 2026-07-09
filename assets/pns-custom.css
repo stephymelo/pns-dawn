@@ -488,18 +488,18 @@ a.pns-feature-item:hover .pns-feature-heading {
   position: static;
 }
 
-/* ULTA-style: slim white circular outline arrows on the sides */
+/* Black circular arrows with a white chevron, centered on the card */
 .pns-featured-slider .slider-button {
   position: absolute;
-  top: 35%;
+  top: 50%;
   transform: translateY(-50%);
   z-index: 3;
   width: 4.4rem;
   height: 4.4rem;
   border-radius: 50%;
-  background-color: #ffffff;
-  color: #111111;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
   cursor: pointer;
   display: flex;
   align-items: center;
