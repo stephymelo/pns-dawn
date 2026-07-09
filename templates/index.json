@@ -90,29 +90,31 @@
             "link": "shopify://collections/weekly-hot-deals"
           }
         },
-        "column_YqLciX": {
+        "column_iXENky": {
           "type": "column",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "image": "shopify://shop_images/National.webp",
+            "title": "",
+            "text": "",
             "link_label": "",
-            "link": ""
+            "link": "shopify://collections/weekly-hot-deals"
           }
         },
-        "column_rt4Bdy": {
+        "column_w9ck9n": {
           "type": "column",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "image": "shopify://shop_images/current-collections.webp",
+            "title": "",
+            "text": "",
             "link_label": "",
-            "link": ""
+            "link": "shopify://collections/weekly-hot-deals"
           }
         }
       },
       "block_order": [
         "column_PYNarh",
-        "column_YqLciX",
-        "column_rt4Bdy"
+        "column_iXENky",
+        "column_w9ck9n"
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
@@ -124,8 +126,8 @@
         "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "left",
-        "background_style": "primary",
-        "color_scheme": "",
+        "background_style": "none",
+        "color_scheme": "scheme-2",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 36,
