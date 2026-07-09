@@ -9,6 +9,71 @@
  */
 {
   "sections": {
+    "pns_home_banner_DedYP7": {
+      "type": "pns-home-banner",
+      "blocks": {
+        "slide_tWnRQN": {
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
+        },
+        "slide_E8YUX3": {
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
+        },
+        "brand_y6PcT4": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "CND",
+            "brand_link": ""
+          }
+        },
+        "brand_itw8tm": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "OPI",
+            "brand_link": ""
+          }
+        },
+        "brand_TpENt9": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Gelish",
+            "brand_link": ""
+          }
+        },
+        "brand_cQde4Y": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Americanails",
+            "brand_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_tWnRQN",
+        "slide_E8YUX3",
+        "brand_y6PcT4",
+        "brand_itw8tm",
+        "brand_TpENt9",
+        "brand_cQde4Y"
+      ],
+      "name": "PNS Home Banner",
+      "settings": {
+        "color_scheme": "",
+        "rotate_speed": 5,
+        "brands_title": "Top Brands",
+        "brands_color_scheme": "",
+        "cta_label": "NAILBUYS",
+        "cta_link": "",
+        "cta_color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -342,9 +407,71 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "pns_brand_slider_tK4kyQ": {
+      "type": "pns-brand-slider",
+      "blocks": {
+        "logo_fqBK9H": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo_nFDagH": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo_G6yxJe": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo_T8cVpz": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo_36jKV4": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo_kyCK9z": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_fqBK9H",
+        "logo_nFDagH",
+        "logo_G6yxJe",
+        "logo_T8cVpz",
+        "logo_36jKV4",
+        "logo_kyCK9z"
+      ],
+      "name": "PNS Brand Slider",
+      "settings": {
+        "title": "Top Brands",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "color_scheme": "",
+        "columns_desktop": 5,
+        "rotate_speed": 4,
+        "transition_speed": 800,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
+    "pns_home_banner_DedYP7",
     "image_banner",
     "featured_collection",
     "multicolumn_q9bdcE",
@@ -353,6 +480,7 @@
     "pns_featured_collection_HpPXtX",
     "image_banner_JG3AQe",
     "multicolumn_VBchct",
-    "multicolumn_QqeKPw"
+    "multicolumn_QqeKPw",
+    "pns_brand_slider_tK4kyQ"
   ]
 }
