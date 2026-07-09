@@ -87,7 +87,11 @@
         </ul>
         {%- if section.settings.cta_label != blank -%}
           <div class="pns-home-banner__cta">
-            <a href="{{ section.settings.cta_link }}" class="pns-home-banner__cta-btn color-{{ section.settings.cta_color_scheme }}">
+            <a
+              href="{{ section.settings.cta_link }}"
+              class="pns-home-banner__cta-btn"
+              style="--pns-cta-bg: {{ section.settings.cta_bg_color }}; --pns-cta-text: {{ section.settings.cta_text_color }};"
+            >
               {{ section.settings.cta_label | escape }}
             </a>
           </div>
@@ -160,10 +164,16 @@
       "label": "CTA button link"
     },
     {
-      "type": "color_scheme",
-      "id": "cta_color_scheme",
-      "label": "CTA button color scheme",
-      "default": "scheme-3"
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "CTA button color",
+      "default": "#c0392b"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA button text color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
@@ -234,7 +244,9 @@
         { "type": "brand", "settings": { "brand_name": "CND" } },
         { "type": "brand", "settings": { "brand_name": "OPI" } },
         { "type": "brand", "settings": { "brand_name": "Gelish" } },
-        { "type": "brand", "settings": { "brand_name": "Americanails" } }
+        { "type": "brand", "settings": { "brand_name": "Americanails" } },
+        { "type": "brand", "settings": { "brand_name": "Cuccio" } },
+        { "type": "brand", "settings": { "brand_name": "Voesh" } }
       ]
     }
   ]

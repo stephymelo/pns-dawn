@@ -1189,7 +1189,8 @@ a.pns-feature-item:hover .pns-feature-heading {
 .pns-home-banner__viewport {
   overflow: hidden;
   width: 100%;
-  height: 100%;
+  /* Match the banner artwork ratio (3200 x 1280 = 2.5:1) */
+  aspect-ratio: 3200 / 1280;
   border-radius: 0.4rem;
 }
 
@@ -1201,23 +1202,27 @@ a.pns-feature-item:hover .pns-feature-heading {
 
 .pns-home-banner__track {
   display: flex;
+  height: 100%;
   transition: transform 0.5s ease;
 }
 
 .pns-home-banner__slide {
   flex: 0 0 100%;
   min-width: 100%;
+  height: 100%;
 }
 
 .pns-home-banner__slide-link {
   display: block;
+  height: 100%;
 }
 
-/* Show the banner completely — no cropping */
+/* Banner artwork is 2.5:1, same as the viewport, so cover shows it fully */
 .pns-home-banner__image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Arrows — same as the product carousel */
@@ -1369,8 +1374,8 @@ a.pns-feature-item:hover .pns-feature-heading {
   letter-spacing: 0.06rem;
   text-transform: uppercase;
   border-radius: 0.4rem;
-  background-color: rgb(var(--color-button));
-  color: rgb(var(--color-button-text));
+  background-color: var(--pns-cta-bg, #c0392b);
+  color: var(--pns-cta-text, #ffffff);
   transition: opacity 0.2s ease;
 }
 

@@ -51,6 +51,20 @@
             "brand_name": "Americanails",
             "brand_link": ""
           }
+        },
+        "brand_cuccio": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Cuccio",
+            "brand_link": ""
+          }
+        },
+        "brand_voesh": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Voesh",
+            "brand_link": ""
+          }
         }
       },
       "block_order": [
@@ -59,7 +73,9 @@
         "brand_y6PcT4",
         "brand_itw8tm",
         "brand_TpENt9",
-        "brand_cQde4Y"
+        "brand_cQde4Y",
+        "brand_cuccio",
+        "brand_voesh"
       ],
       "name": "PNS Home Banner",
       "settings": {
@@ -69,7 +85,8 @@
         "brands_color_scheme": "",
         "cta_label": "NAILBUYS",
         "cta_link": "",
-        "cta_color_scheme": "",
+        "cta_bg_color": "#c0392b",
+        "cta_text_color": "#ffffff",
         "padding_top": 36,
         "padding_bottom": 36
       }
