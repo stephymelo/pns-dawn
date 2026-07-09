@@ -1059,3 +1059,105 @@ a.pns-feature-item:hover .pns-feature-heading {
     gap: 1.4rem;
   }
 }
+
+/* ============================================
+   Brand logo slider (auto-rotating)
+   ============================================ */
+.pns-brand-section__title {
+  margin: 0 0 3rem;
+}
+
+.pns-brand-slider {
+  --brand-per-view: 5;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.pns-brand-slider__viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.pns-brand-slider__track {
+  display: flex;
+  will-change: transform;
+}
+
+.pns-brand-slide {
+  flex: 0 0 calc(100% / var(--brand-per-view, 5));
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.4rem;
+}
+
+.pns-brand-slide__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.pns-brand-slide__img {
+  max-width: 100%;
+  max-height: 8rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Arrows — same look as the product carousel */
+.pns-brand-slider .slider-button {
+  flex: 0 0 auto;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  background-color: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.pns-brand-slider .slider-button:hover {
+  background-color: #e88a9a;
+  color: #ffffff;
+  border-color: #e88a9a;
+}
+
+.pns-brand-slider .slider-button .icon {
+  width: 1rem;
+  height: 1rem;
+  color: inherit;
+}
+
+.pns-brand-slider .slider-button--next .icon {
+  transform: rotate(-90deg);
+}
+
+.pns-brand-slider .slider-button--prev .icon {
+  transform: rotate(90deg);
+}
+
+@media screen and (max-width: 989px) {
+  .pns-brand-slider {
+    --brand-per-view: 3 !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .pns-brand-slider {
+    --brand-per-view: 2 !important;
+  }
+
+  .pns-brand-slide {
+    padding: 1rem 1.4rem;
+  }
+}
