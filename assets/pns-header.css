@@ -178,16 +178,20 @@
 
 .pns-nav-bar .pns-nav-link:hover {
   background-color: rgba(var(--color-foreground), 0.1);
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
 }
 
+/* Chevron (open caret) */
 .pns-nav-bar .pns-nav-link .pns-caret {
   display: inline-block;
-  width: 0;
-  height: 0;
-  border-left: 0.4rem solid transparent;
-  border-right: 0.4rem solid transparent;
-  border-top: 0.4rem solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
-  margin-left: 0.2rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 1.5px solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
+  border-bottom: 1.5px solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
+  transform: rotate(45deg);
+  margin-left: 0.5rem;
+  margin-bottom: 0.2rem;
   transition: transform 0.2s ease;
 }
 
@@ -198,7 +202,8 @@
 }
 
 .pns-nav-bar .pns-nav-link--deals .pns-caret {
-  border-top-color: rgb(var(--color-button));
+  border-right-color: rgb(var(--color-button));
+  border-bottom-color: rgb(var(--color-button));
 }
 
 /* --- Dropdown menu (hover) --- */
@@ -228,7 +233,7 @@
 }
 
 .pns-nav-item:hover > .pns-nav-link .pns-caret {
-  transform: rotate(180deg);
+  transform: rotate(225deg);
 }
 
 .pns-nav-dropdown a {

@@ -152,6 +152,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-3.92 7.94"/></svg>
           </a>
         {%- endif -%}
+        {%- if shop.customer_accounts_enabled -%}
+          <span class="pns-utility-separator">|</span>
+          <a href="{{ routes.account_login_url }}" class="pns-utility-signin">Sign In</a>
+        {%- endif -%}
         {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
           <span class="pns-utility-separator">|</span>
           <localization-form class="small-hide medium-hide">
