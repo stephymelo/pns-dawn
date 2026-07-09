@@ -947,10 +947,10 @@ a.pns-feature-item:hover .pns-feature-heading {
 /* Decorative background logo */
 .pns-footer__bg-logo {
   position: absolute;
-  right: 3%;
-  bottom: -7rem;
-  width: 42rem;
-  max-width: 42%;
+  right: 2%;
+  bottom: -3rem;
+  width: 50rem;
+  max-width: 48%;
   z-index: 1;
   pointer-events: none;
 }
