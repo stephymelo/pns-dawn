@@ -831,7 +831,7 @@ a.pns-feature-item:hover .pns-feature-heading {
   color: var(--pns-footer-top-text, #ffffff);
   opacity: 0.82;
   text-decoration: none;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 
 .pns-footer__link:hover {
@@ -842,7 +842,7 @@ a.pns-feature-item:hover .pns-feature-heading {
 .pns-footer__newsletter-text {
   margin: 0 0 2.2rem;
   max-width: 42rem;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1.5;
   opacity: 0.9;
 }
@@ -947,8 +947,8 @@ a.pns-feature-item:hover .pns-feature-heading {
   gap: 0.9rem;
   color: var(--pns-footer-mid-text, #1a1a1a);
   text-decoration: none;
-  font-size: 1.7rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .pns-footer__contact-icon {
@@ -957,37 +957,28 @@ a.pns-feature-item:hover .pns-feature-heading {
   flex-shrink: 0;
 }
 
-/* Social icons as outlined circles */
+/* Social icons — plain, no circle */
 .pns-footer__socials .list-social {
-  gap: 0.8rem;
+  gap: 1.2rem;
   margin: 0;
 }
 
 .pns-footer__socials .list-social__link {
-  width: 4rem;
-  height: 4rem;
-  padding: 0;
-  border-radius: 50%;
-  border: 1.5px solid var(--pns-footer-mid-text, #1a1a1a);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0.4rem;
+  border: none;
+  border-radius: 0;
+  background: none;
   color: var(--pns-footer-mid-text, #1a1a1a);
-  transition: background-color 0.2s ease;
 }
 
 .pns-footer__socials .list-social__link .icon {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2rem;
+  height: 2rem;
   fill: var(--pns-footer-mid-text, #1a1a1a);
 }
 
-.pns-footer__socials .list-social__link:hover {
-  background: var(--pns-footer-mid-text, #1a1a1a);
-}
-
 .pns-footer__socials .list-social__link:hover .icon {
-  fill: var(--pns-footer-mid-bg, #a9ddd1);
+  opacity: 0.7;
 }
 
 /* --- Bottom (pink): copyright + policy menu --- */
@@ -1006,8 +997,8 @@ a.pns-feature-item:hover .pns-feature-heading {
 }
 
 .pns-footer__copy {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .pns-footer__brand {
@@ -1026,8 +1017,8 @@ a.pns-feature-item:hover .pns-feature-heading {
 .pns-footer__policy-link {
   color: var(--pns-footer-bot-text, #1a1a1a);
   text-decoration: none;
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .pns-footer__policy-link:hover {
