@@ -432,7 +432,8 @@
         "logo_fqBK9H": {
           "type": "logo",
           "settings": {
-            "link": ""
+            "image": "shopify://shop_images/gelish-logo.png",
+            "link": "shopify://collections/gelish"
           }
         },
         "logo_nFDagH": {
