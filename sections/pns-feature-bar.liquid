@@ -1,60 +1,26 @@
 {{ 'pns-custom.css' | asset_url | stylesheet_tag }}
 
 <div
-  class="pns-feature-bar{% if section.settings.background_color == blank %} color-{{ section.settings.color_scheme }} gradient{% endif %}"
+  class="pns-feature-bar color-{{ section.settings.color_scheme }} gradient"
   style="
     --pns-feature-accent: {{ section.settings.accent_color }};
     --pns-feature-icon-color: {{ section.settings.icon_color }};
-    {% if section.settings.background_color != blank %}background-color: {{ section.settings.background_color }};{% endif %}
+    {% if section.settings.background_color != blank %}background-color: {{ section.settings.background_color }}; background-image: none;{% endif %}
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     {% if section.settings.show_bottom_border %}border-bottom: {{ section.settings.bottom_border_width }}px solid {{ section.settings.bottom_border_color }};{% endif %}
   "
 >
-  <div class="page-width pns-feature-bar__grid">
-    {%- for block in section.blocks -%}
-      {%- liquid
-        assign tag = 'div'
-        if block.settings.link != blank
-          assign tag = 'a'
-        endif
-      -%}
-      <{{ tag }}
-        class="pns-feature-item"
-        {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
-        {{ block.shopify_attributes }}
-      >
-        {%- if block.settings.icon != blank -%}
-          {%- if section.settings.recolor_icons -%}
-            <span
-              class="pns-feature-icon pns-feature-icon--recolor"
-              role="img"
-              aria-label="{{ block.settings.heading | escape }}"
-              style="--pns-feature-icon-src: url('{{ block.settings.icon | image_url: width: 160 }}');"
-            ></span>
-          {%- else -%}
-            <span class="pns-feature-icon">
-              {{
-                block.settings.icon
-                | image_url: width: 160
-                | image_tag:
-                  loading: 'lazy',
-                  widths: '80, 120, 160',
-                  alt: block.settings.heading | escape
-              }}
-            </span>
-          {%- endif -%}
-        {%- endif -%}
-        <span class="pns-feature-text-wrap">
-          {%- if block.settings.heading != blank -%}
-            <span class="pns-feature-heading">{{ block.settings.heading | escape }}</span>
-          {%- endif -%}
-          {%- if block.settings.text != blank -%}
-            <span class="pns-feature-text">{{ block.settings.text | escape }}</span>
-          {%- endif -%}
-        </span>
-      </{{ tag }}>
-    {%- endfor -%}
+  <div class="page-width pns-feature-bar__marquee">
+    <div class="pns-feature-bar__grid">
+      {%- for block in section.blocks -%}
+        {%- render 'pns-feature-item', block: block, recolor_icons: section.settings.recolor_icons -%}
+      {%- endfor -%}
+      {%- comment -%} Duplicate set for the seamless mobile marquee {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- render 'pns-feature-item', block: block, recolor_icons: section.settings.recolor_icons, dup: true -%}
+      {%- endfor -%}
+    </div>
   </div>
 </div>
 

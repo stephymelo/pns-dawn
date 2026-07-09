@@ -1,0 +1,38 @@
+{%- liquid
+  assign tag = 'div'
+  if block.settings.link != blank
+    assign tag = 'a'
+  endif
+-%}
+<{{ tag }}
+  class="pns-feature-item{% if dup %} pns-feature-item--dup{% endif %}"
+  {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+  {% if dup %}aria-hidden="true" tabindex="-1"{% else %}{{ block.shopify_attributes }}{% endif %}
+>
+  {%- if block.settings.icon != blank -%}
+    {%- if recolor_icons -%}
+      <span
+        class="pns-feature-icon pns-feature-icon--recolor"
+        role="img"
+        aria-label="{{ block.settings.heading | escape }}"
+        style="--pns-feature-icon-src: url('{{ block.settings.icon | image_url: width: 160 }}');"
+      ></span>
+    {%- else -%}
+      <span class="pns-feature-icon">
+        {{
+          block.settings.icon
+          | image_url: width: 160
+          | image_tag: loading: 'lazy', widths: '80, 120, 160', alt: block.settings.heading | escape
+        }}
+      </span>
+    {%- endif -%}
+  {%- endif -%}
+  <span class="pns-feature-text-wrap">
+    {%- if block.settings.heading != blank -%}
+      <span class="pns-feature-heading">{{ block.settings.heading | escape }}</span>
+    {%- endif -%}
+    {%- if block.settings.text != blank -%}
+      <span class="pns-feature-text">{{ block.settings.text | escape }}</span>
+    {%- endif -%}
+  </span>
+</{{ tag }}>
