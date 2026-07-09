@@ -1184,9 +1184,12 @@ a.pns-feature-item:hover .pns-feature-heading {
   display: block;
   position: relative;
   width: 100%;
+  /* Never stretch the banner past its ratio to match the taller brands box */
+  align-self: start;
 }
 
 .pns-home-banner__viewport {
+  position: relative;
   overflow: hidden;
   width: 100%;
   /* Match the banner artwork ratio (3200 x 1280 = 2.5:1) */
@@ -1332,10 +1335,16 @@ a.pns-feature-item:hover .pns-feature-heading {
   list-style: none;
   margin: 0;
   padding: 0;
-  flex: 1;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .pns-home-banner__brand-item {
+  flex: 1 1 0;
+  display: flex;
+  min-height: 0;
   border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
 }
 
@@ -1344,8 +1353,10 @@ a.pns-feature-item:hover .pns-feature-heading {
 }
 
 .pns-home-banner__brand-link {
-  display: block;
-  padding: 1.2rem 2rem;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 2rem;
   color: rgb(var(--color-foreground));
   text-decoration: none;
   font-size: 1.5rem;
@@ -1359,14 +1370,13 @@ a.pns-feature-item:hover .pns-feature-heading {
 }
 
 .pns-home-banner__cta {
-  padding: 1.4rem 2rem;
-  margin-top: auto;
+  padding: 1rem 1.6rem;
 }
 
 .pns-home-banner__cta-btn {
   display: block;
   width: 100%;
-  padding: 1.2rem 2rem;
+  padding: 1rem 2rem;
   text-align: center;
   text-decoration: none;
   font-size: 1.5rem;

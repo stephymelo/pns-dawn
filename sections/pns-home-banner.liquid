@@ -46,25 +46,25 @@
               {%- endif -%}
             {%- endfor -%}
           </div>
-        </div>
 
-        {%- if slide_count > 1 -%}
-          <button class="slider-button slider-button--prev" data-pns-banner-prev aria-label="{{ 'general.slider.previous_slide' | t }}">
-            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-          </button>
-          <button class="slider-button slider-button--next" data-pns-banner-next aria-label="{{ 'general.slider.next_slide' | t }}">
-            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-          </button>
-          <div class="pns-home-banner__dots">
-            {%- for i in (1..slide_count) -%}
-              <button
-                class="pns-home-banner__dot{% if forloop.first %} is-active{% endif %}"
-                data-pns-banner-dot
-                aria-label="{{ 'general.slider.name' | t }} {{ forloop.index }}"
-              ></button>
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
+          {%- if slide_count > 1 -%}
+            <button class="slider-button slider-button--prev" data-pns-banner-prev aria-label="{{ 'general.slider.previous_slide' | t }}">
+              <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+            </button>
+            <button class="slider-button slider-button--next" data-pns-banner-next aria-label="{{ 'general.slider.next_slide' | t }}">
+              <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+            </button>
+            <div class="pns-home-banner__dots">
+              {%- for i in (1..slide_count) -%}
+                <button
+                  class="pns-home-banner__dot{% if forloop.first %} is-active{% endif %}"
+                  data-pns-banner-dot
+                  aria-label="{{ 'general.slider.name' | t }} {{ forloop.index }}"
+                ></button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
       </pns-home-banner>
 
       {%- comment -%} Right: Top Brands {%- endcomment -%}
