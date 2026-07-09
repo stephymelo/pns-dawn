@@ -8,7 +8,6 @@
     {% if section.settings.background_color != blank %}background-color: {{ section.settings.background_color }};{% endif %}
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-    {% if section.settings.show_top_border %}border-top: {{ section.settings.top_border_width }}px solid {{ section.settings.accent_color }};{% endif %}
     {% if section.settings.show_bottom_border %}border-bottom: {{ section.settings.bottom_border_width }}px solid {{ section.settings.bottom_border_color }};{% endif %}
   "
 >
@@ -98,22 +97,6 @@
       "id": "icon_color",
       "label": "Icon color",
       "default": "#f4b6bc"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_top_border",
-      "label": "Show top accent border",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "top_border_width",
-      "min": 0,
-      "max": 12,
-      "step": 1,
-      "unit": "px",
-      "label": "Top border thickness",
-      "default": 4
     },
     {
       "type": "checkbox",
