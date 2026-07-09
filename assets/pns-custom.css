@@ -1173,10 +1173,17 @@ a.pns-feature-item:hover .pns-feature-heading {
 
 @media screen and (min-width: 990px) {
   .pns-home-banner__grid {
-    grid-template-columns: 2fr 1fr;
-    gap: 0;
+    grid-template-columns: 1fr 24rem;
+    gap: 1.6rem;
     align-items: stretch;
   }
+}
+
+/* Banner stage: prev arrow | image | next arrow (arrows outside the image) */
+.pns-home-banner__stage {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* --- Rotating banner --- */
@@ -1191,16 +1198,11 @@ a.pns-feature-item:hover .pns-feature-heading {
 .pns-home-banner__viewport {
   position: relative;
   overflow: hidden;
-  width: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
   /* Match the banner artwork ratio (3200 x 1280 = 2.5:1) */
   aspect-ratio: 3200 / 1280;
   border-radius: 0.4rem;
-}
-
-@media screen and (min-width: 990px) {
-  .pns-home-banner__viewport {
-    border-radius: 0.4rem 0 0 0.4rem;
-  }
 }
 
 .pns-home-banner__track {
@@ -1228,12 +1230,9 @@ a.pns-feature-item:hover .pns-feature-heading {
   object-fit: cover;
 }
 
-/* Arrows — same as the product carousel */
+/* Arrows — outside the image, same look as the product carousel */
 .pns-home-banner__slider .slider-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
+  flex: 0 0 auto;
   width: 4.4rem;
   height: 4.4rem;
   border-radius: 50%;
@@ -1259,46 +1258,36 @@ a.pns-feature-item:hover .pns-feature-heading {
   color: inherit;
 }
 
-.pns-home-banner__slider .slider-button--prev {
-  left: 1rem;
-}
-
 .pns-home-banner__slider .slider-button--prev .icon {
   transform: rotate(90deg);
-}
-
-.pns-home-banner__slider .slider-button--next {
-  right: 1rem;
 }
 
 .pns-home-banner__slider .slider-button--next .icon {
   transform: rotate(-90deg);
 }
 
-/* Dots */
+/* Dots — below the banner (outside the image) */
 .pns-home-banner__dots {
-  position: absolute;
-  bottom: 1.2rem;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  justify-content: center;
   gap: 0.6rem;
-  z-index: 3;
+  margin-top: 1.2rem;
 }
 
 .pns-home-banner__dot {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid rgba(var(--color-foreground), 0.35);
   background: transparent;
   padding: 0;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .pns-home-banner__dot.is-active {
-  background: #fff;
+  background: rgb(var(--color-foreground));
+  border-color: rgb(var(--color-foreground));
 }
 
 /* --- Top Brands panel --- */
@@ -1308,13 +1297,6 @@ a.pns-feature-item:hover .pns-feature-heading {
   border: 1px solid rgba(var(--color-foreground), 0.1);
   border-radius: 0.4rem;
   overflow: hidden;
-}
-
-@media screen and (min-width: 990px) {
-  .pns-home-banner__brands {
-    border-radius: 0 0.4rem 0.4rem 0;
-    border-left: none;
-  }
 }
 
 .pns-home-banner__brands-header {

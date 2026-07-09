@@ -1,13 +1,15 @@
 {{ 'pns-custom.css' | asset_url | stylesheet_tag }}
 
 <div
-  class="pns-feature-bar color-{{ section.settings.color_scheme }} gradient"
+  class="pns-feature-bar{% if section.settings.background_color == blank %} color-{{ section.settings.color_scheme }} gradient{% endif %}"
   style="
     --pns-feature-accent: {{ section.settings.accent_color }};
     --pns-feature-icon-color: {{ section.settings.icon_color }};
+    {% if section.settings.background_color != blank %}background-color: {{ section.settings.background_color }};{% endif %}
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     {% if section.settings.show_top_border %}border-top: {{ section.settings.top_border_width }}px solid {{ section.settings.accent_color }};{% endif %}
+    {% if section.settings.show_bottom_border %}border-bottom: {{ section.settings.bottom_border_width }}px solid {{ section.settings.bottom_border_color }};{% endif %}
   "
 >
   <div class="page-width pns-feature-bar__grid">
@@ -74,6 +76,12 @@
     },
     {
       "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Overrides the color scheme background. Clear to use the color scheme."
+    },
+    {
+      "type": "color",
       "id": "accent_color",
       "label": "Heading & accent color",
       "default": "#f4b6bc"
@@ -106,6 +114,28 @@
       "unit": "px",
       "label": "Top border thickness",
       "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_border",
+      "label": "Show bottom stroke",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bottom_border_color",
+      "label": "Bottom stroke color",
+      "default": "#f4b6bc"
+    },
+    {
+      "type": "range",
+      "id": "bottom_border_width",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom stroke thickness",
+      "default": 2
     },
     {
       "type": "range",
