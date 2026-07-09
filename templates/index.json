@@ -479,6 +479,20 @@
     "pns_brand_slider_tK4kyQ": {
       "type": "pns-brand-slider",
       "blocks": {
+        "logo_T8cVpz": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/cnd-logo.png",
+            "link": ""
+          }
+        },
+        "logo_8LgThA": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/opi-logo.png",
+            "link": ""
+          }
+        },
         "logo_fqBK9H": {
           "type": "logo",
           "settings": {
@@ -486,44 +500,67 @@
             "link": "shopify://collections/gelish"
           }
         },
-        "logo_nFDagH": {
-          "type": "logo",
-          "settings": {
-            "link": ""
-          }
-        },
         "logo_G6yxJe": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/amn-logo2.png",
             "link": ""
           }
         },
-        "logo_T8cVpz": {
+        "logo_nFDagH": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/cuccio-logo.webp",
             "link": ""
           }
         },
         "logo_36jKV4": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/voesh-logo.png",
+            "link": ""
+          }
+        },
+        "logo_VL6eVe": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Nouveau-Nail-logo.png",
+            "link": ""
+          }
+        },
+        "logo_qicBTg": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ibd-logo.png",
             "link": ""
           }
         },
         "logo_kyCK9z": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/seche-logo.png",
+            "link": ""
+          }
+        },
+        "logo_fDWGEG": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Backscratchers-logo.png",
             "link": ""
           }
         }
       },
       "block_order": [
-        "logo_fqBK9H",
-        "logo_nFDagH",
-        "logo_G6yxJe",
         "logo_T8cVpz",
+        "logo_8LgThA",
+        "logo_fqBK9H",
+        "logo_G6yxJe",
+        "logo_nFDagH",
         "logo_36jKV4",
-        "logo_kyCK9z"
+        "logo_VL6eVe",
+        "logo_qicBTg",
+        "logo_kyCK9z",
+        "logo_fDWGEG"
       ],
       "name": "PNS Brand Slider",
       "settings": {
