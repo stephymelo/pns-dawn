@@ -548,6 +548,35 @@ a.pns-feature-item:hover .pns-feature-heading {
   display: none;
 }
 
+/* Desktop: constrain to the theme page width (Dawn's slider is full-bleed by
+   default) and show exactly 4 equal cards; scroll for the rest */
+@media screen and (min-width: 990px) {
+  .pns-featured-slider slider-component {
+    max-width: var(--page-width) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box;
+    --desktop-margin-left-first-item: 0rem;
+  }
+
+  .pns-featured-slider .slider--desktop .slider__slide:first-child {
+    margin-left: 0 !important;
+    scroll-margin-left: 0 !important;
+  }
+
+  .pns-featured-slider .slider--desktop::after {
+    display: none !important;
+  }
+
+  .pns-featured-slider .slider--desktop .slider__slide {
+    width: calc((100% - 3 * var(--grid-desktop-horizontal-spacing, 2.4rem)) / 4) !important;
+    min-width: calc((100% - 3 * var(--grid-desktop-horizontal-spacing, 2.4rem)) / 4) !important;
+    max-width: calc((100% - 3 * var(--grid-desktop-horizontal-spacing, 2.4rem)) / 4) !important;
+  }
+}
+
 /* Mobile: no arrows — swipe with a peek */
 @media screen and (max-width: 989px) {
   .pns-featured-slider .slider-buttons {
