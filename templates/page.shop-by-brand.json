@@ -11,13 +11,23 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "pns_brands_page_Cn9NxT": {
+      "type": "pns-brands-page",
+      "name": "PNS Brands Page",
+      "settings": {
+        "heading": "Shop by Brand",
+        "description": "Discover your favorite brands and explore their collections."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "pns_brands_page_Cn9NxT"
   ]
 }
