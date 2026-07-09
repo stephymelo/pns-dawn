@@ -806,10 +806,15 @@ a.pns-feature-item:hover .pns-feature-heading {
 }
 
 .pns-footer__heading {
-  margin: 0 0 2.2rem;
-  font-size: 2.2rem;
-  font-weight: 600;
+  margin: 0 0 2rem;
+  font-size: calc(var(--font-heading-scale) * 1.6rem);
   color: var(--pns-footer-top-text, #ffffff);
+}
+
+@media screen and (min-width: 990px) {
+  .pns-footer__heading {
+    font-size: calc(var(--font-heading-scale) * 1.8rem);
+  }
 }
 
 .pns-footer__links {
