@@ -74,6 +74,10 @@
 /* ============================================
    Feature / trust-badge bar (below the nav menu)
    ============================================ */
+.pns-feature-bar {
+  background-color: var(--pns-feature-bg, rgb(var(--color-background)));
+}
+
 .pns-feature-bar__grid {
   display: flex;
   flex-wrap: wrap;
@@ -1304,6 +1308,32 @@ a.pns-feature-item:hover .pns-feature-heading {
 
 .pns-home-banner__slider .slider-button--next .icon {
   transform: rotate(-90deg);
+}
+
+/* Mobile: banner full width, arrows overlaid on the edges (not flanking) */
+@media screen and (max-width: 989px) {
+  .pns-home-banner__stage {
+    position: relative;
+    display: block;
+    gap: 0;
+  }
+
+  .pns-home-banner__slider .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+
+  .pns-home-banner__slider .slider-button--prev {
+    left: 0.6rem;
+  }
+
+  .pns-home-banner__slider .slider-button--next {
+    right: 0.6rem;
+  }
 }
 
 /* Dots — below the banner (outside the image) */

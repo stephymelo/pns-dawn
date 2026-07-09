@@ -1,11 +1,11 @@
 {{ 'pns-custom.css' | asset_url | stylesheet_tag }}
 
 <div
-  class="pns-feature-bar color-{{ section.settings.color_scheme }} gradient"
+  class="pns-feature-bar color-{{ section.settings.color_scheme }}"
   style="
     --pns-feature-accent: {{ section.settings.accent_color }};
     --pns-feature-icon-color: {{ section.settings.icon_color }};
-    {% if section.settings.background_color != blank %}background-color: {{ section.settings.background_color }}; background-image: none;{% endif %}
+    {% if section.settings.background_color != blank %}--pns-feature-bg: {{ section.settings.background_color }};{% endif %}
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     {% if section.settings.show_bottom_border %}border-bottom: {{ section.settings.bottom_border_width }}px solid {{ section.settings.bottom_border_color }};{% endif %}
@@ -26,7 +26,7 @@
 
 {% schema %}
 {
-  "name": "Feature bar",
+  "name": "PNS Feature Bar",
   "tag": "section",
   "class": "pns-feature-bar-section",
   "enabled_on": {
@@ -141,7 +141,7 @@
   "max_blocks": 6,
   "presets": [
     {
-      "name": "Feature bar",
+      "name": "PNS Feature Bar",
       "blocks": [
         {
           "type": "feature",
