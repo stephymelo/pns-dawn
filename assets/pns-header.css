@@ -188,8 +188,8 @@
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
-  border-right: 1.5px solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
-  border-bottom: 1.5px solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
+  border-right: 1px solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
+  border-bottom: 1px solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
   transform: rotate(45deg);
   margin-left: 0.5rem;
   margin-bottom: 0.2rem;
@@ -226,14 +226,14 @@
   pointer-events: none;
 }
 
-.pns-nav-item:hover > .pns-nav-dropdown {
+.pns-nav-item.is-open > .pns-nav-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-.pns-nav-item:hover > .pns-nav-link .pns-caret {
+.pns-nav-item.is-open > .pns-nav-link .pns-caret {
   transform: rotate(225deg);
 }
 
