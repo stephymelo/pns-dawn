@@ -35,13 +35,13 @@
     font-size: 1.4rem;
     outline: none;
     background: rgb(var(--color-background));
-    color: rgb(var(--color-foreground));
+    color: #4a4a4a;
     height: 4rem;
     transition: border-color 0.2s ease;
   }
 
   .pns-header-search-inline .pns-search-input::placeholder {
-    color: rgba(var(--color-foreground), 0.5);
+    color: #4a4a4a;
   }
 
   .pns-header-search-inline .pns-search-input:focus {
@@ -180,10 +180,18 @@
   transition: background-color 0.2s ease;
 }
 
-.pns-nav-bar .pns-nav-link:hover {
+.pns-nav-bar .pns-nav-link:hover,
+.pns-nav-bar .pns-nav-item.is-open > .pns-nav-link {
   background-color: rgba(var(--color-foreground), 0.1);
   text-decoration: underline;
+  text-decoration-color: currentColor;
   text-underline-offset: 0.4rem;
+}
+
+/* Text, chevron and underline go dark on hover/open (Deals keeps its color) */
+.pns-nav-bar .pns-nav-link:not(.pns-nav-link--deals):hover,
+.pns-nav-bar .pns-nav-item.is-open > .pns-nav-link:not(.pns-nav-link--deals) {
+  color: #171717;
 }
 
 /* Chevron (open caret) */
@@ -191,8 +199,8 @@
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
-  border-right: 1px solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
-  border-bottom: 1px solid var(--pns-nav-link-color, rgb(var(--color-foreground)));
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
   transform: rotate(45deg);
   margin-left: 0.5rem;
   margin-bottom: 0.2rem;
