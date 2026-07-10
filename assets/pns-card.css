@@ -196,3 +196,19 @@
   text-align: center;
   justify-content: center;
 }
+
+/* Keep quick-add below the title/price.
+   Dawn's .card__content is a grid that pins .card__information to row 2, which
+   lets the quick-add auto-place in row 1 (above the title). Use a simple column. */
+.product-card-wrapper .card__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card-wrapper .card__information {
+  grid-row-start: auto;
+}
+
+.product-card-wrapper .quick-add {
+  margin-top: auto;
+}
