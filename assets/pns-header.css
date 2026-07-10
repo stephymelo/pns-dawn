@@ -21,7 +21,8 @@
 
   .pns-header-search-inline .pns-search-form {
     display: flex;
-    width: 50%;
+    width: 100%;
+    max-width: 64rem;
     position: relative;
     margin: 0 0 0 auto;
   }
