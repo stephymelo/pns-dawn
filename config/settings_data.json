@@ -16,7 +16,7 @@
     "heading_scale": 100,
     "type_body_font": "open_sans_n4",
     "body_scale": 100,
-    "page_width": 1200,
+    "page_width": 1400,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 24,
     "spacing_grid_vertical": 24,
@@ -270,9 +270,9 @@
           "background": "#ffffff",
           "background_gradient": "",
           "text": "#121212",
-          "button": "#F1B5BA",
+          "button": "#f1b5ba",
           "button_label": "#ffffff",
-          "secondary_button_label": "#F1B5BA",
+          "secondary_button_label": "#f1b5ba",
           "shadow": "#121212"
         }
       },
@@ -289,7 +289,7 @@
       },
       "scheme-3": {
         "settings": {
-          "background": "#E97283",
+          "background": "#e97283",
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#ffffff",
@@ -311,12 +311,12 @@
       },
       "scheme-5": {
         "settings": {
-          "background": "#F1B5BA",
+          "background": "#f1b5ba",
           "background_gradient": "",
-          "text": "#F1B5BA",
-          "button": "#E70B3E",
-          "button_label": "#F1B5BA",
-          "secondary_button_label": "#F1B5BA",
+          "text": "#f1b5ba",
+          "button": "#e70b3e",
+          "button_label": "#f1b5ba",
+          "secondary_button_label": "#f1b5ba",
           "shadow": "#121212"
         }
       },
