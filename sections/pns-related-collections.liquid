@@ -64,18 +64,19 @@
               {% assign product_id_string = product_item.id | append: '' %}
               {% unless rendered_product_ids contains product_id_string %}
                 {% if product_item.metafields.product_collection.product_collection.value == target_collection_show and product_item.id != product.id %}
-                  <li class="grid__item slider__slide">
+                  <li id="Slide-{{ section.id }}-{{ product_item.id }}" class="grid__item slider__slide">
                     {% render 'card-product',
                       card_product: product_item,
                       media_aspect_ratio: section.settings.image_ratio,
                       image_shape: section.settings.image_shape,
+                      lazy_load: false,
                       show_secondary_image: section.settings.show_secondary_image,
                       show_vendor: section.settings.show_vendor,
                       show_rating: section.settings.show_rating,
                       skip_styles: skip_card_product_styles,
                       section_id: section.id,
                       quick_add: 'standard',
-                      product_view_context: 'related'
+                      product_view_context: 'collection'
                     %}
                   </li>
                   {%- assign skip_card_product_styles = true -%}
