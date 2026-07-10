@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'pns-header.css' | asset_url }}" media="print" onload="this.media='all'">
+{{ 'pns-header.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'pns-nav-menu.js' | asset_url }}" defer="defer"></script>
 <link
   rel="stylesheet"
@@ -163,7 +163,7 @@
             {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
             {{
               settings.logo
-              | image_url: width: 600
+              | image_url: width: 1100
               | image_tag:
                 class: 'header__heading-logo motion-reduce',
                 widths: widths,
@@ -263,7 +263,7 @@
             {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
             {{
               settings.logo
-              | image_url: width: 600
+              | image_url: width: 1100
               | image_tag:
                 class: 'header__heading-logo',
                 widths: widths,
