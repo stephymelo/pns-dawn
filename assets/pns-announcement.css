@@ -11,20 +11,37 @@
   color: rgb(var(--color-foreground));
 }
 
+/* Announcement bar height */
+.announcement-bar-section .utility-bar {
+  min-height: 44px;
+}
+
+.announcement-bar-section .utility-bar__grid {
+  align-items: center;
+}
+
+/* Social icons in outlined circles */
 .announcement-bar-section .utility-bar .list-social__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0;
   background: none;
-  border: none;
-  border-radius: 0;
-  padding: 0.4rem;
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 50%;
 }
 
 .announcement-bar-section .utility-bar .list-social__link .icon {
   fill: rgb(var(--color-foreground));
   color: rgb(var(--color-foreground));
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
 .announcement-bar-section .utility-bar .announcement-bar__message {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 500;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
@@ -44,7 +61,7 @@
 .pns-utility-links span {
   color: rgb(var(--color-foreground));
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   letter-spacing: 0.02rem;
 }
 

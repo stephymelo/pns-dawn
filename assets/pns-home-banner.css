@@ -137,19 +137,18 @@
 }
 
 .pns-home-banner__dot {
-  width: 1rem;
-  height: 1rem;
+  width: 0.8rem;
+  height: 0.8rem;
   border-radius: 50%;
-  border: 2px solid rgba(var(--color-foreground), 0.35);
-  background: transparent;
+  border: none;
+  background: #b3b3b3;
   padding: 0;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .pns-home-banner__dot.is-active {
-  background: rgb(var(--color-foreground));
-  border-color: rgb(var(--color-foreground));
+  background: #111111;
 }
 
 /* --- Top Brands panel --- */
