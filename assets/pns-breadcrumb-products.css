@@ -1,0 +1,46 @@
+.pns-breadcrumb {
+  background-color: var(--pns-bc-bg, #111111);
+  color: var(--pns-bc-text, #ffffff);
+}
+
+.pns-breadcrumb__inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem 0;
+}
+
+.pns-breadcrumb__item {
+  color: var(--pns-bc-text, #ffffff);
+  text-decoration: none;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+a.pns-breadcrumb__item:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.pns-breadcrumb__home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pns-breadcrumb__home-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.pns-breadcrumb__sep {
+  color: var(--pns-bc-text, #ffffff);
+  opacity: 0.6;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.pns-breadcrumb__current {
+  opacity: 0.9;
+}
