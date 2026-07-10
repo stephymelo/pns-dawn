@@ -184,3 +184,15 @@
   display: none !important;
 }
 
+
+/* ============================================
+   Product Card: center title + price
+   ============================================ */
+.product-card-wrapper .card__heading {
+  text-align: center;
+}
+
+.product-card-wrapper .price {
+  text-align: center;
+  justify-content: center;
+}
