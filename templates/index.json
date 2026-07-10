@@ -75,6 +75,20 @@
             "link": ""
           }
         },
+        "slide_XXNCdq": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/CND_Retro_Refresh_Banner.webp",
+            "link": ""
+          }
+        },
+        "slide_LNgyxR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/CND_Retro_Refresh_Banner.webp",
+            "link": ""
+          }
+        },
         "brand_y6PcT4": {
           "type": "brand",
           "settings": {
@@ -121,6 +135,8 @@
       "block_order": [
         "slide_tWnRQN",
         "slide_E8YUX3",
+        "slide_XXNCdq",
+        "slide_LNgyxR",
         "brand_y6PcT4",
         "brand_itw8tm",
         "brand_TpENt9",
