@@ -20,6 +20,11 @@
   align-items: center;
 }
 
+/* Space out the social icons, matching the footer's social list */
+.announcement-bar-section .utility-bar .list-social {
+  gap: 1.2rem;
+}
+
 /* Social icons in outlined circles */
 .announcement-bar-section .utility-bar .list-social__link {
   display: flex;
