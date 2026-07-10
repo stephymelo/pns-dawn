@@ -214,8 +214,8 @@
 }
 
 .pns-footer__copy {
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .pns-footer__brand {
@@ -234,8 +234,8 @@
 .pns-footer__policy-link {
   color: var(--pns-footer-bot-text, #1a1a1a);
   text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .pns-footer__policy-link:hover {
