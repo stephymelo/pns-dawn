@@ -31,12 +31,16 @@
   height: 1.8rem;
 }
 
-/* panel: white rounded card floating to the right of the toggle */
+/* panel: white rounded card floating to the right of the toggle.
+   Anchored to the toggle's bottom edge and grown UPWARD so the panel always
+   stays inside the sticky product-info column. The share block sits at the
+   bottom of that column, so a vertically-centred panel (the old behaviour)
+   spilled past the column's bottom edge, where the next section's content
+   painted over the last icon (Email) — looking like a clipped bottom. */
 .pns-share__panel {
   position: absolute;
-  top: 50%;
+  bottom: 0;
   left: calc(100% + 1rem);
-  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -45,7 +49,7 @@
   border: 1px solid #ececec;
   border-radius: 1.4rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  z-index: 6;
+  z-index: 20;
 }
 
 .pns-share__link {
@@ -70,6 +74,7 @@
 @media screen and (max-width: 749px) {
   .pns-share__panel {
     top: calc(100% + 0.8rem);
+    bottom: auto;
     left: 0;
     transform: none;
     flex-direction: row;
