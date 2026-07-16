@@ -21,6 +21,12 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "custom_liquid_3r4nq7": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -82,6 +88,7 @@
         }
       },
       "block_order": [
+        "custom_liquid_3r4nq7",
         "vendor",
         "title",
         "price",
