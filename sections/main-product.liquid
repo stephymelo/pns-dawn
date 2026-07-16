@@ -100,6 +100,11 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
+                    {%- if product.vendor != blank -%}
+                      <p class="product__text sm-brand inline-richtext pns-product-vendor">
+                        <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor | escape }}</a>
+                      </p>
+                    {%- endif -%}
                     <h1>{{ product.title | escape }}</h1>
                     <a href="{{ product.url }}" class="product__title">
                       <h2 class="h1">
@@ -108,7 +113,7 @@
                     </a>
                   </div>
                 {%- when 'price' -%}
-                  <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  <div id="price-{{ section.id }}" role="status" class="sm-price" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       use_variant: true,

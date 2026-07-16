@@ -102,3 +102,67 @@
   font-weight: 500;
   opacity: 1 !important;
 }
+
+/* ============================================================
+   PNS product page: title / vendor / price — match live PNS
+   ============================================================ */
+
+/* Title: smaller + bold (was Dawn's large heading) */
+.product__title h1,
+.product__title h2 {
+  color: #000;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Vendor: shown as a link to the vendor's products */
+.pns-product-vendor {
+  margin: 0 0 0.6rem;
+  font-size: 16px;
+  font-weight: 400;
+  color: #b9bbbf;
+}
+.pns-product-vendor a {
+  color: inherit;
+  text-decoration: none;
+}
+.pns-product-vendor a:hover {
+  text-decoration: underline;
+}
+
+/* Price: on sale -> inverted (sale price first), pink + bold; compare-at struck in gray */
+.sm-price .price__container .price__sale {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 1rem;
+  color: #e97283;
+  font-size: 20px;
+  font-weight: 600;
+}
+.sm-price .price__container .price__sale .price-item--regular {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+  font-weight: 400;
+}
+.sm-price .price__container .price__sale .price-item--sale {
+  color: #e97283 !important;
+  font-weight: 600;
+}
+
+/* Regular (not on sale) price: bold */
+.sm-price .price__container .price__regular .price-item--regular {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* Sale tag: black + bold */
+.sm-price .price__badge-sale {
+  background: #000 !important;
+  color: #fff !important;
+  font-weight: 700;
+  border: 0;
+}
