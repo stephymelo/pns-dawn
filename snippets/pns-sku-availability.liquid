@@ -1,0 +1,57 @@
+{%- comment -%}
+  PNS SKU + Availability
+  Shows the current variant's SKU and stock status on the product page.
+
+  Usage (in main-product.liquid or a custom-liquid block):
+    {% render 'pns-sku-availability', product: product %}
+
+  Reflects the selected / first-available variant. Add data-* hooks are included
+  so it can be made variant-reactive with JS later if needed.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign sku = current_variant.sku | default: product.variants.first.sku
+-%}
+
+<div class="pns-sku-availability" data-pns-sku-availability>
+  {%- if sku != blank -%}
+    <p class="pns-sku">
+      <span class="pns-sku__label">SKU:</span>
+      <span class="pns-sku__value" data-pns-sku>{{ sku }}</span>
+    </p>
+  {%- endif -%}
+  <p class="pns-availability">
+    <span class="pns-availability__label">Availability :</span>
+    {%- if current_variant.available -%}
+      <span class="pns-availability__value pns-availability__value--in" data-pns-availability>IN STOCK</span>
+    {%- else -%}
+      <span class="pns-availability__value pns-availability__value--out" data-pns-availability>OUT OF STOCK</span>
+    {%- endif -%}
+  </p>
+</div>
+
+{%- style -%}
+  .pns-sku-availability {
+    margin: 1rem 0;
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+  .pns-sku-availability p {
+    margin: 0 0 0.2rem;
+    color: #4a4a4a;
+  }
+  .pns-sku__value {
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  .pns-availability__value {
+    font-weight: 700;
+  }
+  .pns-availability__value--in {
+    color: #5cba54; /* in stock — green */
+  }
+  .pns-availability__value--out {
+    color: #d64545; /* out of stock — red */
+  }
+{%- endstyle -%}

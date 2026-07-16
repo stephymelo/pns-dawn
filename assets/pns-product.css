@@ -33,6 +33,12 @@
   transition: transform 0.35s ease;
 }
 
+/* Kill Dawn's ::after box-shadow ring (it showed as an inner white line) */
+.product-form__submit::after {
+  content: none !important;
+  box-shadow: none !important;
+}
+
 .product-form__submit:hover {
   color: #e88a9a !important;
 }
@@ -121,7 +127,7 @@
   margin: 0 0 0.6rem;
   font-size: 16px;
   font-weight: 400;
-  color: #b9bbbf;
+  color: #4a4a4a;
 }
 .pns-product-vendor a {
   color: inherit;
@@ -131,8 +137,9 @@
   text-decoration: underline;
 }
 
-/* Price: on sale -> inverted (sale price first), pink + bold; compare-at struck in gray */
-.sm-price .price__container .price__sale {
+/* Price: ONLY when on sale -> inverted (sale price first), pink + bold; compare-at struck in gray.
+   Scoped to .price--on-sale so the sale markup stays hidden at full price. */
+.sm-price .price--on-sale .price__container .price__sale {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-start;
@@ -165,4 +172,12 @@
   color: #fff !important;
   font-weight: 700;
   border: 0;
+}
+
+/* Hide the Shop Pay installments / "4 interest-free payments" banner */
+.product-form__buttons shopify-payment-terms,
+.product__info-container shopify-payment-terms,
+shopify-payment-terms,
+.shopify-payment-terms {
+  display: none !important;
 }
