@@ -2,7 +2,7 @@
 
 Developer documentation for the **Premier Nail Source** Shopify theme (built on Shopify **Dawn 15.5.0**).
 
-➡️ **Open [`index.html`](./index.html) in a browser** — it's the full, PNS-branded reference (new sections, modified components, theme-editor setup, dependencies, gotchas).
+➡️ **Open [`docs.html`](./docs.html) in a browser** — it's the full, PNS-branded reference (new sections, modified components, theme-editor setup, dependencies, gotchas, Rimix badges wiring).
 
 ## TL;DR
 
@@ -36,4 +36,4 @@ Developer documentation for the **Premier Nail Source** Shopify theme (built on 
 - Theme social settings (`settings.social_*_link`).
 - Uploaded assets: footer lotus, Feature Bar icons, brand logos, banner artwork (3200×1280).
 
-See `index.html` for the full breakdown and the theme-editor setup checklist.
+See `docs.html` for the full breakdown and the theme-editor setup checklist.

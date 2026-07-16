@@ -117,6 +117,8 @@
   <a href="#editor">Theme-editor checklist</a>
   <a href="#deps">Dependencies & assets</a>
   <a href="#gotchas">Gotchas</a>
+  <h4>Apps</h4>
+  <a href="#rimix">Rimix product badges</a>
 </nav>
 
 <main>
@@ -340,9 +342,55 @@
     <tr><td>Product metafield <code>product_collection.product_collection</code></td><td>PNS Related Collections</td><td>Must be set per product; groups "More From This Collection".</td></tr>
     <tr><td>Shopify navigation menus: <code>main-menu</code>, <code>footer</code>, <code>footer-products</code></td><td>Header nav, PNS Footer</td><td>Menu handles referenced in the group JSON.</td></tr>
     <tr><td>Theme social settings</td><td>Announcement bar, PNS Footer</td><td><code>settings.social_*_link</code>.</td></tr>
-    <tr><td>Product badges app (e.g. Rimix)</td><td>Cards / product page</td><td>Native Dawn badges are hidden on cards; app injects its own via storefront JS/app-embed (not theme code).</td></tr>
+    <tr><td>Product badges app (Rimix)</td><td>Cards / product page</td><td>Native Dawn badges are hidden on cards; Rimix injects its own via a site-wide app-embed (not theme code). Full wiring in <a href="#rimix">Rimix product badges</a>.</td></tr>
     <tr><td>Uploaded images</td><td>Footer lotus, Feature Bar icons, brand logos, banners</td><td>Referenced as <code>shopify://shop_images/…</code> in the config.</td></tr>
   </table>
+</section>
+
+<section class="doc" id="rimix">
+  <h2><span class="dot"></span>Rimix product badges — how it works &amp; why it can look broken</h2>
+  <p class="lead">Verified 2026-07-16 by inspecting the live public storefront (premiernailsource.com) and Rimix's own script. <b>None of this lives in the theme — it's a site-wide app embed configured in the Rimix dashboard.</b></p>
+
+  <div class="cmp">
+    <h3><span class="badge file">app-embed</span> What Rimix is in this store</h3>
+    <ul>
+      <li>Single site-wide embed: <code>shopify://apps/rimix-product-badges/blocks/rimix-helper</code> (in <code>config/settings_data.json</code>, <code>disabled:false</code>, empty settings). There is <b>no Rimix app block</b> in any template or section.</li>
+      <li>All logic lives in the app's script <code>product-badges.js</code> (loaded from the Shopify app CDN). The theme contributes <b>nothing</b> except having card markup the script can match.</li>
+    </ul>
+  </div>
+
+  <div class="cmp">
+    <h3>The mechanism (this is the important part)</h3>
+    <p>The script has <b>zero hardcoded theme selectors</b>. It reads a per-theme selector profile from the global <code>window.RMPB_COMPATIBLE_THEME.selectors</code>. For this store (theme "Dawn", id 887) the collection/card (<code>loop</code>) selectors are:</p>
+    <pre><code>loop.wrapper : .card-wrapper , .spf-product-card
+loop.image   : .card__media , .spf-product-card__image-wrapper
+loop.title   : .card &gt; .card__content .card__heading , .spf-product-card__title
+loop.price   : .card &gt; .card__content .price , .spf-product-card__price-wrapper</code></pre>
+    <p>Per card it: finds the <code>a[href*="/products/"]</code> link → <code>.closest(loop.wrapper)</code> → injects mount points <code>&lt;div class="rm-product-badge-wrap" data-position="inside_image|above_title|below_title|above_price|below_price"&gt;</code> relative to image/title/price → fills the ones whose product matches a badge <b>condition</b>.</p>
+    <div class="callout">The <code>.spf-product-card*</code> half of each selector was hand-added in the Rimix dashboard to support the <b>Smart Product Filter (SPF)</b> app, which <b>replaces the grid</b> on collection pages. On <code>/collections/all</code> there are <b>0</b> Dawn cards — 100% <code>spf-product-card</code>. Home page = native Dawn <code>.card-wrapper</code> cards.</div>
+  </div>
+
+  <div class="cmp">
+    <h3>Our pns-dawn card already satisfies every hook ✅</h3>
+    <p>Tracing <code>snippets/card-product.liquid</code>, the Dawn 15.5 card exposes all four <code>loop</code> selectors:</p>
+    <ul>
+      <li><code>.card-wrapper</code> ✅ &middot; <code>.card__media</code> ✅</li>
+      <li><code>.card &gt; .card__content .card__heading</code> ✅ — the second <code>.card__content</code> is a direct child of <code>.card</code>.</li>
+      <li><code>.card &gt; .card__content .price</code> ✅ — from the <code>price</code> snippet render.</li>
+    </ul>
+    <p>The Dawn 15.5 <code>&lt;product-component&gt;</code> wrapper sits <b>above</b> <code>.card-wrapper</code>, so it does not break <code>.closest()</code> or any descendant query. And <code>pns-card.css</code> hides only <code>.card__badge &gt; .badge</code> (Dawn's native span) — never Rimix's <code>.rm-product-badge-wrap</code>. <b>So the card markup is not the blocker.</b></p>
+  </div>
+
+  <div class="cmp">
+    <h3>If badges don't show on the new theme, it's one of these (all app-side)</h3>
+    <table>
+      <tr><th>Cause</th><th>Fix (Rimix dashboard — not theme code)</th></tr>
+      <tr><td><b>Theme profile not applied.</b> The selector table is stored per-theme; a new/previewed theme may load no selectors.</td><td>Re-run Rimix's theme setup for the new theme, or paste the custom selectors: wrapper <code>.card-wrapper</code>, image <code>.card__media</code>, title <code>.card &gt; .card__content .card__heading</code>, price <code>.card &gt; .card__content .price</code>.</td></tr>
+      <tr><td><b>No matching condition.</b> On the live home page Rimix injected a mount point into 68/68 cards but only 14 showed a badge — badges are gated on tags (e.g. <code>special offer</code>) + inventory (≤15).</td><td>Test with a product that actually meets a badge's condition, or loosen the condition.</td></tr>
+      <tr><td><b>Dynamic cards.</b> Rimix scans on load and marks links <code>data-rmpb="loaded"</code>. Cards rendered after that — slick-slider clones, async PNS Related Products — can be skipped.</td><td>App-side (Rimix's mutation watch) — be aware async sections are the risky ones.</td></tr>
+    </table>
+    <div class="callout warn"><b>Hard rule:</b> never open the live PNS theme editor / Shopify admin. This was all diagnosed read-only from the public storefront + the app's public script.</div>
+  </div>
 </section>
 
 <section class="doc" id="gotchas">
