@@ -19,7 +19,10 @@
       var titleEl = li.querySelector('.card__heading, .card-information .card__heading');
       var title = (titleEl ? titleEl.textContent : li.textContent) || '';
       var match = q === '' || title.toLowerCase().indexOf(q) !== -1;
-      li.style.display = match ? '' : 'none';
+      // Hide via a class (not inline display) so the custom "Category" filter,
+      // which toggles `pns-hide-category`, combines with this instead of fighting
+      // over the same inline style. An item shows only if it has neither class.
+      li.classList.toggle('pns-hide-search', !match);
       if (match) visible++;
     });
 

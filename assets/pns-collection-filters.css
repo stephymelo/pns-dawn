@@ -154,6 +154,23 @@
 }
 
 /* ============================================================
+   PNS client-side grid filters (name search + Category)
+   Both filters hide items with a class so they combine cleanly:
+   an item shows only when it carries NEITHER hide class.
+   ============================================================ */
+.grid__item.pns-hide-search,
+.grid__item.pns-hide-category {
+  display: none !important;
+}
+
+/* ============================================================
+   PNS custom "Category" filter (matches the native vertical facets)
+   ============================================================ */
+.pns-category-filter .facets__summary-label {
+  text-transform: uppercase;
+}
+
+/* ============================================================
    PNS infinite scroll (load-more)
    ============================================================ */
 .pns-infinite-scroll {

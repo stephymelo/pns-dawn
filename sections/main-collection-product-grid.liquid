@@ -3,6 +3,9 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'pns-collection-filters.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'pns-collection-search.js' | asset_url }}" defer="defer"></script>
+{%- if section.settings.show_category_filter -%}
+  <script src="{{ 'pns-category-filter.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 {%- if section.settings.enable_infinite_scroll -%}
   <script src="{{ 'pns-infinite-scroll.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
@@ -46,6 +49,40 @@
   data-collection-id="{{ collection.id }}"
 >
   <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+    {%- comment -%}
+      PNS custom "Category" filter data. Built BEFORE the paginate block so it can
+      sample across the collection's products (not just the current page). Produces
+      parallel '||'-joined handle/title lists plus a membership string used to count
+      products per collection. Excludes the current collection and frontpage/all.
+    {%- endcomment -%}
+    {%- if section.settings.show_category_filter -%}
+      {%- liquid
+        assign pns_cat_sep = ','
+        assign pns_cat_membership = ''
+        assign pns_cat_seen = pns_cat_sep
+        assign pns_cat_handles = ''
+        assign pns_cat_titles = ''
+        for pns_p in collection.products limit: 250
+          for pns_c in pns_p.collections
+            assign pns_h = pns_c.handle
+            assign pns_cat_membership = pns_cat_membership | append: pns_cat_sep | append: pns_h | append: pns_cat_sep
+            unless pns_h == collection.handle or pns_h == 'frontpage' or pns_h == 'all'
+              assign pns_test = pns_cat_sep | append: pns_h | append: pns_cat_sep
+              unless pns_cat_seen contains pns_test
+                assign pns_cat_seen = pns_cat_seen | append: pns_h | append: pns_cat_sep
+                if pns_cat_handles == ''
+                  assign pns_cat_handles = pns_h
+                  assign pns_cat_titles = pns_c.title
+                else
+                  assign pns_cat_handles = pns_cat_handles | append: '||' | append: pns_h
+                  assign pns_cat_titles = pns_cat_titles | append: '||' | append: pns_c.title
+                endif
+              endunless
+            endunless
+          endfor
+        endfor
+      -%}
+    {%- endif -%}
     {%- paginate collection.products by section.settings.products_per_page -%}
       {%- comment -%} Search bar + sort/count toolbar now live inside the product column (see below) {%- endcomment -%}
       <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
@@ -58,6 +95,14 @@
             id="main-collection-filters"
             data-id="{{ section.id }}"
           >
+            {%- if section.settings.show_category_filter -%}
+              {% render 'pns-category-filter',
+                handles: pns_cat_handles,
+                titles: pns_cat_titles,
+                membership: pns_cat_membership,
+                section_id: section.id
+              %}
+            {%- endif -%}
             {% render 'facets',
               results: collection,
               enable_filtering: section.settings.enable_filtering,
@@ -176,6 +221,9 @@
                   {%- endif -%}
                   <li
                     class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {% if section.settings.show_category_filter %}
+                      data-collections="{{ product.collections | map: 'handle' | join: ',' }}"
+                    {% endif %}
                     {% if settings.animations_reveal_on_scroll %}
                       data-cascade
                       style="--animation-order: {{ forloop.index }};"
@@ -417,6 +465,13 @@
       "default": true,
       "label": "Show product name search bar",
       "info": "Adds a 'Search products' box that filters the loaded products by name."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category_filter",
+      "default": true,
+      "label": "Show \"Category\" filter",
+      "info": "Adds a custom 'Category' filter to the sidebar listing the collections that the loaded products belong to. Filters the grid client-side (loaded products only)."
     },
     {
       "type": "checkbox",

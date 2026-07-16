@@ -1,0 +1,76 @@
+{% comment %}
+  PNS custom "Category" filter.
+
+  Renders a Dawn-style vertical facet disclosure titled "CATEGORY" that lists the
+  collections the current collection's products also belong to, and lets the
+  shopper narrow the loaded product grid by collection membership (client-side,
+  OR logic — see assets/pns-category-filter.js).
+
+  Native Shopify Search & Discovery facets can't answer "which collections is this
+  product in", so this is hand-built. It lives OUTSIDE Dawn's <facet-filters-form>
+  so ticking a box does not trigger Dawn's facet AJAX — it only toggles a CSS class
+  on the grid items, and combines cleanly with the in-grid name search.
+
+  Accepts:
+  - handles: {String} '||'-joined collection handles
+  - titles: {String} '||'-joined collection titles (parallel to handles)
+  - membership: {String} ',handle,' per product-occurrence, used to count products
+  - section_id: {String} the section id (for unique element ids)
+{% endcomment %}
+{%- assign pns_handles = handles | split: '||' -%}
+{%- assign pns_titles = titles | split: '||' -%}
+{%- if handles != blank and pns_handles.size > 0 -%}
+  <details
+    id="Details-pns-category-{{ section_id }}"
+    class="facets__disclosure-vertical pns-category-filter"
+    data-pns-category-filter
+    open
+  >
+    <summary
+      class="facets__summary caption-large focus-offset"
+      aria-label="Category"
+    >
+      <div>
+        <span class="facets__summary-label">Category</span>
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </div>
+    </summary>
+    <div class="parent-display facets__display-vertical">
+      <fieldset class="facets-wrap parent-wrap facets-wrap-vertical">
+        <legend class="visually-hidden">Category</legend>
+        <ul
+          class="facets-layout facets-layout-list facets-layout-list--text facets__list--vertical list-unstyled"
+          role="list"
+        >
+          {%- for pns_h in pns_handles -%}
+            {%- assign pns_t = pns_titles[forloop.index0] | default: pns_h -%}
+            {%- assign pns_needle = ',' | append: pns_h | append: ',' -%}
+            {%- assign pns_cnt = membership | split: pns_needle | size | minus: 1 -%}
+            {%- assign pns_input_id = 'pns-cat-' | append: section_id | append: '-' | append: forloop.index -%}
+            <li class="list-menu__item facets__item">
+              <label for="{{ pns_input_id }}" class="facets__label facet-checkbox">
+                <input
+                  type="checkbox"
+                  id="{{ pns_input_id }}"
+                  value="{{ pns_h | escape }}"
+                  data-pns-category-input
+                >
+                {{- 'square.svg' | inline_asset_content -}}
+
+                <div class="svg-wrapper">
+                  {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                </div>
+
+                <span class="facet-checkbox__text" aria-hidden="true">
+                  <span class="facet-checkbox__text-label">{{- pns_t | escape }}</span>
+                  {%- if pns_cnt > 0 %} ({{ pns_cnt }}){% endif -%}
+                </span>
+                <span class="visually-hidden">{{ pns_t | escape }}</span>
+              </label>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </fieldset>
+    </div>
+  </details>
+{%- endif -%}
