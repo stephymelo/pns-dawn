@@ -21,20 +21,36 @@
   --grid-mobile-vertical-spacing: 2.4rem;
 }
 
-/* Product card image: always a uniform SQUARE with the full image contained (never cropped) */
+/* Product card image: always a uniform SQUARE with the FULL image contained
+   (never cropped), regardless of the product's real image aspect ratio or the
+   section's image_ratio (adapt/portrait/square) setting.
+   Covers both the "Card" (.card--card) and "Standard" (.card--standard) styles. */
+
+/* 1) Force the aspect box to 1:1. Dawn sets --ratio-percent inline on
+   .card__inner.ratio (and the outer .card) from the product's image aspect
+   ratio; !important beats the (non-important) inline custom property. */
+.product-card-wrapper .card.ratio,
 .product-card-wrapper .card__inner.ratio {
   --ratio-percent: 100% !important;
 }
 
-.card__media {
+/* 2) Small inset so the image isn't edge-to-edge inside the square. */
+.product-card-wrapper .card__media {
   padding: 1.2rem;
 }
 
-.card__media .media img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
+/* 3) Contain (letterbox) the image so it's always shown in full. This must beat
+   Dawn's `object-fit: cover` from `.card__media .media img` (same specificity)
+   and `.media > img` (lower). Higher specificity + !important wins regardless of
+   stylesheet load order. Applies to the featured and hover/secondary images. */
+.product-card-wrapper .card__media .media img,
+.product-card-wrapper .card--card .card__media .media img,
+.product-card-wrapper .card--standard .card__media .media img,
+.product-card-wrapper .card__media .media > img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
 }
 
 /* ============================================
@@ -185,7 +201,10 @@
   border-radius: 0.8rem;
 }
 
-/* Native Dawn Sale / Sold-out badges are left as-is (visible) on cards. */
+/* Hide Dawn's native Sale/Sold-out badge spans on cards so the Rimix app badges render instead. Do NOT hide the .card__badge container (Rimix may inject into/near it). */
+.product-card-wrapper .card__badge > .badge {
+  display: none !important;
+}
 
 /* ============================================
    Product Card: center title + price
