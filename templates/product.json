@@ -234,6 +234,7 @@
         "feature_JRfnge": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/shipping-icon-4.png",
             "heading": "Fast Free Shipping",
             "text": "On Most Orders Over $99*",
             "link": ""
@@ -242,6 +243,7 @@
         "feature_qMF4B6": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/cs-icon.png",
             "heading": "Customer Service",
             "text": "Licensed Nail Techs On Phones & Live Chat",
             "link": ""
@@ -250,6 +252,7 @@
         "feature_QkcgAj": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/return-icon.png",
             "heading": "Easy Returns",
             "text": "30 Day Return Policy*",
             "link": ""
