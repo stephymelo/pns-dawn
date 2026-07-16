@@ -69,6 +69,13 @@
             "show_gift_card_recipient": true
           }
         },
+        "text_T39dkm": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Description</strong>",
+            "text_style": "body"
+          }
+        },
         "description": {
           "type": "description",
           "settings": {}
@@ -88,6 +95,7 @@
         "packify_app_block_Fg99iU",
         "quantity_selector",
         "buy_buttons",
+        "text_T39dkm",
         "description",
         "share"
       ],
