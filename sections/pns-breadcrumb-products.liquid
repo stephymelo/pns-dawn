@@ -7,9 +7,25 @@
       <span>Home</span>
     </a>
     {%- if product -%}
+      {%- comment -%}
+        `collection` is only set when the product is reached via /collections/x/products/y.
+        Through a direct product link there is no collection context, so fall back to the
+        product's first real collection (skipping the generic frontpage/all collections).
+      {%- endcomment -%}
+      {%- liquid
+        assign bc_collection = collection
+        if bc_collection == blank or bc_collection.handle == blank
+          for c in product.collections
+            unless c.handle == 'frontpage' or c.handle == 'all'
+              assign bc_collection = c
+              break
+            endunless
+          endfor
+        endif
+      -%}
       <span class="pns-breadcrumb__sep" aria-hidden="true">›</span>
-      {%- if collection and collection.handle -%}
-        <a href="{{ collection.url }}" class="pns-breadcrumb__item">{{ collection.title | escape }}</a>
+      {%- if bc_collection and bc_collection.handle -%}
+        <a href="{{ bc_collection.url }}" class="pns-breadcrumb__item">{{ bc_collection.title | escape }}</a>
       {%- else -%}
         <a href="{{ routes.all_products_collection_url }}" class="pns-breadcrumb__item">{{ section.settings.fallback_label | default: 'All' | escape }}</a>
       {%- endif -%}

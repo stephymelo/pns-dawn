@@ -179,8 +179,10 @@
   padding: 1.2rem;
 }
 
-/* Hide Shopify's native badges (Sale / Sold out) — badges come from an app */
-.product-card-wrapper .card__badge {
+/* Hide only Dawn's native Sale/Sold-out badge SPANS (badges come from the Rimix
+   app). Do NOT hide the .card__badge container or any app-injected element — the
+   Rimix app embed injects its badge here/near the card and must remain visible. */
+.product-card-wrapper .card__badge > .badge {
   display: none !important;
 }
 
