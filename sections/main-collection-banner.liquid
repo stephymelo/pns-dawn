@@ -1,28 +1,33 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign has_banner_image = false
+  if section.settings.show_collection_image and collection.image
+    assign has_banner_image = true
+  endif
+-%}
+
 {%- style -%}
   @media screen and (max-width: 749px) {
     .collection-hero--with-image .collection-hero__inner {
       padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
     }
   }
+  /* No image: center the collection title (rendered at H2 size, kept as an H1 tag) */
+  .collection-hero--title-only .collection-hero__inner {
+    justify-content: center;
+    text-align: center;
+  }
+  .collection-hero--title-only .collection-hero__text-wrapper {
+    width: 100%;
+  }
 {%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
+<div class="collection-hero{% if has_banner_image %} collection-hero--with-image{% else %} collection-hero--title-only{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
-        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-        {{- collection.title | escape -}}
-      </h1>
-
-      {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
-      {%- endif -%}
-    </div>
-
-    {%- if section.settings.show_collection_image and collection.image -%}
+    {%- if has_banner_image -%}
+      {%- comment -%} Image present: show the image only, not the title {%- endcomment -%}
       <div class="collection-hero__image-container media gradient">
         <img
           srcset="
@@ -40,6 +45,18 @@
           width="{{ collection.image.width }}"
           height="{{ collection.image.height }}"
         >
+      </div>
+    {%- else -%}
+      {%- comment -%} No image: show the collection title centered, H2 size, H1 tag {%- endcomment -%}
+      <div class="collection-hero__text-wrapper">
+        <h1 class="collection-hero__title h2">
+          <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+          {{- collection.title | escape -}}
+        </h1>
+
+        {%- if section.settings.show_collection_description -%}
+          <div class="collection-hero__description rte">{{ collection.description }}</div>
+        {%- endif -%}
       </div>
     {%- endif -%}
   </div>

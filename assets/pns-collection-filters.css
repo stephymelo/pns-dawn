@@ -47,26 +47,8 @@
   right: 1.2rem;
 }
 
-/* 4) Hide the collection name/title on collection pages.
-   Kept in the DOM (visually-hidden) so the H1 still exists for SEO/accessibility. */
-.collection-hero__title {
-  position: absolute !important;
-  overflow: hidden;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-/* If the banner has no image, collapse the empty space the hidden title leaves */
-.collection-hero:not(.collection-hero--with-image) {
-  padding-top: 0;
-  padding-bottom: 0;
-}
+/* (Collection title visibility is handled in sections/main-collection-banner.liquid:
+   image present -> show image, no title; no image -> centered H1 title at H2 size.) */
 
 /* ============================================================
    PNS in-grid "Search products" bar (filter by name)
