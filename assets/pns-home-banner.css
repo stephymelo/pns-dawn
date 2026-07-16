@@ -15,24 +15,6 @@
     justify-content: center;
     align-items: stretch;
   }
-
-  /* Desktop: arrows sit just off the image edges (flanking), close */
-  .pns-home-banner__stage {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .pns-home-banner__viewport {
-    width: 808px;
-    flex: 0 0 auto;
-  }
-
-  .pns-home-banner__slider .slider-button {
-    position: static;
-    flex: 0 0 auto;
-    transform: none;
-  }
 }
 
 /* Banner stage: image with small arrows overlaid on the edges */
@@ -128,6 +110,27 @@
 
 .pns-home-banner__slider .slider-button--next .icon {
   transform: rotate(-90deg);
+}
+
+/* Desktop: image is 808px and the arrows sit OUTSIDE it (flanking, in the white
+   space) instead of overlaying. Declared after the base rules so it wins. */
+@media screen and (min-width: 990px) {
+  .pns-home-banner__stage {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .pns-home-banner__viewport {
+    width: 808px;
+    flex: 0 0 auto;
+  }
+
+  .pns-home-banner__slider .slider-button {
+    position: static;
+    flex: 0 0 auto;
+    transform: none;
+  }
 }
 
 /* Dots — below the banner (outside the image) */
