@@ -7,53 +7,11 @@
   background-color: transparent;
 }
 
-/* ============================================
-   Product Card: Smaller images + more spacing
-   ============================================ */
+/* Grid spacing, image ratio/shape, and card text alignment all come from Dawn's
+   theme-editor settings (Product grid section + Theme settings → Product cards). */
 
-/* Increase gap between cards */
-.collection .grid,
-.pns-featured-slider .grid,
-.slider--desktop {
-  --grid-desktop-horizontal-spacing: 2.4rem;
-  --grid-desktop-vertical-spacing: 3.2rem;
-  --grid-mobile-horizontal-spacing: 1.6rem;
-  --grid-mobile-vertical-spacing: 2.4rem;
-}
-
-/* Product card image: always a uniform SQUARE with the FULL image contained
-   (never cropped), regardless of the product's real image aspect ratio or the
-   section's image_ratio (adapt/portrait/square) setting.
-   Covers both the "Card" (.card--card) and "Standard" (.card--standard) styles. */
-
-/* 1) Force the aspect box to 1:1. Dawn sets --ratio-percent inline on
-   .card__inner.ratio (and the outer .card) from the product's image aspect
-   ratio; !important beats the (non-important) inline custom property. */
-.product-card-wrapper .card.ratio,
-.product-card-wrapper .card__inner.ratio {
-  --ratio-percent: 100% !important;
-}
-
-/* 2) Inset so the product sits smaller inside the square with whitespace
-   around it (matches the airier live look; margin-less images no longer
-   fill the whole tile). */
-.product-card-wrapper .card__media {
-  padding: 2.6rem;
-}
-
-/* 3) Contain (letterbox) the image so it's always shown in full. This must beat
-   Dawn's `object-fit: cover` from `.card__media .media img` (same specificity)
-   and `.media > img` (lower). Higher specificity + !important wins regardless of
-   stylesheet load order. Applies to the featured and hover/secondary images. */
-.product-card-wrapper .card__media .media img,
-.product-card-wrapper .card--card .card__media .media img,
-.product-card-wrapper .card--standard .card__media .media img,
-.product-card-wrapper .card__media .media > img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  object-position: center center !important;
-}
+/* Product card images use Dawn's native handling — controlled by the section's
+   "Image ratio" setting + theme card settings. No forced square/contain/padding. */
 
 /* ============================================
    Product Card: Quantity Picker + Add to Cart
@@ -208,17 +166,8 @@
   display: none !important;
 }
 
-/* ============================================
-   Product Card: center title + price
-   ============================================ */
-.product-card-wrapper .card__heading {
-  text-align: center;
-}
-
-.product-card-wrapper .price {
-  text-align: center;
-  justify-content: center;
-}
+/* Card title/price alignment comes from the theme's card text-alignment setting
+   (Theme settings → Product cards) — not forced here. */
 
 /* Card sale price: sale price on the LEFT (pink + bold), original struck on the RIGHT */
 .product-card-wrapper .price--on-sale .price__sale {
