@@ -21,12 +21,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "custom_liquid_3r4nq7": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": ""
-          }
-        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -37,6 +31,12 @@
         "title": {
           "type": "title",
           "settings": {}
+        },
+        "custom_liquid_3r4nq7": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- liquid\n    assign current_variant = product.selected_or_first_available_variant\n    assign sku = current_variant.sku | default: product.variants.first.sku\n  -%}\n\n  <div class=\"pns-sku-availability\">\n    {%- if sku != blank -%}\n      <p class=\"pns-sku\">\n        <span class=\"pns-sku__label\">SKU:</span>\n        <span class=\"pns-sku__value\">{{ sku }}</span>\n      </p>\n    {%- endif -%}\n    <p class=\"pns-availability\">\n      <span class=\"pns-availability__label\">Availability :</span>\n      {%- if current_variant.available -%}\n        <span class=\"pns-availability__value pns-availability__value--in\">IN STOCK</span>\n      {%- else -%}\n        <span class=\"pns-availability__value pns-availability__value--out\">OUT OF STOCK</span>\n      {%- endif -%}\n    </p>\n  </div>\n  \n  {%- style -%}\n    .pns-sku-availability { margin: 1.2rem 0; font-size: 1.6rem; line-height: 1.6; }\n    .pns-sku-availability p { margin: 0 0 0.4rem; color: #4a4a4a; }\n    .pns-sku__value { font-weight: 700; color: #1a1a1a; }\n    .pns-availability__value { font-weight: 700; }\n    .pns-availability__value--in { color: #5cba54; }  /* green */\n    .pns-availability__value--out { color: #d64545; } /* red */\n  {%- endstyle -%}"
+          }
         },
         "price": {
           "type": "price",
@@ -58,9 +58,9 @@
             "display_price": "unit",
             "link_style": "buttons",
             "link_behavior": "go_to_product",
-            "heading_color": "#F58A2A",
+            "heading_color": "#f58a2a",
             "heading_size": 17,
-            "link_color": "#FFFFFF",
+            "link_color": "#ffffff",
             "link_background_color": "#181818",
             "styles": ".packify_heading {\n  font-weight: bold;\n}\n\n.packify_pack_name {\n  font-weight: bold;\n}\n\n.packify_pack_button {\n  border: 0;\n  border-radius: 0;\n  box-shadow: 0 0 0 .1rem;\n  cursor: pointer;\n  font-size: 1.5rem;\n  margin-bottom: 1rem;\n  padding: .9rem 3rem 1.1rem;\n  min-height: 4.5rem;\n  width: 100%;\n  -webkit-appearance: none;\n}\n\n.packify_pack_button:hover {\n  box-shadow: 0 0 0 .2rem;\n}\n\n.packify_pack_button:disabled {\n  cursor: not-allowed;\n  opacity: .5;\n}\n\n/* Keep badge inside the last/best option */\n.packify_pack:last-child {\n  position: relative;\n}\n\n.packify_pack:last-child .packify_pack_button {\n  position: relative;\n}\n\n.packify_pack:last-child .packify_pack_button::before {\n  content: \"🔥 BEST VALUE\";\n  position: absolute;\n  top: -14px;\n  left: 18px;\n  background: #FFFFFF;\n  color: #E95D86;\n  border: 2px solid #E95D86;\n  padding: 5px 14px;\n  border-radius: 999px;\n  font-size: 12px;\n  font-weight: 800;\n  line-height: 1;\n  z-index: 2;\n  box-shadow: 0 6px 14px rgba(233, 93, 134, .18);\n}"
           }
@@ -88,9 +88,9 @@
         }
       },
       "block_order": [
-        "custom_liquid_3r4nq7",
         "vendor",
         "title",
+        "custom_liquid_3r4nq7",
         "price",
         "variant_picker",
         "packify_app_block_Fg99iU",
