@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PNS Dawn — Dev Docs</title>
+<style>
+  :root{
+    --pink:#e88a9a; --pink-soft:#f4b6bc; --mint:#a9ddd1; --footer-pink:#f6ccc5;
+    --ink:#1a1a1a; --muted:#6b6b6b; --nav-ink:#4a4a4a; --line:#ececec; --bg:#ffffff; --panel:#faf7f8;
+    --code-bg:#2b2733; --code-ink:#f3eef7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+  a{color:var(--pink);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:#f3edef;color:#a23b52;padding:.12em .4em;border-radius:4px}
+  pre{background:var(--code-bg);color:var(--code-ink);padding:16px 18px;border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.5}
+  pre code{background:none;color:inherit;padding:0}
+  .wrap{display:flex;max-width:1200px;margin:0 auto;gap:0}
+  /* Hero */
+  header.hero{background:linear-gradient(120deg,#151515 0%,#2a2130 60%,#3a2430 100%);color:#fff;padding:54px 32px 46px;position:relative;overflow:hidden}
+  header.hero .lotus{position:absolute;right:-40px;bottom:-60px;width:340px;opacity:.9;pointer-events:none}
+  header.hero .petal{position:absolute;bottom:0;transform-origin:bottom center}
+  header.hero h1{margin:0;font-size:34px;letter-spacing:.5px}
+  header.hero .tag{display:inline-block;margin-bottom:14px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--pink-soft);border:1px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:20px}
+  header.hero p{margin:12px 0 0;max-width:640px;color:#d9d2d6}
+  header.hero .meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  header.hero .chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:6px 14px;font-size:13px}
+  header.hero .chip b{color:var(--mint)}
+  /* Layout */
+  nav.side{width:250px;flex:0 0 250px;border-right:1px solid var(--line);padding:26px 16px 60px;position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto}
+  nav.side h4{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin:22px 8px 8px}
+  nav.side a{display:block;color:var(--nav-ink);padding:5px 10px;border-radius:7px;font-size:14px}
+  nav.side a:hover{background:var(--panel);text-decoration:none;color:var(--ink)}
+  main{flex:1;min-width:0;padding:34px 40px 90px}
+  section.doc{margin-bottom:46px;scroll-margin-top:20px}
+  section.doc>h2{font-size:24px;margin:0 0 6px;padding-bottom:10px;border-bottom:2px solid var(--pink-soft);display:flex;align-items:center;gap:10px}
+  section.doc>h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--pink)}
+  h3{font-size:18px;margin:26px 0 8px}
+  .lead{color:var(--muted);margin-top:0}
+  /* Card blocks */
+  .cmp{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0;background:var(--bg)}
+  .cmp h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .badge{font-size:11px;font-weight:700;letter-spacing:.5px;padding:3px 9px;border-radius:20px;text-transform:uppercase}
+  .badge.new{background:var(--pink);color:#fff}
+  .badge.mod{background:var(--mint);color:#0e3a30}
+  .badge.file{background:#efe9ec;color:#7a4a58;font-weight:600;letter-spacing:0;text-transform:none;font-family:ui-monospace,monospace}
+  .files{font-size:13px;color:var(--muted);margin:2px 0 12px}
+  .files code{background:#f3edef}
+  ul{margin:8px 0;padding-left:20px}
+  li{margin:4px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--panel);font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .swatches{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+  .sw{border:1px solid var(--line);border-radius:10px;overflow:hidden;width:132px}
+  .sw .chip{height:52px}
+  .sw .lbl{padding:8px 10px;font-size:12px}
+  .sw .lbl b{display:block;font-family:ui-monospace,monospace;font-size:13px;color:var(--ink)}
+  .callout{border-left:4px solid var(--pink);background:var(--panel);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+  .callout.warn{border-color:#e0a23a;background:#fdf6ea}
+  .check{list-style:none;padding-left:0}
+  .check li{padding-left:28px;position:relative}
+  .check li:before{content:"☐";position:absolute;left:2px;color:var(--pink);font-size:16px}
+  footer.foot{border-top:1px solid var(--line);padding:24px 40px;color:var(--muted);font-size:13px;max-width:1200px;margin:0 auto}
+  @media(max-width:820px){
+    nav.side{display:none}
+    main{padding:24px 18px 70px}
+    header.hero{padding:40px 20px 34px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="lotus" viewBox="0 0 200 160" aria-hidden="true">
+    <ellipse class="petal" cx="70" cy="150" rx="34" ry="86" fill="#a9ddd1" opacity=".85" transform="rotate(-22 70 150)"/>
+    <ellipse class="petal" cx="130" cy="150" rx="34" ry="86" fill="#f6ccc5" opacity=".9" transform="rotate(22 130 150)"/>
+    <ellipse class="petal" cx="100" cy="150" rx="30" ry="92" fill="#e88a9a" opacity=".92"/>
+  </svg>
+  <span class="tag">Premier Nail Source · Dev Reference</span>
+  <h1>PNS Dawn — Developer Docs</h1>
+  <p>How the Premier Nail Source Shopify theme was customized on top of Shopify Dawn. New components, changes to existing components, and everything a developer needs to set up in the theme editor.</p>
+  <div class="meta">
+    <span class="chip">Base theme: <b>Shopify Dawn 15.5.0</b></span>
+    <span class="chip">Repo: <b>stephymelo/pns-dawn</b> (branch main)</span>
+    <span class="chip">Prefix convention: <b>PNS / pns-*</b></span>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="side">
+  <h4>Start here</h4>
+  <a href="#overview">Overview & principles</a>
+  <a href="#branding">Branding & colors</a>
+  <a href="#architecture">CSS / JS architecture</a>
+  <h4>New sections</h4>
+  <a href="#s-feature-bar">PNS Feature Bar</a>
+  <a href="#s-home-banner">PNS Home Banner</a>
+  <a href="#s-featured">PNS Featured Collection</a>
+  <a href="#s-brand-slider">PNS Brand Slider</a>
+  <a href="#s-footer">PNS Footer</a>
+  <a href="#s-breadcrumb">PNS Breadcrumb Products</a>
+  <a href="#s-related-products">PNS Related Products</a>
+  <a href="#s-related-collections">PNS Related Collections</a>
+  <a href="#s-brands-page">PNS Brands Page</a>
+  <h4>Modified components</h4>
+  <a href="#m-announcement">Announcement bar</a>
+  <a href="#m-header">Header</a>
+  <a href="#m-card">Product card</a>
+  <a href="#m-product">Product page</a>
+  <a href="#m-collections">Collection / featured / related</a>
+  <a href="#m-multicolumn">Multicolumn</a>
+  <a href="#m-image-banner">Image banner</a>
+  <h4>Setup</h4>
+  <a href="#editor">Theme-editor checklist</a>
+  <a href="#deps">Dependencies & assets</a>
+  <a href="#gotchas">Gotchas</a>
+</nav>
+
+<main>
+
+<section class="doc" id="overview">
+  <h2><span class="dot"></span>Overview & principles</h2>
+  <p class="lead">This theme is Shopify <b>Dawn 15.5.0</b> with a layer of Premier Nail Source (PNS) customizations. The goal was to replicate the look of the live premiernailsource.com site.</p>
+  <ul>
+    <li><b>Everything custom is prefixed <code>pns-</code> / "PNS "</b> — section files (<code>sections/pns-*.liquid</code>), CSS/JS assets (<code>assets/pns-*.css|js</code>), CSS classes (<code>.pns-*</code>), and schema/section display names ("PNS …").</li>
+    <li><b>Every section links its own CSS file.</b> There is intentionally no shared mega-stylesheet — see <a href="#architecture">architecture</a>.</li>
+    <li><b>Two-way GitHub ↔ Shopify sync is live.</b> Editing settings in the Shopify theme editor rewrites the JSON config files (<code>templates/*.json</code>, <code>config/settings_data.json</code>, <code>sections/*-group.json</code>) and pushes commits back to <code>main</code>. Always <code>git pull</code> before editing and before pushing.</li>
+    <li><b>Do not publish from git.</b> Commits update the connected (unpublished/draft) theme in the Shopify admin; they do not publish it live.</li>
+  </ul>
+  <div class="callout warn"><b>Sync caution:</b> because the theme editor owns the JSON, values you hard-set in <code>*-group.json</code> / <code>templates/*.json</code> can be overwritten by an editor save. For values that must survive (e.g. announcement-bar phone/email), we bake defaults into the section's Liquid or schema, not just the config.</div>
+</section>
+
+<section class="doc" id="branding">
+  <h2><span class="dot"></span>Branding & colors</h2>
+  <p class="lead">Core palette used across the custom components. Most are exposed as theme-editor color settings; the hard-coded ones are noted per component.</p>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#e88a9a"></div><div class="lbl">Brand pink<b>#E88A9A</b></div></div>
+    <div class="sw"><div class="chip" style="background:#f4b6bc"></div><div class="lbl">Soft pink (accents)<b>#F4B6BC</b></div></div>
+    <div class="sw"><div class="chip" style="background:#a9ddd1"></div><div class="lbl">Mint (contact bar)<b>#A9DDD1</b></div></div>
+    <div class="sw"><div class="chip" style="background:#f6ccc5"></div><div class="lbl">Footer pink<b>#F6CCC5</b></div></div>
+    <div class="sw"><div class="chip" style="background:#4a4a4a"></div><div class="lbl">Nav / body text<b>#4A4A4A</b></div></div>
+    <div class="sw"><div class="chip" style="background:#111111"></div><div class="lbl">Dark (footer/arrows)<b>#111111</b></div></div>
+    <div class="sw"><div class="chip" style="background:#c0392b"></div><div class="lbl">NAILBUYS CTA<b>#C0392B</b></div></div>
+  </div>
+  <p><b>Color schemes</b> (in <code>config/settings_data.json</code>): scheme-1 = white bg / pink button; scheme-2 = white / black button; scheme-3 = pink (#E88A9A) bg / white text; scheme-4 = black; scheme-5 = blue. Typography: <b>Instrument Sans</b> (heading n5, body n4).</p>
+</section>
+
+<section class="doc" id="architecture">
+  <h2><span class="dot"></span>CSS / JS architecture</h2>
+  <p class="lead">Originally all custom CSS lived in one <code>pns-custom.css</code> (loaded globally via the header). That was split so each section owns its stylesheet.</p>
+  <h3>Per-section CSS mapping</h3>
+  <table>
+    <tr><th>Loaded by</th><th>CSS file</th></tr>
+    <tr><td><code>sections/announcement-bar.liquid</code></td><td><code>pns-announcement.css</code></td></tr>
+    <tr><td><code>sections/header.liquid</code></td><td><code>pns-header.css</code></td></tr>
+    <tr><td><code>snippets/card-product.liquid</code> (loads once wherever a card renders)</td><td><code>pns-card.css</code></td></tr>
+    <tr><td><code>sections/main-product.liquid</code></td><td><code>pns-product.css</code></td></tr>
+    <tr><td>each <code>pns-*.liquid</code> section</td><td>matching <code>pns-*.css</code></td></tr>
+  </table>
+  <div class="callout"><b>Why the card CSS is in the snippet:</b> product cards render in many sections (collections, featured, related, search). Loading <code>pns-card.css</code> from <code>card-product.liquid</code>'s style block means it loads once wherever a card appears — no section needs to remember to include it.</div>
+  <h3>Custom JavaScript</h3>
+  <table>
+    <tr><th>File</th><th>Purpose</th></tr>
+    <tr><td><code>pns-quantity-picker.js</code></td><td>Product-card − / + quantity buttons (delegated, idempotent).</td></tr>
+    <tr><td><code>pns-nav-menu.js</code></td><td>Header nav dropdowns open on <b>click</b> (not hover); outside-click / Esc closes.</td></tr>
+    <tr><td><code>pns-brand-slider.js</code></td><td><code>&lt;pns-brand-slider&gt;</code> auto-rotating logo carousel (conveyor loop).</td></tr>
+    <tr><td><code>pns-home-banner.js</code></td><td><code>&lt;pns-home-banner&gt;</code> rotating promo banner (pixel-based translate).</td></tr>
+  </table>
+  <p>The PNS Featured / Related sliders reuse Dawn's global <code>&lt;slider-component&gt;</code> (in <code>global.js</code>) — no extra JS. <b>Slides must have <code>id="Slide-…"</code></b> or the arrows can't compute scroll.</p>
+</section>
+
+<!-- ============ NEW SECTIONS ============ -->
+<h2 style="font-size:14px;text-transform:uppercase;letter-spacing:2px;color:#b06;margin:40px 0 6px">New custom sections</h2>
+
+<div class="cmp" id="s-feature-bar">
+  <h3>PNS Feature Bar <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-feature-bar.liquid</code> · <code>snippets/pns-feature-item.liquid</code> · <code>assets/pns-feature-bar.css</code></div>
+  <p>Trust-badge row (Fast Free Shipping / Customer Service / Easy Returns). Block-based: each item has an uploadable icon, heading, subtext, optional link.</p>
+  <ul>
+    <li><b>Icon recolor:</b> uploaded PNG/SVG icons are tinted to the "Icon color" via CSS <code>mask</code> (toggle "Recolor icons").</li>
+    <li>Editable: background color (overrides scheme), heading/accent color, icon color, bottom stroke (color + thickness), padding.</li>
+    <li><b>Mobile:</b> the row becomes a seamless auto-scrolling marquee (duplicated set via the snippet).</li>
+    <li>Was originally in the header group; <b>moved to a template section</b> (<code>enabled_on templates</code>) so it's placed per-template. Currently added at the top of the homepage.</li>
+  </ul>
+</div>
+
+<div class="cmp" id="s-home-banner">
+  <h3>PNS Home Banner <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-home-banner.liquid</code> · <code>assets/pns-home-banner.css</code> · <code>assets/pns-home-banner.js</code></div>
+  <p>Two-column hero: a rotating promo banner (left) + a "Top Brands" list panel (right). Replaces the old promo-brands section.</p>
+  <ul>
+    <li><b>Slide (banner) blocks</b> (image + link) and <b>Brand blocks</b> (name + link) live in the same section.</li>
+    <li>Desktop layout: image locked to <b>808px</b> at 2.5:1 ratio (3200×1280 artwork); Top Brands panel <b>390px</b>; small black arrows sit <b>outside</b> the image; dots below. Mobile: full-width banner with overlaid arrows.</li>
+    <li>Editable NAILBUYS CTA (button color + text color pickers), rotate speed, decorative background lotus (image picker).</li>
+    <li>JS: <code>&lt;pns-home-banner&gt;</code> — pixel-measured translate so each slide reveals fully; pauses on hover; respects reduced motion.</li>
+  </ul>
+</div>
+
+<div class="cmp" id="s-featured">
+  <h3>PNS Featured Collection <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-featured-collection.liquid</code> · <code>assets/pns-featured-collection.css</code></div>
+  <p>A Featured-Collection variant rendered as a carousel with circular black side arrows (the shared "PNS slider" look). Copied from Dawn's featured-collection and reworked.</p>
+  <ul>
+    <li>Always a slider: desktop shows 4, mobile shows ~1.5 cards (peek). Arrows hidden at the ends; "View all" removed.</li>
+    <li>Constrained to the theme page-width (Dawn's desktop slider is full-bleed by default — overridden).</li>
+    <li>Editable heading + alignment; <code>quick_add</code> defaults to <b>standard</b> so cards show the qty picker + add-to-cart.</li>
+  </ul>
+</div>
+
+<div class="cmp" id="s-brand-slider">
+  <h3>PNS Brand Slider <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-brand-slider.liquid</code> · <code>assets/pns-brand-slider.css</code> · <code>assets/pns-brand-slider.js</code></div>
+  <p>Auto-rotating brand-logo carousel ("Top Brands"). Logo image blocks; rotates one logo at a time on a smooth, seamless loop; same black arrows with pink hover.</p>
+  <ul><li>Editable: heading + alignment, logos-per-view (desktop), rotate interval, animation speed. Pauses on hover/focus, respects reduced motion.</li></ul>
+</div>
+
+<div class="cmp" id="s-footer">
+  <h3>PNS Footer <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-footer.liquid</code> · <code>assets/pns-footer.css</code> · used via <code>sections/footer-group.json</code></div>
+  <p>Custom 3-tier footer replacing Dawn's footer in the footer group.</p>
+  <ul>
+    <li><b>Top (dark):</b> "Menu column" blocks (link-list) + a Newsletter block (heading + description + email/Subscribe) + a decorative background lotus (image picker).</li>
+    <li><b>Contact bar (mint):</b> address, phone, outlined-circle social icons.</li>
+    <li><b>Bottom (pink):</b> "© {year} {brand}" (brand name in an accent color) + an editable bottom menu (link-list).</li>
+    <li>All three tier colors, text colors, brand color, address, phone, copyright name are editor settings. Headings/links use Dawn's footer type sizes.</li>
+  </ul>
+</div>
+
+<div class="cmp" id="s-breadcrumb">
+  <h3>PNS Breadcrumb Products <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-breadcrumb-products.liquid</code> · <code>assets/pns-breadcrumb-products.css</code></div>
+  <p>Full-width black breadcrumb bar for product pages: filled home icon + Home › collection (or fallback "All") › product title. Editable background/text colors + fallback label. <code>enabled_on templates: [product]</code>.</p>
+</div>
+
+<div class="cmp" id="s-related-products">
+  <h3>PNS Related Products <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-related-products.liquid</code> · <code>assets/pns-related-products.css</code></div>
+  <p>Shopify product recommendations ("related" intent, async via <code>&lt;product-recommendations&gt;</code>) rendered in the PNS slider carousel. Heading default "You may also like". Cards use <code>quick_add: standard</code>. Product template only.</p>
+</div>
+
+<div class="cmp" id="s-related-collections">
+  <h3>PNS Related Collections <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-related-collections.liquid</code> · <code>assets/pns-related-collections.css</code></div>
+  <p>Same slider, but products are grouped by the <b><code>product_collection.product_collection</code> metafield</b> (not the Shopify collection) — it loops the product's collections, de-dupes, and shows others sharing the same metafield value, excluding the current product. Heading default "More From This Collection".</p>
+  <div class="callout warn"><b>Dependency:</b> requires the <code>product_collection.product_collection</code> product metafield to be populated, or the section renders nothing.</div>
+</div>
+
+<div class="cmp" id="s-brands-page">
+  <h3>PNS Brands Page <span class="badge new">New</span></h3>
+  <div class="files">Files: <code>sections/pns-brands-page.liquid</code> · used via <code>templates/page.shop-by-brand.json</code></div>
+  <p>"Shop by Brand" grid looping <code>shop.vendors</code>, linking each to <code>/collections/&lt;vendor-handle&gt;</code>, greyscale→color on hover, responsive 4→3→2→1. Editable heading + description (no blocks). Styles are inline in the section.</p>
+</div>
+
+<!-- ============ MODIFIED COMPONENTS ============ -->
+<h2 style="font-size:14px;text-transform:uppercase;letter-spacing:2px;color:#0e7a63;margin:44px 0 6px">Modified Dawn components</h2>
+
+<div class="cmp" id="m-announcement">
+  <h3>Announcement bar <span class="badge mod">Modified</span></h3>
+  <div class="files">Files: <code>sections/announcement-bar.liquid</code> · <code>assets/pns-announcement.css</code></div>
+  <ul>
+    <li>Pink bar (scheme-3). Social icons as <b>32×32 outlined circles</b>, spaced like the footer.</li>
+    <li>Right-side utility links: phone icon | @ email icon | Create an Account | Sign In | language selector. Native Dawn account links removed.</li>
+    <li>Message 14px; utility text 16px; bar min-height 44px.</li>
+    <li><b>Phone/email have Liquid <code>default</code> fallbacks</b> (1-800-727-1119 / support@premiernailsource.com) so the icons survive editor blanking.</li>
+  </ul>
+</div>
+
+<div class="cmp" id="m-header">
+  <h3>Header <span class="badge mod">Modified</span></h3>
+  <div class="files">Files: <code>sections/header.liquid</code> · <code>assets/pns-header.css</code> · <code>assets/pns-nav-menu.js</code></div>
+  <ul>
+    <li>Always-visible inline <b>predictive search bar</b> in the header row (logo left · search center · icons right); header row ~132px.</li>
+    <li>Secondary <b>nav bar</b> below the header (16px links, ~44.8px tall, color <code>#4A4A4A</code> via the <code>nav_link_color</code> setting; "Deals" keeps its accent). Chevron carets; dropdowns open on <b>click</b> (<code>pns-nav-menu.js</code>); hover/open turns text + underline dark.</li>
+    <li>Fixes: logo blur (<code>image_url</code> cap raised 600→1100 for retina), FOUC (header CSS loaded render-blocking, not async), search text <code>#4A4A4A</code>.</li>
+  </ul>
+</div>
+
+<div class="cmp" id="m-card">
+  <h3>Product card <span class="badge mod">Modified</span></h3>
+  <div class="files">Files: <code>snippets/card-product.liquid</code> · <code>assets/pns-card.css</code> · <code>assets/pns-quantity-picker.js</code></div>
+  <ul>
+    <li>Persistent <b>quantity picker + pink "Add to cart"</b> (with cart icon) on single-variant cards; multi-variant cards get a pink "Choose options" button.</li>
+    <li>Gray card outline; <b>native Dawn Sale/Sold-out badges hidden</b> (badges come from an app); title + price centered.</li>
+    <li>Layout fix: Dawn's <code>.card__content</code> is a grid that pins the info to row 2 (letting quick-add float above) — overridden to a flex column so order is <b>title → price → qty → add-to-cart</b>.</li>
+  </ul>
+</div>
+
+<div class="cmp" id="m-product">
+  <h3>Product page <span class="badge mod">Modified</span></h3>
+  <div class="files">Files: <code>sections/main-product.liquid</code> · <code>assets/pns-product.css</code></div>
+  <ul>
+    <li><b>Add to cart:</b> solid pink, bold label; on hover the fill <b>slides off to the right</b> revealing a pink-outlined / pink-text button. Buttons full-width of the container.</li>
+    <li><b>Quantity selector</b> restyled to match the product-card picker (single rounded outlined box with divider lines).</li>
+  </ul>
+</div>
+
+<div class="cmp" id="m-collections">
+  <h3>Collection grid · Featured collection · Related products <span class="badge mod">Modified</span></h3>
+  <div class="files">Files: <code>sections/main-collection-product-grid.liquid</code> · <code>sections/featured-collection.liquid</code> · <code>sections/related-products.liquid</code></div>
+  <p>These Dawn sections were changed so their cards pass <b><code>quick_add: 'standard'</code></b>, which makes the custom quantity picker + add-to-cart render (the grid & featured also default the setting to "standard").</p>
+</div>
+
+<div class="cmp" id="m-multicolumn">
+  <h3>Multicolumn <span class="badge mod">Modified</span></h3>
+  <div class="files">Files: <code>sections/multicolumn.liquid</code></div>
+  <p>The column <b>image is now wrapped in the block's link</b> when a link is set — the image is clickable even with no title/text/label (Dawn only linked the text label).</p>
+</div>
+
+<div class="cmp" id="m-image-banner">
+  <h3>Image banner <span class="badge mod">Modified</span></h3>
+  <div class="files">Files: <code>sections/image-banner.liquid</code></div>
+  <p>Added an <b>"Image link"</b> setting — a full-cover overlay link makes the whole banner image clickable (content buttons still click through, z-index layered).</p>
+</div>
+
+<!-- ============ SETUP ============ -->
+<section class="doc" id="editor">
+  <h2><span class="dot"></span>Theme-editor setup checklist</h2>
+  <p class="lead">What has to be configured in the Shopify theme editor for the theme to look complete.</p>
+  <ul class="check">
+    <li><b>Homepage:</b> add PNS Feature Bar (top), PNS Home Banner, PNS Featured Collection(s), PNS Brand Slider, multicolumns.</li>
+    <li><b>Product template:</b> add PNS Breadcrumb Products (top), PNS Related Products and/or PNS Related Collections (replace/hide Dawn's "Related products").</li>
+    <li><b>Shop-by-Brand page:</b> template <code>page.shop-by-brand.json</code> uses PNS Brands Page.</li>
+    <li><b>Footer:</b> footer group uses PNS Footer — set the two menu columns (footer / footer-products menus), address, phone, colors, and upload the background lotus.</li>
+    <li><b>Upload assets:</b> footer lotus logo; Feature Bar icons (shipping / customer-service / return); brand logos (Brand Slider + Top Brands); banner artwork (3200×1280).</li>
+    <li><b>Social links</b> in Theme settings → Social media (Facebook / Instagram / YouTube / TikTok) — used by the announcement bar and footer.</li>
+    <li><b>Header:</b> set the main menu (drives the secondary nav bar) and the <code>nav_link_color</code> if changing from #4A4A4A.</li>
+    <li><b>Logo:</b> Theme settings → logo width (max raised to 500px). Use a source image ≥1000px wide to stay crisp.</li>
+    <li><b>PNS Home Banner:</b> set the NAILBUYS button link + colors; add banner slides + Top Brands entries.</li>
+    <li><b>Metafield:</b> populate <code>product_collection.product_collection</code> on products if using PNS Related Collections.</li>
+  </ul>
+</section>
+
+<section class="doc" id="deps">
+  <h2><span class="dot"></span>Dependencies & assets</h2>
+  <table>
+    <tr><th>Dependency</th><th>Used by</th><th>Notes</th></tr>
+    <tr><td>Product metafield <code>product_collection.product_collection</code></td><td>PNS Related Collections</td><td>Must be set per product; groups "More From This Collection".</td></tr>
+    <tr><td>Shopify navigation menus: <code>main-menu</code>, <code>footer</code>, <code>footer-products</code></td><td>Header nav, PNS Footer</td><td>Menu handles referenced in the group JSON.</td></tr>
+    <tr><td>Theme social settings</td><td>Announcement bar, PNS Footer</td><td><code>settings.social_*_link</code>.</td></tr>
+    <tr><td>Product badges app (e.g. Rimix)</td><td>Cards / product page</td><td>Native Dawn badges are hidden on cards; app injects its own via storefront JS/app-embed (not theme code).</td></tr>
+    <tr><td>Uploaded images</td><td>Footer lotus, Feature Bar icons, brand logos, banners</td><td>Referenced as <code>shopify://shop_images/…</code> in the config.</td></tr>
+  </table>
+</section>
+
+<section class="doc" id="gotchas">
+  <h2><span class="dot"></span>Gotchas &amp; conventions for the next dev</h2>
+  <ul>
+    <li><b>Always <code>git pull</code></b> before editing and before pushing — the Shopify editor pushes its own commits.</li>
+    <li><b>New section?</b> Prefix it <code>pns-</code> / "PNS ", give it <b>its own</b> <code>assets/pns-*.css</code>, and link that CSS from the section's first line.</li>
+    <li><b>Card CSS</b> is loaded by <code>snippets/card-product.liquid</code>, not by each section — don't re-add it per section.</li>
+    <li><b>Slider sections</b> reuse Dawn's <code>&lt;slider-component&gt;</code>: slides need <code>id="Slide-{{ section.id }}-…"</code> and the grid needs <code>id="Slider-{{ section.id }}"</code> or the arrows won't scroll.</li>
+    <li><b>Values that must persist</b> (phone/email, etc.) belong in Liquid <code>default</code> filters or schema defaults, not only in the editor-owned JSON.</li>
+    <li><b>Don't publish from git</b> — commits only update the draft theme.</li>
+    <li>Base theme is Dawn 15.5.0. A future Dawn upgrade will need these customizations re-applied to the new Dawn files (they were re-applied once already, 15.4.1 → 15.5.0).</li>
+  </ul>
+</section>
+
+</main>
+</div>
+
+<footer class="foot">
+  PNS Dawn developer documentation · Base: Shopify Dawn 15.5.0 · Keep this in sync when you add or change PNS components.
+</footer>
+
+</body>
+</html>
