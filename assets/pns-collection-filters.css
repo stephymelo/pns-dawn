@@ -16,10 +16,16 @@
   color: #1a1a1a;
 }
 
-/* 2) Square color swatches instead of circular */
+/* 2) Square color swatches instead of circular — set the shape VARIABLE so the
+   swatch AND its hover/selection ring (the box-shadow on .swatch-input__label,
+   which uses --swatch-input--border-radius) are square, not round. */
+.facets-container .swatch-input,
+.facets-container .swatch-input__label,
 .facets-container .swatch,
-.facets-container .swatch-input__input + .swatch,
+.mobile-facets__label,
+.mobile-facets__label .swatch-input__label,
 .mobile-facets__label .swatch {
+  --swatch-input--border-radius: 0.2rem;
   border-radius: 0.2rem !important;
 }
 
@@ -262,7 +268,7 @@
   aspect-ratio: 1 / 1;
   padding: 0.8rem;
   border: 1px solid #e0e0e0;
-  border-radius: 0.6rem;
+  border-radius: 0; /* fully square, no rounding */
   background: #ffffff;
   overflow: hidden;
 }
