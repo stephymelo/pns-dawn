@@ -104,7 +104,7 @@
 
 .pns-collection-search__icon {
   position: absolute;
-  top: 50%;
+  top: 2.4rem; /* half the input height — stays centered on the input even when the "no match" note shows */
   left: 1.6rem;
   transform: translateY(-50%);
   display: flex;
