@@ -58,6 +58,12 @@
             "styles": ".packify_heading {\n  font-weight: bold;\n}\n\n.packify_pack_name {\n  font-weight: bold;\n}\n\n.packify_pack_button {\n  border: 0;\n  border-radius: 0;\n  box-shadow: 0 0 0 .1rem;\n  cursor: pointer;\n  font-size: 1.5rem;\n  margin-bottom: 1rem;\n  padding: .9rem 3rem 1.1rem;\n  min-height: 4.5rem;\n  width: 100%;\n  -webkit-appearance: none;\n}\n\n.packify_pack_button:hover {\n  box-shadow: 0 0 0 .2rem;\n}\n\n.packify_pack_button:disabled {\n  cursor: not-allowed;\n  opacity: .5;\n}\n\n/* Keep badge inside the last/best option */\n.packify_pack:last-child {\n  position: relative;\n}\n\n.packify_pack:last-child .packify_pack_button {\n  position: relative;\n}\n\n.packify_pack:last-child .packify_pack_button::before {\n  content: \"🔥 BEST VALUE\";\n  position: absolute;\n  top: -14px;\n  left: 18px;\n  background: #FFFFFF;\n  color: #E95D86;\n  border: 2px solid #E95D86;\n  padding: 5px 14px;\n  border-radius: 999px;\n  font-size: 12px;\n  font-weight: 800;\n  line-height: 1;\n  z-index: 2;\n  box-shadow: 0 6px 14px rgba(233, 93, 134, .18);\n}"
           }
         },
+        "bogos_io_free_gift_bundle_view_8QFbhb": {
+          "type": "shopify://apps/bogos-io-free-gift/blocks/bundle-view/0432bba6-720a-4e95-be5a-b868386f7aa6",
+          "settings": {
+            "product": ""
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -93,6 +99,7 @@
         "price",
         "variant_picker",
         "packify_app_block_Fg99iU",
+        "bogos_io_free_gift_bundle_view_8QFbhb",
         "quantity_selector",
         "buy_buttons",
         "text_T39dkm",
