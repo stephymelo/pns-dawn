@@ -267,7 +267,7 @@
       "name": "PNS Feature Bar",
       "settings": {
         "color_scheme": "",
-        "background_color": "",
+        "background_color": "#F9F9F9",
         "accent_color": "#f4b6bc",
         "recolor_icons": true,
         "icon_color": "#f4b6bc",
