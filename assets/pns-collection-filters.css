@@ -66,6 +66,34 @@
    image present -> show image, no title; no image -> centered H1 title at H2 size.) */
 
 /* ============================================================
+   Product column layout (right of the vertical filter sidebar):
+   search bar on top, then [product count] .......... [sort]
+   ============================================================ */
+.facets-vertical .pns-collection-main {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.pns-collection-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+/* product count sits on the left (kill Dawn's left margin) */
+.pns-collection-toolbar .product-count-vertical {
+  margin: 0 !important;
+}
+
+/* sort control sits on the right */
+.pns-collection-toolbar .pns-toolbar-sort,
+.pns-collection-toolbar .facets-vertical-form {
+  margin: 0;
+}
+
+/* ============================================================
    PNS in-grid "Search products" bar (filter by name)
    ============================================================ */
 .pns-collection-search {
