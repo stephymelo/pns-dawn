@@ -1,0 +1,43 @@
+{%- comment -%}
+  HulkApps Advanced Wishlist - product "Add to wishlist" button.
+  Recreated from the live premiernailsource.com rendered markup so the theme
+  matches production. The button is functional only when the HulkApps
+  Advanced Wishlist app embed (storefront JS) is enabled on the theme; the
+  markup below is the hook set the app's JS binds to.
+
+  The app JS toggles the button visible (it ships with style="display:none")
+  and wires the click handler. Without the app embed it stays hidden/inert,
+  which is the same graceful behaviour as the live site before the app loads.
+{%- endcomment -%}
+{%- liquid
+  assign wl_variant = product.selected_or_first_available_variant.id | default: product.selected_variant.id
+-%}
+{% style %}
+  .sm-btn-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .sm-btn-box .wishlist-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+  .sm-btn-box .wishlist-btn .hulk_wl_icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+{% endstyle %}
+<a href="#" class="icon-wishlist-heart-empty wishlist-btn grid-wishlist-btn heart-wishlist-animation" data-wishList data-added="false" data-proID="{{ product.id }}" data-varID="{{ wl_variant }}" data-button-layout="simple_button" style="display:none">
+    <div class="hulk_wl_icon-text" hulk-wl-custom-style data-count="hide">
+        <div class="hulk_wl_icon">
+            <i class="heart-hulk-animation"><i class="icon-wishlist-heart-empty"></i></i>
+            <span>Add to wishlist</span>
+        </div>
+    </div>
+        <span class="count" hulk-wl-custom-style>(0)</span>
+</a>
