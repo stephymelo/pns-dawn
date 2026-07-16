@@ -214,3 +214,30 @@
 .product-card-wrapper .quick-add {
   margin-top: auto;
 }
+
+/* Web/desktop: shrink the quantity picker + tighten the button so the
+   "Add to cart" label fits on one line inside narrow grid cards */
+@media screen and (min-width: 750px) {
+  .product-card-wrapper .pns-qty-picker {
+    height: 3.8rem;
+  }
+  .product-card-wrapper .pns-qty-btn {
+    width: 2.4rem;
+    font-size: 1.5rem;
+  }
+  .product-card-wrapper .pns-qty-input {
+    width: 2rem;
+    font-size: 1.3rem;
+  }
+  .product-card-wrapper .pns-add-to-cart-btn {
+    height: 3.8rem;
+    gap: 0.4rem;
+    padding: 0 0.6rem;
+    font-size: 1.15rem;
+    letter-spacing: 0;
+  }
+  .product-card-wrapper .pns-add-to-cart-btn .pns-cart-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+}

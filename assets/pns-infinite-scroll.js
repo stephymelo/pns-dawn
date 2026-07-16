@@ -87,7 +87,9 @@ if (!customElements.get('pns-infinite-scroll')) {
       finish() {
         delete this.dataset.nextUrl;
         if (this.observer) this.observer.disconnect();
-        if (this.button) this.button.hidden = true;
+        // Hide the whole control. (button.hidden is unreliable here: Dawn's
+        // .button { display: ... } overrides the [hidden] attribute.)
+        this.style.display = 'none';
       }
     }
   );
