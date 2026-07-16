@@ -199,6 +199,23 @@
   justify-content: center;
 }
 
+/* Card sale price: sale price on the LEFT (pink + bold), original struck on the RIGHT */
+.product-card-wrapper .price--on-sale .price__sale {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.product-card-wrapper .price--on-sale .price-item--sale {
+  color: #e97283;
+  font-weight: 700;
+}
+.product-card-wrapper .price--on-sale .price-item--regular {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+}
+
 /* Keep quick-add below the title/price.
    Dawn's .card__content is a grid that pins .card__information to row 2, which
    lets the quick-add auto-place in row 1 (above the title). Use a simple column. */
