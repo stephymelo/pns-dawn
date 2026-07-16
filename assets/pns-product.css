@@ -46,3 +46,59 @@
   position: relative;
   z-index: 1;
 }
+
+/* Product-page quantity selector — match the product card picker (.pns-qty-picker) */
+.product-form__quantity .quantity {
+  display: inline-flex !important;
+  align-items: center;
+  width: auto !important;
+  min-height: 0 !important;
+  height: 4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2) !important;
+  border-radius: 0.4rem !important;
+  overflow: hidden;
+  color: rgb(var(--color-foreground));
+}
+
+/* remove Dawn's box-shadow outline and background pseudo-elements */
+.product-form__quantity .quantity:after,
+.product-form__quantity .quantity:before {
+  display: none !important;
+}
+
+.product-form__quantity .quantity__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem !important;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+  color: rgb(var(--color-foreground)) !important;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.product-form__quantity .quantity__button:hover {
+  background-color: rgba(var(--color-foreground), 0.06) !important;
+}
+
+.product-form__quantity .quantity__input {
+  width: 3rem !important;
+  flex-grow: 0 !important;
+  height: 100%;
+  padding: 0 !important;
+  text-align: center;
+  border: none !important;
+  border-left: 1px solid rgba(var(--color-foreground), 0.2) !important;
+  border-right: 1px solid rgba(var(--color-foreground), 0.2) !important;
+  background: none !important;
+  color: rgb(var(--color-foreground)) !important;
+  font-size: 1.4rem;
+  font-weight: 500;
+  opacity: 1 !important;
+}
