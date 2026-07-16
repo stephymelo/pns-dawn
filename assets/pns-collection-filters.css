@@ -215,7 +215,8 @@
 @media screen and (min-width: 750px) {
   .facets-vertical .facets-wrapper {
     flex: 0 0 auto;
-    width: 29rem; /* 26rem facet form + 3rem padding-right */
+    width: 22rem; /* narrow sidebar so the product cards get more room (matches live) */
+    padding-right: 2rem;
     box-sizing: border-box;
   }
   .facets-vertical .pns-category-filter,
@@ -232,4 +233,61 @@
 .pns-category-filter label {
   white-space: normal;
   overflow-wrap: anywhere;
+}
+
+/* ============================================================
+   BRANDS filter rendered as logo tiles (logos from the "brands" metaobject).
+   Logo-only tiles like the live site; the text label is kept for a11y.
+   ============================================================ */
+.pns-brand-facet {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+  gap: 0.8rem;
+}
+.pns-brand-facet .facets__item {
+  margin: 0;
+}
+.pns-brand-facet .facets__label {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.pns-brand-facet .facets__image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  padding: 0.8rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.6rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+.pns-brand-facet .facets__image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* selected brand tile */
+.pns-brand-facet .facets__label.active .facets__image-wrapper {
+  border-color: #111111;
+  border-width: 2px;
+}
+/* hide the checkbox + count text — logo-only tile (label kept accessible) */
+.pns-brand-facet input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.pns-brand-facet .facet-checkbox__text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }

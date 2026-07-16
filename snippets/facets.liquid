@@ -119,12 +119,23 @@
                 assign total_active_values = total_active_values | plus: filter.active_values.size
                 assign presentation = filter.presentation | default: default_presentation
 
+                # PNS: render the Brands (vendor) filter as logo image-tiles from the 'brands' metaobject
+                assign is_brand_filter = false
+                assign filter_label_lower = filter.label | downcase
+                if filter_label_lower contains 'brand'
+                  assign is_brand_filter = true
+                  assign presentation = 'image'
+                endif
+
                 if presentation == 'image'
                   assign show_more_number = 12
                   assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
                 else
                   assign show_more_number = 10
                   assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--' | append: presentation
+                endif
+                if is_brand_filter
+                  assign visual_layout_class = visual_layout_class | append: ' pns-brand-facet'
                 endif
               %}
 
@@ -265,6 +276,8 @@
                                           | image_url: width: 300
                                           | image_tag: class: 'facets__image', alt: value.alt
                                         }}
+                                      {%- elsif is_brand_filter -%}
+                                        {% render 'pns-brand-logo', vendor: value.label %}
                                       {%- endif -%}
                                     </div>
                                   {%- else -%}
@@ -516,10 +529,19 @@
                 {%- for filter in results.filters -%}
                   {% liquid
                     assign presentation = filter.presentation | default: default_presentation
+                    assign is_brand_filter = false
+                    assign filter_label_lower = filter.label | downcase
+                    if filter_label_lower contains 'brand'
+                      assign is_brand_filter = true
+                      assign presentation = 'image'
+                    endif
                     if presentation == 'image'
                       assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
                     else
                       assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--' | append: presentation
+                    endif
+                    if is_brand_filter
+                      assign visual_layout_class = visual_layout_class | append: ' pns-brand-facet'
                     endif
                   %}
 
@@ -635,6 +657,8 @@
                                             | image_url: width: 300
                                             | image_tag: class: 'facets__image', alt: value.alt
                                           }}
+                                        {%- elsif is_brand_filter -%}
+                                          {% render 'pns-brand-logo', vendor: value.label %}
                                         {%- endif -%}
                                       </div>
                                     {%- else -%}

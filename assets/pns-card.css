@@ -147,19 +147,25 @@
   border: 1px solid rgba(var(--color-foreground), 0.35);
   border-radius: 0.4rem;
   background: transparent;
-  color: rgb(var(--color-foreground));
+  color: #4a4a4a; /* grayer, like the filter text */
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.2;
-  text-decoration: none;
+  text-decoration: none !important; /* never underline, even on card hover */
   cursor: pointer;
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
+/* Kill the card-wide underline-on-hover for these buttons; keep a subtle hover */
+.underline-links-hover:hover .pns-variant-btn,
 .pns-variant-btn:hover {
-  border-color: rgb(var(--color-foreground));
-  background-color: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
+  text-decoration: none !important;
+}
+
+.pns-variant-btn:hover {
+  border-color: #4a4a4a;
+  background-color: #f4f4f4;
+  color: #4a4a4a;
 }
 
 .pns-variant-btn--unavailable {
