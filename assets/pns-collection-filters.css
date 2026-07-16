@@ -9,6 +9,13 @@
   display: none !important;
 }
 
+/* Bolder filter category headings (COLORS, BRANDS, PRICE, ...) */
+.facets__summary,
+.facets__summary-label {
+  font-weight: 700 !important;
+  color: #1a1a1a;
+}
+
 /* 2) Square color swatches instead of circular */
 .facets-container .swatch,
 .facets-container .swatch-input__input + .swatch,
