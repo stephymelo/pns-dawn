@@ -534,5 +534,10 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".hulk-powered-wrapper {display: none !important;}"
+    ]
   }
 }
