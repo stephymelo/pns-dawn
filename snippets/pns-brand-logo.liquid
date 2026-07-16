@@ -1,0 +1,22 @@
+{%- comment -%}
+  Renders a brand logo from the "brands" metaobject, matched to a vendor name.
+  Metaobject type: brands   Fields: brand_name (single line text, = vendor), brand_logo (file/image)
+  Accepts: vendor {String} — the brand/vendor name to look up
+  Outputs the <img> for the logo, or nothing if there's no matching brand.
+{%- endcomment -%}
+{%- liquid
+  assign brand_logo = null
+  for brand in shop.metaobjects.brands.values
+    if brand.brand_name.value == vendor
+      assign brand_logo = brand.brand_logo.value
+      break
+    endif
+  endfor
+-%}
+{%- if brand_logo != blank -%}
+  {%- if brand_logo.image != blank -%}
+    {{ brand_logo.image | image_url: width: 240 | image_tag: class: 'pns-brand-logo__img', alt: vendor, loading: 'lazy', widths: '120, 240' }}
+  {%- else -%}
+    {{ brand_logo | image_url: width: 240 | image_tag: class: 'pns-brand-logo__img', alt: vendor, loading: 'lazy', widths: '120, 240' }}
+  {%- endif -%}
+{%- endif -%}

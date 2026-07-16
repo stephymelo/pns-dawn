@@ -206,3 +206,30 @@
   --grid-mobile-horizontal-spacing: 0.8rem;
   --grid-mobile-vertical-spacing: 1.2rem;
 }
+
+/* ============================================================
+   Lock the vertical filter sidebar width so opening a filter (e.g. the
+   Category list with long collection names) can't widen the column and
+   shove the product grid. Long labels wrap to the next line instead.
+   ============================================================ */
+@media screen and (min-width: 750px) {
+  .facets-vertical .facets-wrapper {
+    flex: 0 0 auto;
+    width: 29rem; /* 26rem facet form + 3rem padding-right */
+    box-sizing: border-box;
+  }
+  .facets-vertical .pns-category-filter,
+  .facets-vertical .facets__form-vertical {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* wrap long filter option labels instead of expanding the column */
+.facets__label,
+.facet-checkbox__text,
+.facet-checkbox__text-label,
+.pns-category-filter label {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
