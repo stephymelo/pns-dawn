@@ -27,6 +27,14 @@
   #Banner-{{ section.id }}::after {
     opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
   }
+  #Banner-{{ section.id }} .banner__link-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  #Banner-{{ section.id }} .banner__content {
+    z-index: 2;
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -115,6 +123,13 @@
       }}
     </div>
   {%- endif -%}
+  {%- if section.settings.image_link != blank -%}
+    <a
+      href="{{ section.settings.image_link }}"
+      class="banner__link-overlay"
+      aria-label="{{ section.settings.image.alt | default: 'Banner' | escape }}"
+    ></a>
+  {%- endif -%}
   <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
       {%- for block in section.blocks -%}
@@ -184,6 +199,12 @@
       "type": "image_picker",
       "id": "image_2",
       "label": "t:sections.image-banner.settings.image_2.label"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "Image link",
+      "info": "Makes the whole banner image clickable."
     },
     {
       "type": "range",
