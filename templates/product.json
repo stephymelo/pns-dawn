@@ -9,6 +9,15 @@
  */
 {
   "sections": {
+    "pns_breadcrumb_products_Cdaex8": {
+      "type": "pns-breadcrumb-products",
+      "name": "PNS Breadcrumb Products",
+      "settings": {
+        "background_color": "#111111",
+        "text_color": "#ffffff",
+        "fallback_label": "All"
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -170,6 +179,7 @@
     }
   },
   "order": [
+    "pns_breadcrumb_products_Cdaex8",
     "main",
     "disclosures",
     "pns_related_collections_3r6E43",
