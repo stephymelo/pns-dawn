@@ -5,9 +5,12 @@
   Outputs the <img> for the logo, or nothing if there's no matching brand.
 {%- endcomment -%}
 {%- liquid
+  # Case-insensitive match: metaobject brand_name may be "cnd" while the vendor is "CND"
+  assign vendor_key = vendor | downcase | strip
   assign brand_logo = null
   for brand in shop.metaobjects.brands.values
-    if brand.brand_name.value == vendor
+    assign brand_key = brand.brand_name.value | downcase | strip
+    if brand_key == vendor_key
       assign brand_logo = brand.brand_logo.value
       break
     endif
