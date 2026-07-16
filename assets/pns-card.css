@@ -240,6 +240,9 @@
 .product-card-wrapper .card__content {
   display: flex;
   flex-direction: column;
+  /* Trim the card's inner horizontal padding so the qty + add-to-cart row can be wider */
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
 }
 
 .product-card-wrapper .card__information {
