@@ -34,9 +34,11 @@
   --ratio-percent: 100% !important;
 }
 
-/* 2) Small inset so the image isn't edge-to-edge inside the square. */
+/* 2) Inset so the product sits smaller inside the square with whitespace
+   around it (matches the airier live look; margin-less images no longer
+   fill the whole tile). */
 .product-card-wrapper .card__media {
-  padding: 1.2rem;
+  padding: 2.6rem;
 }
 
 /* 3) Contain (letterbox) the image so it's always shown in full. This must beat
