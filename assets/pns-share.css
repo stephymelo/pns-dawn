@@ -1,0 +1,77 @@
+/* PNS Share block — share button that expands to social links */
+.pns-share {
+  position: relative;
+  display: inline-block;
+}
+
+/* toggle: gray circle with a pink share glyph */
+.pns-share__toggle {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  background: #ececec;
+  color: #e88a9a;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.pns-share__toggle::-webkit-details-marker,
+.pns-share__toggle::marker {
+  display: none;
+  content: '';
+}
+.pns-share__toggle:hover {
+  background: #e2e2e2;
+}
+.pns-share__icon {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+/* panel: white rounded card floating to the right of the toggle */
+.pns-share__panel {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 1rem);
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.8rem 0.6rem;
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 1.4rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  z-index: 6;
+}
+
+.pns-share__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  color: #111111;
+  border-radius: 0.8rem;
+  transition: background-color 0.15s ease;
+}
+.pns-share__link:hover {
+  background: #f4f4f4;
+}
+.pns-share__link svg {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+/* On narrow screens, drop the panel below the button instead of beside it */
+@media screen and (max-width: 749px) {
+  .pns-share__panel {
+    top: calc(100% + 0.8rem);
+    left: 0;
+    transform: none;
+    flex-direction: row;
+  }
+}

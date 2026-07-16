@@ -482,6 +482,9 @@
                     render 'share-button', block: block, share_link: share_url
                   %}
 
+                {%- when 'pns_share' -%}
+                  {% render 'pns-share', block: block %}
+
                 {%- when 'disclosures' -%}
                   {%- render 'product-disclosures',
                     product: product,
@@ -964,6 +967,19 @@
           "id": "share_label",
           "label": "t:sections.main-product.blocks.share.settings.text.label",
           "default": "t:sections.main-product.blocks.share.settings.text.default"
+        }
+      ]
+    },
+    {
+      "type": "pns_share",
+      "name": "PNS Share",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "Share button label (accessibility)",
+          "default": "Share"
         }
       ]
     },
