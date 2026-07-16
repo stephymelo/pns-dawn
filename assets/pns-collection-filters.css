@@ -194,3 +194,15 @@
   width: 100%;
   height: 1px;
 }
+
+/* ============================================================
+   Tighter spacing between products in the collection grid.
+   (Grid gap isn't exposed in the theme editor — Dawn's default is larger.)
+   ============================================================ */
+.collection .product-grid,
+#product-grid.product-grid {
+  --grid-desktop-horizontal-spacing: 1rem;
+  --grid-desktop-vertical-spacing: 1.6rem;
+  --grid-mobile-horizontal-spacing: 0.8rem;
+  --grid-mobile-vertical-spacing: 1.2rem;
+}
