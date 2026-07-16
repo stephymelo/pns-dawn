@@ -109,3 +109,28 @@
 .pns-collection-search__empty.is-visible {
   display: block;
 }
+
+/* ============================================================
+   PNS infinite scroll (load-more)
+   ============================================================ */
+.pns-infinite-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.4rem;
+}
+
+.pns-infinite-scroll__button {
+  min-width: 22rem;
+}
+
+.pns-infinite-scroll__button[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* zero-height marker the observer watches; sits just below the grid */
+.pns-infinite-scroll__sentinel {
+  width: 100%;
+  height: 1px;
+}

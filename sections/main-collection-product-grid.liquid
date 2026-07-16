@@ -3,6 +3,9 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'pns-collection-filters.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'pns-collection-search.js' | asset_url }}" defer="defer"></script>
+{%- if section.settings.enable_infinite_scroll -%}
+  <script src="{{ 'pns-infinite-scroll.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -192,7 +195,18 @@
                 {%- endfor -%}
               </ul>
 
-              {%- if paginate.pages > 1 -%}
+              {%- if section.settings.enable_infinite_scroll and paginate.pages > 1 -%}
+                <pns-infinite-scroll
+                  class="pns-infinite-scroll"
+                  data-section-id="{{ section.id }}"
+                  {% if paginate.next %}data-next-url="{{ paginate.next.url }}"{% endif %}
+                >
+                  <button type="button" class="pns-infinite-scroll__button button button--secondary" data-load-more>
+                    Load more products
+                  </button>
+                  <div class="pns-infinite-scroll__sentinel" data-sentinel aria-hidden="true"></div>
+                </pns-infinite-scroll>
+              {%- elsif paginate.pages > 1 -%}
                 {% render 'pagination', paginate: paginate, anchor: '' %}
               {%- endif -%}
             </div>
@@ -398,6 +412,13 @@
       "default": true,
       "label": "Show product name search bar",
       "info": "Adds a 'Search products' box that filters the loaded products by name."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_infinite_scroll",
+      "default": true,
+      "label": "Infinite scroll (load more on scroll)",
+      "info": "Replaces numbered pagination. Keeps all loaded products in the grid so the name search covers everything scrolled into view."
     },
     {
       "type": "header",
