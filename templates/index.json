@@ -186,6 +186,7 @@
       ],
       "disabled": true,
       "settings": {
+        "image_link": "",
         "image_overlay_opacity": 40,
         "image_height": "large",
         "image_behavior": "none",
@@ -319,6 +320,7 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/amn-banner-home.webp",
+        "image_link": "shopify://collections/americanails",
         "image_overlay_opacity": 0,
         "image_height": "adapt",
         "image_behavior": "none",
@@ -366,6 +368,7 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/N-Nail-Buy.webp",
+        "image_link": "shopify://collections/nailbuys",
         "image_overlay_opacity": 0,
         "image_height": "adapt",
         "image_behavior": "none",
