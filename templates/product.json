@@ -34,6 +34,22 @@
             "swatch_shape": "circle"
           }
         },
+        "packify_app_block_Fg99iU": {
+          "type": "shopify://apps/packify/blocks/app-block/019ee17a-55de-72db-9fda-5243954332c1",
+          "settings": {
+            "heading": "Buy a case and save money",
+            "display_single_unit_product": true,
+            "display_name": "pack",
+            "display_price": "pack",
+            "link_style": "buttons",
+            "link_behavior": "go_to_product",
+            "heading_color": "#000000",
+            "heading_size": 17,
+            "link_color": "#000000",
+            "link_background_color": "#ffffff",
+            "styles": ".packify_heading {\r\n  font-weight: bold;\r\n}\r\n\r\n.packify_pack_name {\r\n  font-weight: bold;\r\n}\r\n\r\n.packify_pack_button {\r\n  border: 0;\r\n  border-radius: 0;\r\n  box-shadow: 0 0 0 .1rem;\r\n  cursor: pointer;\r\n  font-size: 1.5rem;\r\n  margin-bottom: 1rem;\r\n  padding: .9rem 3rem 1.1rem;\r\n  min-height: 4.5rem;\r\n  width: 100%;\r\n  -webkit-appearance: none;\r\n}\r\n\r\n.packify_pack_button:hover {\r\n  box-shadow: 0 0 0 .2rem;\r\n}\r\n\r\n.packify_pack_button:disabled {\r\n  cursor: not-allowed;\r\n  opacity: .5;\r\n}"
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -61,6 +77,7 @@
         "title",
         "price",
         "variant_picker",
+        "packify_app_block_Fg99iU",
         "quantity_selector",
         "buy_buttons",
         "description",
