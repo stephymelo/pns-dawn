@@ -1,0 +1,38 @@
+/* PNS product page custom styles */
+
+/* Add to cart: filled pink (default) -> slide fill right on hover to reveal pink outline */
+.product-form__submit {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  background-color: transparent !important;
+  border: 1.5px solid #e88a9a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08rem;
+  transition: color 0.35s ease;
+}
+
+.product-form__submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #e88a9a;
+  z-index: -1;
+  transform: translateX(0);
+  transition: transform 0.35s ease;
+}
+
+.product-form__submit:hover {
+  color: #e88a9a !important;
+}
+
+.product-form__submit:hover::before {
+  transform: translateX(100%);
+}
+
+/* keep the button label/spinner above the sliding fill */
+.product-form__submit > * {
+  position: relative;
+  z-index: 1;
+}
