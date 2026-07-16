@@ -151,15 +151,12 @@
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.2;
+  text-decoration: none;
   cursor: pointer;
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
 .pns-variant-btn:hover {
-  border-color: rgb(var(--color-foreground));
-}
-
-.pns-variant-btn.is-selected {
   border-color: rgb(var(--color-foreground));
   background-color: rgb(var(--color-foreground));
   color: rgb(var(--color-background));
@@ -173,6 +170,8 @@
 
 .pns-variant-btn--unavailable:hover {
   border-color: rgba(var(--color-foreground), 0.35);
+  background-color: transparent;
+  color: rgb(var(--color-foreground));
 }
 
 /* Mobile: stack the quantity picker on top of the add-to-cart button */
