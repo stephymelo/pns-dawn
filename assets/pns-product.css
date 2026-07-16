@@ -131,7 +131,8 @@
 }
 .pns-product-vendor a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
 }
 .pns-product-vendor a:hover {
   text-decoration: underline;
