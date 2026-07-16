@@ -9,15 +9,6 @@
  */
 {
   "sections": {
-    "pns_breadcrumb_products_qpF7Jn": {
-      "type": "pns-breadcrumb-products",
-      "name": "PNS Breadcrumb Products",
-      "settings": {
-        "background_color": "#111111",
-        "text_color": "#ffffff",
-        "fallback_label": "All"
-      }
-    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -81,10 +72,10 @@
         "media_size": "small",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "thumbnail",
+        "gallery_layout": "thumbnail_slider",
         "mobile_thumbnails": "show",
         "media_position": "left",
-        "image_zoom": "none",
+        "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
@@ -162,7 +153,6 @@
     }
   },
   "order": [
-    "pns_breadcrumb_products_qpF7Jn",
     "main",
     "disclosures",
     "pns_related_collections_3r6E43",
