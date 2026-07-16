@@ -42,6 +42,14 @@
   background-color: #ececec !important;
 }
 
+/* No focus ring on the sort button (it still opens the dropdown) */
+.facet-filters__sort:focus,
+.facet-filters__sort:focus-visible,
+.facet-filters__sort.focused {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* keep the caret sitting inside the gray button */
 .facet-filters__field .select .svg-wrapper {
   right: 1.2rem;
