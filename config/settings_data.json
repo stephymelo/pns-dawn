@@ -267,6 +267,11 @@
         "type": "shopify://apps/upcharge-fees/blocks/app-embed-block/3660e544-1847-4d53-9b3b-f0cb50c2d9f7",
         "disabled": false,
         "settings": {}
+      },
+      "8605505498557855500": {
+        "type": "shopify://apps/bogos-io-free-gift/blocks/app-embed/0432bba6-720a-4e95-be5a-b868386f7aa6",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
