@@ -198,6 +198,53 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "pns_feature_bar_m8ygjU": {
+      "type": "pns-feature-bar",
+      "blocks": {
+        "feature_JRfnge": {
+          "type": "feature",
+          "settings": {
+            "heading": "Fast Free Shipping",
+            "text": "On Most Orders Over $99*",
+            "link": ""
+          }
+        },
+        "feature_qMF4B6": {
+          "type": "feature",
+          "settings": {
+            "heading": "Customer Service",
+            "text": "Licensed Nail Techs On Phones & Live Chat",
+            "link": ""
+          }
+        },
+        "feature_QkcgAj": {
+          "type": "feature",
+          "settings": {
+            "heading": "Easy Returns",
+            "text": "30 Day Return Policy*",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_JRfnge",
+        "feature_qMF4B6",
+        "feature_QkcgAj"
+      ],
+      "name": "PNS Feature Bar",
+      "settings": {
+        "color_scheme": "",
+        "background_color": "",
+        "accent_color": "#f4b6bc",
+        "recolor_icons": true,
+        "icon_color": "#f4b6bc",
+        "show_bottom_border": true,
+        "bottom_border_color": "#f4b6bc",
+        "bottom_border_width": 2,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
     }
   },
   "order": [
@@ -206,6 +253,7 @@
     "disclosures",
     "pns_related_collections_3r6E43",
     "pns_related_products_fCNn46",
-    "related-products"
+    "related-products",
+    "pns_feature_bar_m8ygjU"
   ]
 }
