@@ -1,0 +1,21 @@
+{% comment %}
+  PNS in-collection "Search products" bar.
+  Filters the visible product grid by product name (client-side).
+  Rendered from sections/main-collection-product-grid.liquid.
+{% endcomment %}
+<div class="pns-collection-search page-width" data-pns-collection-search-wrap>
+  <span class="pns-collection-search__icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </span>
+  <input
+    type="text"
+    class="pns-collection-search__input"
+    placeholder="{{ 'general.search.search' | t | default: 'Search products' }}"
+    aria-label="Search products in this collection"
+    autocomplete="off"
+    data-pns-collection-search
+  >
+  <p class="pns-collection-search__empty" data-pns-collection-search-empty>
+    No products match your search.
+  </p>
+</div>

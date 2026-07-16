@@ -1,0 +1,129 @@
+/* ============================================================
+   PNS Collection Filters — match the live PNS look
+   Loaded from sections/main-collection-product-grid.liquid
+   ============================================================ */
+
+/* 1) Hide the "Filter:" heading in the vertical sidebar
+   (keeps the "Clear all" pill, which only shows when filters are active) */
+.facets__heading--vertical {
+  display: none !important;
+}
+
+/* 2) Square color swatches instead of circular */
+.facets-container .swatch,
+.facets-container .swatch-input__input + .swatch,
+.mobile-facets__label .swatch {
+  border-radius: 0.2rem !important;
+}
+
+/* 3) Sort dropdown: drop the "Sort by:" label, style as a light-gray button */
+.facet-filters__label {
+  display: none !important;
+}
+
+.facet-filters__field .select {
+  background: transparent;
+}
+
+.facet-filters__sort {
+  background-color: #f2f2f2 !important;
+  border: 1px solid #e2e2e2 !important;
+  border-radius: 0.6rem !important;
+  color: #4a4a4a !important;
+  font-size: 1.4rem !important;
+  font-weight: 500;
+  padding: 1rem 3.8rem 1rem 1.4rem !important;
+  min-height: 0 !important;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.facet-filters__sort:hover {
+  background-color: #ececec !important;
+}
+
+/* keep the caret sitting inside the gray button */
+.facet-filters__field .select .svg-wrapper {
+  right: 1.2rem;
+}
+
+/* 4) Hide the collection name/title on collection pages.
+   Kept in the DOM (visually-hidden) so the H1 still exists for SEO/accessibility. */
+.collection-hero__title {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* If the banner has no image, collapse the empty space the hidden title leaves */
+.collection-hero:not(.collection-hero--with-image) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* ============================================================
+   PNS in-grid "Search products" bar (filter by name)
+   ============================================================ */
+.pns-collection-search {
+  position: relative;
+  width: 100%;
+  margin: 0 0 1.6rem;
+}
+
+.pns-collection-search__icon {
+  position: absolute;
+  top: 50%;
+  left: 1.6rem;
+  transform: translateY(-50%);
+  display: flex;
+  width: 1.8rem;
+  height: 1.8rem;
+  color: #9a9a9a;
+  pointer-events: none;
+}
+
+.pns-collection-search__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pns-collection-search__input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 4.8rem;
+  padding: 0 1.6rem 0 4.6rem;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  background-color: #ffffff;
+  border: 1px solid #e2b6bd; /* soft pink outline like the live site */
+  border-radius: 0.6rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pns-collection-search__input::placeholder {
+  color: #9a9a9a;
+}
+
+.pns-collection-search__input:focus {
+  border-color: #e88a9a;
+  box-shadow: 0 0 0 1px #e88a9a;
+}
+
+/* "no matches" note */
+.pns-collection-search__empty {
+  display: none;
+  margin: 1.2rem 0;
+  font-size: 1.4rem;
+  color: #6b6b6b;
+}
+.pns-collection-search__empty.is-visible {
+  display: block;
+}
