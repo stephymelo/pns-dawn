@@ -46,17 +46,17 @@
         "packify_app_block_Fg99iU": {
           "type": "shopify://apps/packify/blocks/app-block/019ee17a-55de-72db-9fda-5243954332c1",
           "settings": {
-            "heading": "Buy a case and save money",
+            "heading": "💰BUY MORE, SAVE MORE 📦",
             "display_single_unit_product": true,
             "display_name": "pack",
-            "display_price": "pack",
+            "display_price": "unit",
             "link_style": "buttons",
             "link_behavior": "go_to_product",
-            "heading_color": "#000000",
+            "heading_color": "#F58A2A",
             "heading_size": 17,
-            "link_color": "#000000",
-            "link_background_color": "#ffffff",
-            "styles": ".packify_heading {\r\n  font-weight: bold;\r\n}\r\n\r\n.packify_pack_name {\r\n  font-weight: bold;\r\n}\r\n\r\n.packify_pack_button {\r\n  border: 0;\r\n  border-radius: 0;\r\n  box-shadow: 0 0 0 .1rem;\r\n  cursor: pointer;\r\n  font-size: 1.5rem;\r\n  margin-bottom: 1rem;\r\n  padding: .9rem 3rem 1.1rem;\r\n  min-height: 4.5rem;\r\n  width: 100%;\r\n  -webkit-appearance: none;\r\n}\r\n\r\n.packify_pack_button:hover {\r\n  box-shadow: 0 0 0 .2rem;\r\n}\r\n\r\n.packify_pack_button:disabled {\r\n  cursor: not-allowed;\r\n  opacity: .5;\r\n}"
+            "link_color": "#FFFFFF",
+            "link_background_color": "#181818",
+            "styles": ".packify_heading {\n  font-weight: bold;\n}\n\n.packify_pack_name {\n  font-weight: bold;\n}\n\n.packify_pack_button {\n  border: 0;\n  border-radius: 0;\n  box-shadow: 0 0 0 .1rem;\n  cursor: pointer;\n  font-size: 1.5rem;\n  margin-bottom: 1rem;\n  padding: .9rem 3rem 1.1rem;\n  min-height: 4.5rem;\n  width: 100%;\n  -webkit-appearance: none;\n}\n\n.packify_pack_button:hover {\n  box-shadow: 0 0 0 .2rem;\n}\n\n.packify_pack_button:disabled {\n  cursor: not-allowed;\n  opacity: .5;\n}\n\n/* Keep badge inside the last/best option */\n.packify_pack:last-child {\n  position: relative;\n}\n\n.packify_pack:last-child .packify_pack_button {\n  position: relative;\n}\n\n.packify_pack:last-child .packify_pack_button::before {\n  content: \"🔥 BEST VALUE\";\n  position: absolute;\n  top: -14px;\n  left: 18px;\n  background: #FFFFFF;\n  color: #E95D86;\n  border: 2px solid #E95D86;\n  padding: 5px 14px;\n  border-radius: 999px;\n  font-size: 12px;\n  font-weight: 800;\n  line-height: 1;\n  z-index: 2;\n  box-shadow: 0 6px 14px rgba(233, 93, 134, .18);\n}"
           }
         },
         "quantity_selector": {
