@@ -140,11 +140,13 @@
                   assign presentation = 'image'
                 endif
 
-                # PNS: the singular "Color" facet gets a nail-swatch image next to each name
-                # (metaobject color_nail_swatch). EQUALS so it never catches the plural "Colors" swatch filter.
+                # PNS: the singular "Color" facet renders as a grid of nail-swatch tiles
+                # (metaobject color_nail_swatch), no text/count — like the live site.
+                # EQUALS so it never catches the plural "Colors" swatch filter.
                 assign is_color_filter = false
                 if filter_label_lower == 'color'
                   assign is_color_filter = true
+                  assign presentation = 'image'
                 endif
 
                 if presentation == 'image'
@@ -157,6 +159,9 @@
                 if is_brand_filter
                   assign visual_layout_class = visual_layout_class | append: ' pns-brand-facet'
                 endif
+                if is_color_filter
+                  assign visual_layout_class = visual_layout_class | append: ' pns-color-facet'
+                endif
               %}
 
               {% case filter.type %}
@@ -165,7 +170,8 @@
                     id="Details-{{ filter.param_name | escape }}-{{ section.id }}"
                     class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
                     data-index="{{ forloop.index }}"
-                    {%- comment -%} PNS: native filters start collapsed; the custom Category filter is the only one open by default {%- endcomment -%}
+                    {%- comment -%} PNS: native filters start collapsed; Color (swatch grid) opens by default like the live site {%- endcomment -%}
+                    {% if is_color_filter %}open{% endif %}
                   >
                     <summary
                       class="facets__summary caption-large focus-offset"
@@ -288,7 +294,9 @@
 
                                   {%- if presentation == 'image' -%}
                                     <div class="facets__image-wrapper">
-                                      {%- if value.image -%}
+                                      {%- if is_color_filter -%}
+                                        {% render 'pns-color-swatch', color: value.label %}
+                                      {%- elsif value.image -%}
                                         {{
                                           value.image
                                           | image_url: width: 300
@@ -298,8 +306,6 @@
                                         {% render 'pns-brand-logo', vendor: value.label %}
                                       {%- endif -%}
                                     </div>
-                                  {%- elsif is_color_filter -%}
-                                    <span class="pns-color-swatch">{% render 'pns-color-swatch', color: value.label %}</span>
                                   {%- else -%}
                                     {{- 'square.svg' | inline_asset_content -}}
 
@@ -338,7 +344,8 @@
                     id="Details-{{ filter.param_name | escape }}-{{ section.id }}"
                     class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
                     data-index="{{ forloop.index }}"
-                    {%- comment -%} PNS: native filters start collapsed; the custom Category filter is the only one open by default {%- endcomment -%}
+                    {%- comment -%} PNS: native filters start collapsed; Color (swatch grid) opens by default like the live site {%- endcomment -%}
+                    {% if is_color_filter %}open{% endif %}
                   >
                     <summary class="facets__summary caption-large focus-offset">
                       <div>
@@ -556,6 +563,7 @@
                     assign is_color_filter = false
                     if filter_label_lower == 'color'
                       assign is_color_filter = true
+                      assign presentation = 'image'
                     endif
                     if presentation == 'image'
                       assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
@@ -565,6 +573,9 @@
                     if is_brand_filter
                       assign visual_layout_class = visual_layout_class | append: ' pns-brand-facet'
                     endif
+                    if is_color_filter
+                      assign visual_layout_class = visual_layout_class | append: ' pns-color-facet'
+                    endif
                   %}
 
                   {% case filter.type %}
@@ -573,6 +584,7 @@
                         id="Details-Mobile-{{ filter.param_name | escape }}-{{ section.id }}"
                         class="mobile-facets__details js-filter"
                         data-index="mobile-{{ forloop.index }}"
+                        {% if is_color_filter %}open{% endif %}
                       >
                         <summary class="mobile-facets__summary focus-inset">
                           <div>
@@ -673,7 +685,9 @@
 
                                     {%- if presentation == 'image' -%}
                                       <div class="facets__image-wrapper">
-                                        {%- if value.image -%}
+                                        {%- if is_color_filter -%}
+                                          {% render 'pns-color-swatch', color: value.label %}
+                                        {%- elsif value.image -%}
                                           {{
                                             value.image
                                             | image_url: width: 300
@@ -683,8 +697,6 @@
                                           {% render 'pns-brand-logo', vendor: value.label %}
                                         {%- endif -%}
                                       </div>
-                                    {%- elsif is_color_filter -%}
-                                      <span class="pns-color-swatch">{% render 'pns-color-swatch', color: value.label %}</span>
                                     {%- else -%}
                                       <span class="mobile-facets__highlight"></span>
                                       {{- 'square.svg' | inline_asset_content -}}
@@ -719,6 +731,7 @@
                         id="Details-Mobile-{{ filter.param_name | escape }}-{{ section.id }}"
                         class="mobile-facets__details js-filter"
                         data-index="mobile-{{ forloop.index }}"
+                        {% if is_color_filter %}open{% endif %}
                       >
                         <summary class="mobile-facets__summary focus-inset">
                           <div>

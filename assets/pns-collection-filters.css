@@ -299,33 +299,60 @@
 }
 
 /* ============================================================
-   COLOR filter (singular): nail-swatch image next to each color name,
-   pulled from the "color_nail_swatch" metaobject (see pns-color-swatch.liquid).
-   Stays a LIST (swatch + name + count) to match the plural "Colors" swatch look —
-   NOT the logo grid used for Brands. The plural "Colors" facet is untouched.
+   COLOR filter (singular): grid of nail-swatch TILES pulled from the
+   "color_nail_swatch" metaobject (see pns-color-swatch.liquid). No text/count —
+   image-only tiles like the live site, and open by default. Mirrors the Brands
+   grid. The plural "Colors" facet is untouched.
    ============================================================ */
-.pns-color-swatch {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  width: 3.2rem;
-  height: 3.2rem;
-  margin-right: 0.6rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 0.2rem; /* squared, matching the color swatches */
-  background: #f7f7f7;
-  overflow: hidden;
+.pns-color-facet {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3.8rem, 1fr));
+  gap: 0.8rem;
 }
-.pns-color-swatch__img {
+.pns-color-facet .facets__item {
+  margin: 0;
+}
+.pns-color-facet .facets__label {
+  position: relative;
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 }
-/* selected color row: emphasize the swatch border */
-.facets__label.active .pns-color-swatch,
-.mobile-facets__label.active .pns-color-swatch {
+.pns-color-facet .facets__image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  padding: 0.4rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.4rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+.pns-color-facet .facets__image-wrapper .pns-color-swatch__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* selected color tile */
+.pns-color-facet .facets__label.active .facets__image-wrapper {
   border-color: #111111;
   border-width: 2px;
+}
+/* hide the checkbox + count text — image-only tile (label kept accessible) */
+.pns-color-facet input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.pns-color-facet .facet-checkbox__text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
