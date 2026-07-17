@@ -297,3 +297,35 @@
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* ============================================================
+   COLOR filter (singular): nail-swatch image next to each color name,
+   pulled from the "color_nail_swatch" metaobject (see pns-color-swatch.liquid).
+   Stays a LIST (swatch + name + count) to match the plural "Colors" swatch look —
+   NOT the logo grid used for Brands. The plural "Colors" facet is untouched.
+   ============================================================ */
+.pns-color-swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin-right: 0.6rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.2rem; /* squared, matching the color swatches */
+  background: #f7f7f7;
+  overflow: hidden;
+}
+.pns-color-swatch__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* selected color row: emphasize the swatch border */
+.facets__label.active .pns-color-swatch,
+.mobile-facets__label.active .pns-color-swatch {
+  border-color: #111111;
+  border-width: 2px;
+}

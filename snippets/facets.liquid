@@ -140,6 +140,13 @@
                   assign presentation = 'image'
                 endif
 
+                # PNS: the singular "Color" facet gets a nail-swatch image next to each name
+                # (metaobject color_nail_swatch). EQUALS so it never catches the plural "Colors" swatch filter.
+                assign is_color_filter = false
+                if filter_label_lower == 'color'
+                  assign is_color_filter = true
+                endif
+
                 if presentation == 'image'
                   assign show_more_number = 12
                   assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
@@ -291,6 +298,8 @@
                                         {% render 'pns-brand-logo', vendor: value.label %}
                                       {%- endif -%}
                                     </div>
+                                  {%- elsif is_color_filter -%}
+                                    <span class="pns-color-swatch">{% render 'pns-color-swatch', color: value.label %}</span>
                                   {%- else -%}
                                     {{- 'square.svg' | inline_asset_content -}}
 
@@ -544,6 +553,10 @@
                       assign is_brand_filter = true
                       assign presentation = 'image'
                     endif
+                    assign is_color_filter = false
+                    if filter_label_lower == 'color'
+                      assign is_color_filter = true
+                    endif
                     if presentation == 'image'
                       assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
                     else
@@ -670,6 +683,8 @@
                                           {% render 'pns-brand-logo', vendor: value.label %}
                                         {%- endif -%}
                                       </div>
+                                    {%- elsif is_color_filter -%}
+                                      <span class="pns-color-swatch">{% render 'pns-color-swatch', color: value.label %}</span>
                                     {%- else -%}
                                       <span class="mobile-facets__highlight"></span>
                                       {{- 'square.svg' | inline_asset_content -}}

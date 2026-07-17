@@ -1,0 +1,49 @@
+{%- comment -%}
+  Renders a nail-swatch image for a color value, pulled from the "Color Nail Swatch"
+  metaobject and matched to the color name (mirrors pns-brand-logo for brands).
+
+  Accepts:
+  - color {String} — the color value/name to look up (e.g. the facet value label "Black")
+
+  Matching is case-insensitive + trimmed against every TEXT field on each metaobject
+  entry, so we don't need to know the exact field key. The image is grabbed from the
+  entry's file/image field. Outputs the <img>, or nothing if there's no match.
+
+  Metaobject type API handle for "Color Nail Swatch" is color_nail_swatch. It is NOT the
+  product metafield (custom.color_swatch); that is the per-product color value. Change the
+  type handle in this one place if it ever moves.
+{%- endcomment -%}
+{%- liquid
+  assign color_mo_type = 'color_nail_swatch'
+
+  assign color_key = color | downcase | strip
+  assign swatch_img = null
+
+  assign entries = shop.metaobjects[color_mo_type].values
+  for entry in entries
+    assign is_match = false
+    for f in entry.fields
+      if f.type contains 'text'
+        assign fv = f.value | downcase | strip
+        if fv == color_key
+          assign is_match = true
+        endif
+      endif
+    endfor
+    if is_match
+      for f in entry.fields
+        if f.value.image != blank
+          assign swatch_img = f.value.image
+        elsif f.type contains 'file' and f.value != blank
+          assign swatch_img = f.value
+        elsif f.type contains 'image' and f.value != blank
+          assign swatch_img = f.value
+        endif
+      endfor
+      break
+    endif
+  endfor
+-%}
+{%- if swatch_img != blank -%}
+  {{ swatch_img | image_url: width: 160 | image_tag: class: 'pns-color-swatch__img', alt: color, loading: 'lazy', widths: '80, 160' }}
+{%- endif -%}
