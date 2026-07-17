@@ -48,14 +48,17 @@
   {{ swatch_img | image_url: width: 160 | image_tag: class: 'pns-color-swatch__img', alt: color, loading: 'lazy', widths: '80, 160' }}
 {%- endif -%}
 {%- if color == 'Black' -%}
+  {%- assign be = null -%}
+  {%- for entry in entries -%}
+    {%- if entry.system.handle == 'black' -%}{%- assign be = entry -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
   {%- capture pns_dbg -%}
-    type={{ color_mo_type }} count={{ entries.size }} ||
-    {%- for entry in entries limit: 3 -%}
-      [handle={{ entry.system.handle }} display={{ entry.display_name }}
-      {%- for f in entry.fields -%}
-        <FIELD key={{ f.key }} type={{ f.type }} val={{ f.value }} hasimg={% if f.value.image != blank %}Y{% else %}N{% endif %}>
-      {%- endfor -%}]
-    {%- endfor -%}
+    fields.size={{ be.fields.size }} ||
+    image:{{ be.image }}|has={% if be.image.image != blank or be.image != blank %}Y{% else %}N{% endif %} ;
+    swatch:{{ be.swatch }} ; nail_swatch:{{ be.nail_swatch }} ;
+    swatch_image:{{ be.swatch_image }} ; color_image:{{ be.color_image }} ;
+    photo:{{ be.photo }} ; file:{{ be.file }} ; color:{{ be.color }} ;
+    nail:{{ be.nail }} ; nail_image:{{ be.nail_image }} ; url:{{ be.image | image_url: width: 80 }}
   {%- endcapture -%}
   <span class="pns-color-dbg" data-dbg="{{ pns_dbg | escape }}" hidden></span>
 {%- endif -%}
