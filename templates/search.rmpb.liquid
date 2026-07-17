@@ -1,21 +1,26 @@
 {%- layout none -%}
+{%- comment -%}
+  Alternate search view used by the Rimix Product Badges app (`?view=rmpb`).
 
-{%- assign query = search.terms | strip -%}
+  Rimix fetches /search(.js)?q=...&view=rmpb to resolve each product's tags /
+  inventory / sale state and decide which badge to show on product CARDS.
+  IMPORTANT: Rimix may query by EITHER `handle:"x" OR handle:"y"` OR by
+  `title:"X" OR title:"Y"` (controlled by the app's RMPB_USE_TITLE setting).
 
-{%- assign handles = query
-        | replace: '&quot;', '"'
-        | replace: 'handle:"', ''
-        | replace: '"', ''
-        | replace: 'OR', ','
-        | strip
-        | split: ','
--%}
+  So this view loops `search.results` — Shopify's search engine resolves the
+  q= predicate for us (title: and handle: both work) — instead of parsing
+  handles out of the query and calling all_products[handle], which only worked
+  for handle: queries and returned nothing once Rimix switched to title mode.
+
+  The response must be pure JSON (no layout/markup) or Rimix logs
+  "Unexpected token '<' ... is not valid JSON" and shows no badges. The output
+  shape (variants keyed by id, sale_amount/sale_percent, inventory, on_sale…)
+  matches what the current Rimix build consumes.
+{%- endcomment -%}
 [
 {%- assign first_item = true -%}
-{%- for h in handles -%}
-    {%- assign handle = h | strip -%}
-    {%- assign product = all_products[handle] -%}
-    {%- if product != empty -%}
+{%- for product in search.results -%}
+    {%- if product.object_type == 'product' -%}
         {%- unless first_item -%},{%- endunless -%}
         {%- assign first_item = false -%}
         {%- assign on_sale = false -%}
