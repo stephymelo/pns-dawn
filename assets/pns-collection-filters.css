@@ -305,9 +305,11 @@
    grid. The plural "Colors" facet is untouched.
    ============================================================ */
 .pns-color-facet {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(3.8rem, 1fr));
-  gap: 0.8rem;
+  /* !important beats Dawn's .facets-layout-grid--image column rule (same class,
+     it just loads after us). Small tiles — show them all, compact like the live site. */
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(3.4rem, 1fr)) !important;
+  gap: 0.6rem;
 }
 .pns-color-facet .facets__item {
   margin: 0;
@@ -325,7 +327,7 @@
   align-items: center;
   justify-content: center;
   aspect-ratio: 1 / 1;
-  padding: 0.4rem;
+  padding: 0.2rem;
   border: 1px solid #e0e0e0;
   border-radius: 0.4rem;
   background: #ffffff;

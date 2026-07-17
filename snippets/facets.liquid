@@ -161,6 +161,8 @@
                 endif
                 if is_color_filter
                   assign visual_layout_class = visual_layout_class | append: ' pns-color-facet'
+                  # Show every color at once — no "Show more" button
+                  assign show_more_number = 9999
                 endif
               %}
 
