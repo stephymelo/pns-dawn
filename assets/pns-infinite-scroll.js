@@ -72,6 +72,32 @@ if (!customElements.get('pns-infinite-scroll')) {
         this.maybeContinue();
       }
 
+      // Force-load every remaining page. Used by the client-side filters
+      // (name search / Category) so they can match products that live on
+      // not-yet-scrolled pages instead of hiding the whole visible grid.
+      // Guards against re-entry and caps iterations so a failing request
+      // can't spin forever.
+      async loadAll() {
+        if (this._loadingAll) return;
+        this._loadingAll = true;
+        this.setBusy(true);
+        let safety = 0;
+        try {
+          while (this.dataset.nextUrl && safety < 1000) {
+            safety += 1;
+            if (this.loading) {
+              // A load kicked off elsewhere is in flight — wait for it.
+              await new Promise((resolve) => setTimeout(resolve, 60));
+            } else {
+              await this.loadNext();
+            }
+          }
+        } finally {
+          this._loadingAll = false;
+          this.setBusy(false);
+        }
+      }
+
       maybeContinue() {
         if (!this.dataset.nextUrl || !this.sentinel) return;
         const rect = this.sentinel.getBoundingClientRect();

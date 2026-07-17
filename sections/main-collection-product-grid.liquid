@@ -95,20 +95,16 @@
             id="main-collection-filters"
             data-id="{{ section.id }}"
           >
-            {%- if section.settings.show_category_filter -%}
-              {% render 'pns-category-filter',
-                handles: pns_cat_handles,
-                titles: pns_cat_titles,
-                membership: pns_cat_membership,
-                section_id: section.id
-              %}
-            {%- endif -%}
             {% render 'facets',
               results: collection,
               enable_filtering: section.settings.enable_filtering,
               enable_sorting: section.settings.enable_sorting,
               filter_type: section.settings.filter_type,
-              paginate: paginate
+              paginate: paginate,
+              pns_show_category_filter: section.settings.show_category_filter,
+              pns_category_handles: pns_cat_handles,
+              pns_category_titles: pns_cat_titles,
+              pns_category_membership: pns_cat_membership
             %}
           </aside>
         {%- endif -%}

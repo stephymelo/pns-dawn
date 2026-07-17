@@ -112,6 +112,19 @@
               </div>
             {%- endif -%}
 
+            {%- comment -%}
+              PNS custom "Category" filter — first item in the vertical filter list,
+              directly after the active-facets pills and before the native facets.
+            {%- endcomment -%}
+            {%- if pns_show_category_filter and filter_type == 'vertical' -%}
+              {% render 'pns-category-filter',
+                handles: pns_category_handles,
+                titles: pns_category_titles,
+                membership: pns_category_membership,
+                section_id: section.id
+              %}
+            {%- endif -%}
+
             <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
             {% comment %} Filters for both horizontal and vertical filter {% endcomment %}
             {%- for filter in results.filters -%}

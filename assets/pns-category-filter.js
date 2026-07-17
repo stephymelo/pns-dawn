@@ -25,6 +25,16 @@
       });
   }
 
+  // When a category is active, pull every remaining infinite-scroll page so the
+  // filter matches products across the whole collection instead of hiding the
+  // visible grid to empty. The MutationObserver re-applies as pages append.
+  function ensureAllLoaded() {
+    var el = document.querySelector('pns-infinite-scroll');
+    if (el && typeof el.loadAll === 'function' && el.dataset.nextUrl) {
+      el.loadAll();
+    }
+  }
+
   function apply() {
     var grid = document.getElementById('product-grid');
     if (!grid) return;
@@ -52,6 +62,7 @@
       // Delegate so it keeps working if the facet markup is ever re-rendered.
       document.addEventListener('change', function (e) {
         if (e.target && e.target.matches && e.target.matches('[data-pns-category-input]')) {
+          if (getChecked().length) ensureAllLoaded();
           apply();
         }
       });
@@ -67,7 +78,10 @@
     }
 
     // Restore filtering if boxes are already checked (e.g. back navigation).
-    if (getChecked().length) apply();
+    if (getChecked().length) {
+      ensureAllLoaded();
+      apply();
+    }
   }
 
   if (document.readyState === 'loading') {
