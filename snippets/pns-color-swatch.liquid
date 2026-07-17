@@ -1,64 +1,69 @@
 {%- comment -%}
   Renders a nail-swatch image for a color value, pulled from the "Color Nail Swatch"
-  metaobject and matched to the color name (mirrors pns-brand-logo for brands).
+  metaobject (type handle: color_nail_swatch) and matched to the color name.
+  Mirrors pns-brand-logo, which does the same for brand logos.
 
   Accepts:
-  - color {String} — the color value/name to look up (e.g. the facet value label "Black")
+  - color {String} — the color value/name to look up (the Color facet value label, e.g. "Black")
 
-  Matching is case-insensitive + trimmed against every TEXT field on each metaobject
-  entry, so we don't need to know the exact field key. The image is grabbed from the
-  entry's file/image field. Outputs the <img>, or nothing if there's no match.
+  How matching works (verified against the live metaobject):
+  - Each metaobject entry's handle IS the color name, lowercased and hyphenated
+    (e.g. "Black" -> "black", "Hot Pink" -> "hot-pink").
+  - The nail-swatch picture lives on the entry's `image` field.
+  - The entry's `fields` array is NOT iterable from the storefront here, so we match on
+    the handle (with a text-field fallback) instead of scanning fields.
 
-  Metaobject type API handle for "Color Nail Swatch" is color_nail_swatch. It is NOT the
-  product metafield (custom.color_swatch); that is the per-product color value. Change the
-  type handle in this one place if it ever moves.
+  Outputs the <img>, or nothing if there's no matching entry.
+  Change color_mo_type in one place if the metaobject type handle ever moves.
 {%- endcomment -%}
 {%- liquid
   assign color_mo_type = 'color_nail_swatch'
 
   assign color_key = color | downcase | strip
+  assign color_key_dash = color_key | replace: ' ', '-'
   assign swatch_img = null
 
   assign entries = shop.metaobjects[color_mo_type].values
   for entry in entries
+    assign entry_handle = entry.system.handle | downcase | strip
     assign is_match = false
-    for f in entry.fields
-      if f.type contains 'text'
-        assign fv = f.value | downcase | strip
-        if fv == color_key
-          assign is_match = true
-        endif
-      endif
-    endfor
-    if is_match
+
+    # Primary: the entry handle equals the color name (Shopify hyphenates spaces)
+    if entry_handle == color_key or entry_handle == color_key_dash
+      assign is_match = true
+    endif
+
+    # Fallback: match any text field on the entry (in case handles ever differ)
+    unless is_match
       for f in entry.fields
-        if f.value.image != blank
-          assign swatch_img = f.value.image
-        elsif f.type contains 'file' and f.value != blank
-          assign swatch_img = f.value
-        elsif f.type contains 'image' and f.value != blank
-          assign swatch_img = f.value
+        if f.type contains 'text'
+          assign fv = f.value | downcase | strip
+          if fv == color_key
+            assign is_match = true
+          endif
         endif
       endfor
+    endunless
+
+    if is_match
+      # Primary image field is `image`; fall back to any file/image field on the entry
+      if entry.image != blank
+        assign swatch_img = entry.image
+      else
+        for f in entry.fields
+          if f.value.image != blank
+            assign swatch_img = f.value.image
+          elsif f.type contains 'file' and f.value != blank
+            assign swatch_img = f.value
+          elsif f.type contains 'image' and f.value != blank
+            assign swatch_img = f.value
+          endif
+        endfor
+      endif
       break
     endif
   endfor
 -%}
 {%- if swatch_img != blank -%}
   {{ swatch_img | image_url: width: 160 | image_tag: class: 'pns-color-swatch__img', alt: color, loading: 'lazy', widths: '80, 160' }}
-{%- endif -%}
-{%- if color == 'Black' -%}
-  {%- assign be = null -%}
-  {%- for entry in entries -%}
-    {%- if entry.system.handle == 'black' -%}{%- assign be = entry -%}{%- break -%}{%- endif -%}
-  {%- endfor -%}
-  {%- capture pns_dbg -%}
-    fields.size={{ be.fields.size }} ||
-    image:{{ be.image }}|has={% if be.image.image != blank or be.image != blank %}Y{% else %}N{% endif %} ;
-    swatch:{{ be.swatch }} ; nail_swatch:{{ be.nail_swatch }} ;
-    swatch_image:{{ be.swatch_image }} ; color_image:{{ be.color_image }} ;
-    photo:{{ be.photo }} ; file:{{ be.file }} ; color:{{ be.color }} ;
-    nail:{{ be.nail }} ; nail_image:{{ be.nail_image }} ; url:{{ be.image | image_url: width: 80 }}
-  {%- endcapture -%}
-  <span class="pns-color-dbg" data-dbg="{{ pns_dbg | escape }}" hidden></span>
 {%- endif -%}
