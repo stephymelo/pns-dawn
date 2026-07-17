@@ -47,3 +47,15 @@
 {%- if swatch_img != blank -%}
   {{ swatch_img | image_url: width: 160 | image_tag: class: 'pns-color-swatch__img', alt: color, loading: 'lazy', widths: '80, 160' }}
 {%- endif -%}
+{%- if color == 'Black' -%}
+  {%- capture pns_dbg -%}
+    type={{ color_mo_type }} count={{ entries.size }} ||
+    {%- for entry in entries limit: 3 -%}
+      [handle={{ entry.system.handle }} display={{ entry.display_name }}
+      {%- for f in entry.fields -%}
+        <FIELD key={{ f.key }} type={{ f.type }} val={{ f.value }} hasimg={% if f.value.image != blank %}Y{% else %}N{% endif %}>
+      {%- endfor -%}]
+    {%- endfor -%}
+  {%- endcapture -%}
+  <span class="pns-color-dbg" data-dbg="{{ pns_dbg | escape }}" hidden></span>
+{%- endif -%}
