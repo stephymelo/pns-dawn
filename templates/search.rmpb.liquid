@@ -2,125 +2,48 @@
 {%- comment -%}
   Alternate search view used by the Rimix Product Badges app (`?view=rmpb`).
 
-  Rimix fetches /search(.js)?q=...&view=rmpb to resolve each product's tags /
-  inventory / sale state and decide which badge to show on product CARDS.
-  IMPORTANT: Rimix may query by EITHER `handle:"x" OR handle:"y"` OR by
-  `title:"X" OR title:"Y"` (controlled by the app's RMPB_USE_TITLE setting).
+  Rimix fetches /search(.js)?q=...&view=rmpb to resolve each card's product data
+  (tags / inventory / sale state) and decide which badge to show. It queries by
+  EITHER handle:"a" OR handle:"b"...  OR  title:"A" OR title:"B"...  depending on
+  the app's RMPB_USE_TITLE setting. The response must be a pure JSON array.
 
-  So this view loops `search.results` — Shopify's search engine resolves the
-  q= predicate for us (title: and handle: both work) — instead of parsing
-  handles out of the query and calling all_products[handle], which only worked
-  for handle: queries and returned nothing once Rimix switched to title mode.
+  Two resolution paths, because they have very different reliability:
 
-  The response must be pure JSON (no layout/markup) or Rimix logs
-  "Unexpected token '<' ... is not valid JSON" and shows no badges. The output
-  shape (variants keyed by id, sale_amount/sale_percent, inventory, on_sale…)
-  matches what the current Rimix build consumes.
+  1) handle: query  -> EXACT all_products[handle] lookup. No result cap, no fuzzy
+     matching. Every requested product resolves. THIS IS THE RELIABLE PATH — set
+     Rimix to match by product handle if you can.
+
+  2) title: query  -> there is no exact "find product by title" in Liquid, so we
+     fall back to search.results, which is relevance-RANKED and PAGINATED. With a
+     big batch (~20 titles) Shopify's default page returns only ~10 results and
+     mixes in fuzzy look-alikes, so real products get pushed out and their card
+     shows no badge (that was the "first New Arrivals card has no badge" bug).
+     We `paginate ... by 50` to lift the cap so far more requested products fit.
+     Still not guaranteed for very large/ambiguous batches — prefer handle mode.
 {%- endcomment -%}
 [
-{%- assign first_item = true -%}
-{%- for product in search.results -%}
-    {%- if product.object_type == 'product' -%}
-        {%- unless first_item -%},{%- endunless -%}
-        {%- assign first_item = false -%}
-        {%- assign on_sale = false -%}
-        {%- assign inventory = 0 -%}
-
-        {
-        "id": {{ product.id }},
-        "available": {{ product.available | default: false }},
-        "title": {{ product.title | json }},
-        "handle": {{ product.handle | json }},
-        "url": "{{ product.url }}",
-        "type": {{ product.type | json }},
-        "price": {{ product.price | default: 0 }},
-        "compare_at_price": {{ product.compare_at_price | default: 0 }},
-        "created_at": "{{ product.created_at | date: "%s%L" }}",
-        "published_at": "{{ product.published_at | date: "%s%L" }}",
-        "tags": [{%- for tag in product.tags -%}{%- unless forloop.first -%},{%- endunless -%}{{ tag | json }}{%- endfor -%}],
-        "vendor": {{ product.vendor | json }},
-        "featured_image": "{{ product.featured_image }}",
-        "images": [
-        {%- for image in product.images -%}
-            {%- unless forloop.first -%},{%- endunless -%}
-            {"id": {{ image.id }}, "src": {{ image.src | json }}}
-        {%- endfor -%}
-        ],
-        "collections": {{ product.collections | map: 'id' | json }},
-
-        {%- assign selected_variant = product.selected_or_first_available_variant -%}
-        {%- assign sale_amount = 0 -%}
-        {%- assign sale_percent = 0 -%}
-        {%- if selected_variant.price and selected_variant.compare_at_price -%}
-            {%- assign sale_amount = selected_variant.compare_at_price | minus: selected_variant.price -%}
-            {%- if sale_amount > 0 -%}
-                {%- assign divisor = selected_variant.compare_at_price | times: 1.0 -%}
-                {%- assign sale_percent = selected_variant.compare_at_price | minus: selected_variant.price | divided_by: divisor | times: 100.0 | round -%}
-            {%- endif -%}
+{%- assign emitted = 0 -%}
+{%- assign terms = search.terms -%}
+{%- if terms contains 'handle:' -%}
+    {%- assign handles = terms | replace: 'handle:"', '' | replace: '"', '' | replace: 'OR', ',' | split: ',' -%}
+    {%- for h in handles -%}
+        {%- assign handle = h | strip -%}
+        {%- assign product = all_products[handle] -%}
+        {%- if product != empty and product.id -%}
+            {%- if emitted > 0 -%},{%- endif -%}
+            {%- assign emitted = emitted | plus: 1 -%}
+            {% render 'rmpb-product', product: product %}
         {%- endif -%}
-        "variant": {
-        "id": "{{ selected_variant.id }}",
-        "title": {{ selected_variant.title | json }},
-        "available": {{ selected_variant.available | default: false }},
-        "featured_image": "{{ selected_variant.featured_image }}",
-        "inventory_management": "{{ selected_variant.inventory_management }}",
-        "inventory_policy": "{{ selected_variant.inventory_policy }}",
-        "inventory_quantity": {{ selected_variant.inventory_quantity | default: 0 }},
-        "price": {{ selected_variant.price | default: 0 }},
-        "compare_at_price": {{ selected_variant.compare_at_price | default: 0 }},
-        "sale_amount": {{ sale_amount | money | json }},
-        "sale_percent": {{ sale_percent | json }},
-        "on_sale": {%- if selected_variant.compare_at_price > selected_variant.price -%}true{%- else -%}false{%- endif -%}
-        },
-
-        "variants": {
-        {%- for variant in product.variants -%}
-            {%- unless forloop.first -%},{%- endunless -%}
-            {%- if variant.compare_at_price > variant.price -%}
-                {%- assign on_sale = true -%}
+    {%- endfor -%}
+{%- else -%}
+    {%- paginate search.results by 50 -%}
+        {%- for product in search.results -%}
+            {%- if product.object_type == 'product' -%}
+                {%- if emitted > 0 -%},{%- endif -%}
+                {%- assign emitted = emitted | plus: 1 -%}
+                {% render 'rmpb-product', product: product %}
             {%- endif -%}
-            {%- if variant.available and variant.inventory_management != null and variant.inventory_management != '' -%}
-                {%- if variant.inventory_policy == 'deny' and variant.inventory_quantity > 0 -%}
-                    {%- assign inventory = inventory | plus: variant.inventory_quantity -%}
-                {%- elsif variant.inventory_policy == 'continue' -%}
-                    {%- assign inventory = 999999 -%}
-                {%- endif -%}
-            {%- elsif variant.available and variant.inventory_management == null -%}
-                {%- assign inventory = 999999 -%}
-            {%- endif -%}
-
-            {%- assign sale_amount = 0 -%}
-            {%- assign sale_percent = 0 -%}
-            {%- if variant.price and variant.compare_at_price -%}
-                {%- assign sale_amount = variant.compare_at_price | minus: variant.price -%}
-                {%- if sale_amount > 0 -%}
-                    {%- assign divisor = variant.compare_at_price | times: 1.0 -%}
-                    {%- assign sale_percent = variant.compare_at_price | minus: variant.price | divided_by: divisor | times: 100.0 | round -%}
-                {%- endif -%}
-            {%- endif -%}
-
-            "{{ variant.id }}": {
-            "id": {{ variant.id }},
-            "title": {{ variant.title | json }},
-            "name": {{ variant.name | json }},
-            "price": {{ variant.price | default: 0 }},
-            "featured_image": "{{ variant.featured_image }}",
-            "compare_at_price": {{ variant.compare_at_price | default: 0 }},
-            "sale_amount": {{ sale_amount | money | json }},
-            "sale_percent": {{ sale_percent | json }},
-            "available": {{ variant.available | default: false }},
-            "inventory_management": "{{ variant.inventory_management }}",
-            "inventory_policy": "{{ variant.inventory_policy }}",
-            "inventory_quantity": {{ variant.inventory_quantity | default: 0 }},
-            "selected": {%- if variant.selected -%}{{ variant.selected }}{%- elsif product.selected_or_first_available_variant.id == variant.id -%}true{%- else -%}false{%- endif -%},
-            "on_sale": {%- if variant.compare_at_price > variant.price -%}true{%- else -%}false{%- endif -%}
-            }
         {%- endfor -%}
-        },
-
-        "on_sale": {{ on_sale }},
-        "inventory": {{ inventory }}
-        }
-    {%- endif -%}
-{%- endfor -%}
+    {%- endpaginate -%}
+{%- endif -%}
 ]
