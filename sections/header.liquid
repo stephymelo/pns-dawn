@@ -310,6 +310,14 @@
       {% render 'header-search', input_id: 'Search-In-Modal' %}
 
       {%- if shop.customer_accounts_enabled -%}
+        {%- comment -%}
+          Wishlist heart icon — rendered by the Advanced Wishlist app.
+          The heart glyph comes from the app's `wishlist__icon` font (the
+          `.icon-wishlist-heart-empty` class draws it via ::before content "l"),
+          and the link points at the app proxy route /apps/advanced-wishlist.
+          Requires the Advanced Wishlist app installed to show the heart.
+        {%- endcomment -%}
+        <a href="/apps/advanced-wishlist" class="header__icon text-current site-header__icon icon-wishlist-heart-empty" style="font-size: x-large;"></a>
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
           class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
